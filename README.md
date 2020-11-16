@@ -66,21 +66,6 @@ The instructors have found that when multiple people from the same team come to 
 
 This project must have:
   - 90% reported coverage for all controller and model classes using SimpleCov
-  - Deployment to Heroku
-
-### Images Must Be Externally Hosted
-
-**All images used must be hosted on an external service.** To use an externally-hosted image, use absolute URLs to the website.
-
-Examples of websites that will host your images:
-- Imgur
-- Google+ Photos
-- Flickr
-- TinyPic
-
-You may use any other service besides those examples.
-
-Heroku and Rails have very specific requirements to make images appear correctly after deployment. To avoid distracting yourselves from fighting deployment fires, we recommend using externally hosted images
 
 ## Process Requirements
 
@@ -325,7 +310,7 @@ Each team will present their product in a final presentation to the group on the
 
 ## Submission Guidelines
 
-Your final project must be deployed to [Heroku](http://heroku.com). Your team will open a single pull request for the entire project. There are comprehension questions to answer with your submission that you should complete together as a group. Remember, you can submit a PR and still make some final changes to your code, so don't wait until the last minute.
+Your team will open a single pull request for the entire project. There are comprehension questions to answer with your submission that you should complete together as a group. Remember, you can submit a PR and still make some final changes to your code, so don't wait until the last minute.
 
 We ask you and your team members to list specific areas of feedback for instructors. Please be specific about files and lines of code. Please do not give an answer vague, like "testing"! Thank you!
 
