@@ -6,7 +6,6 @@
 
 Workflow | yes / no
 ---   | ---
-Deployed to Heroku | ✔️?
 **Before logging in** |
 Browse all products, by category, by merchant | ✔️?
 Leave a review | ✔️?
