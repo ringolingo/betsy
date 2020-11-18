@@ -1,0 +1,20 @@
+one:
+  quantity: 1
+  product: sleepy_time_tea
+  order: a
+two:
+  quantity: 4
+  product: fuzzy_blanket
+  order: a
+three:
+  quantity: 2
+  product: oil_diffuser
+  order: b
+four:
+  quantity: 10
+  product: cbd_lotion
+  order: b
+five:
+  quantity: 2
+  product: comforter
+  order: c
