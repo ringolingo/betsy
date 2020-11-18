@@ -41,7 +41,26 @@ describe Merchant do
     end
   end
 
-  # describe "relationships" do
-  #
-  # end
+  describe "relationships" do
+    before do
+      @merchant = Merchant.new(username: "merchant", email: "merchant@stuff.com")
+      # @merchant = merchants(:merchant1)
+      @product = Product.new(merchant: @merchant, title: "stuff")
+    end
+
+    it "can have a product" do
+      @product.save
+
+      expect(@merchant.products.count).must_equal 1
+      expect(@merchant.products.first).must_equal @product
+    end
+
+    it "destroys the product of a deleted merchant" do
+      @product.save
+
+      @merchant.destroy
+
+      expect(@product).must_be_nil
+    end
+  end
 end
