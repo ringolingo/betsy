@@ -21,6 +21,6 @@ describe Order do
     end
 
     describe 'can add an OrderItem' do
-
+    end
   end
 end
