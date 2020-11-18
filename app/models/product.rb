@@ -13,5 +13,6 @@ class Product < ApplicationRecord
   def self.category
     return ['bedding', 'sleep aids', 'pajamas', 'night lights']
   end
+
 end
 
