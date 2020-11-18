@@ -48,12 +48,15 @@ ActiveRecord::Schema.define(version: 2020_11_18_035430) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
+    t.string "category"
     t.string "description"
     t.integer "price"
     t.string "photo_url"
     t.integer "stock"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "merchant_id"
+    t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
 
 end

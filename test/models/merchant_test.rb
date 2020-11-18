@@ -41,7 +41,14 @@ describe Merchant do
     end
   end
 
-  # describe "relationships" do
-  #
-  # end
+  describe "relationships" do
+    it "can have a product" do
+      @merchant = merchants(:merchant1)
+      @product = Product.new(merchant: @merchant, name: "stuff")
+      @product.save
+
+      expect(@merchant.products.count).must_equal 1
+      expect(@merchant.products.first).must_equal @product
+    end
+  end
 end
