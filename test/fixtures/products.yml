@@ -1,0 +1,7 @@
+blanket:
+  name: cozy blanket
+  category: bedding
+  description: A nice warm blanket for napping
+  price: 30
+  photo_url: image.jpeg
+  stock: 8
