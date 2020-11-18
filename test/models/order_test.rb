@@ -39,12 +39,13 @@ describe Order do
     end
 
     it 'OrderItem can add an Order' do
-      order_item = OrderItem.create(product_id: 1, order_id: @order.id)
+      order_item = OrderItem.create(product: products(:blanket), order: @order)
       expect(order_item.order.name).must_equal "Betty Elms"
     end
 
-    describe 'Can access Product through OrderItem' do
-
+    it 'Can access Product through OrderItem' do
+      order_item = OrderItem.create(product: products(:blanket), order: @order)
+      expect(order_item.order.name).must_equal "Betty Elms"
     end
 
   end
