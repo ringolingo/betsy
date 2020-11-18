@@ -1,0 +1,11 @@
+betty:
+  status: pending
+  sub_total: 5000
+  order_total: 7000
+  name: Betty Elms
+  address: 1234 Mulholland Dr, Seattle, WA 98122
+  email: bbb@bmail.com
+  credit_card_number: 1234567890123456
+  expiration_date: <%= Time.new("1984").strftime("%Y-%m-%d")%>
+  cvv: 123
+  zip_code: 22026
