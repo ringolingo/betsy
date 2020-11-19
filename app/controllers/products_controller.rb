@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     binding.pry
 
     @product = Product.new(product_params)
-    @product.merchant_id = session[:merchant_id]
+    @product.merchant_id = session[:user_id]
 
     if @product.save
       flash[:status] = :success

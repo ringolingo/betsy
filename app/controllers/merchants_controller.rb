@@ -7,8 +7,8 @@ class MerchantsController < ApplicationController
 
   def create
     auth_hash = request.env["omniauth.auth"]
-    merchant = Merchant.find_by[uid: auth_hash[:uid],
-                                provider: params[:provider]
+    merchant = Merchant.find_by(uid: auth_hash[:uid],
+                                  provider: params[:provider])
     if merchant # Merchant Exists
       flash[:notice] = "Existing Merchant #{merchant.username} is logged in."
     else
@@ -22,7 +22,7 @@ class MerchantsController < ApplicationController
       end
     end
 
-    session[:user_id] = user.id
+    session[:user_id] = merchant.id
     redirect_to root_path
   end
 end
