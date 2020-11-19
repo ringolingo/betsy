@@ -5,6 +5,15 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
+  def show
+    @merchant = Merchant.find_by(id: params[:id])
+
+    if @merchant.nil?
+      flash[:error] = "No such person"
+      redirect_to merchants_path and return
+    end
+  end
+  
   def create
     auth_hash = request.env["omniauth.auth"]
     merchant = Merchant.find_by(uid: auth_hash[:uid],
