@@ -4,6 +4,8 @@ class OrderItemsController < ApplicationController
 
   def create
 
+    #check if quantity is > stock
+
     product = Product.find_by(id: params[:product_id])
 
     save_order = true
@@ -21,7 +23,7 @@ class OrderItemsController < ApplicationController
 
     order_item = OrderItem.new(order: @current_order, product: product, quantity: params[:order_item][:quantity])
 
-    save_order_item = order_item.save!
+    save_order_item = order_item.save
 
     if(save_order && save_order_item)
       flash[:success] = "Item added to cart!"
@@ -48,7 +50,9 @@ class OrderItemsController < ApplicationController
   def update
 
     redirect_to orders_path and return if @order_item.nil?
+
     update = @order_item.update(order_item_params)
+
     if update
       flash[:success] = "Order item successfully updated"
       redirect_to orders_path
