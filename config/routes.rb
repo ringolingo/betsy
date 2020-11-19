@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :merchants # only: [] or expect: []
 
   resources :orders # only: [] or expect: []
+
+  resources :order_items
 end
