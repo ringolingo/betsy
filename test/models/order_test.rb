@@ -9,7 +9,7 @@ describe Order do
   describe 'validations' do
 
     it 'is valid when all fields are present' do
-      #order_item = OrderItem.create(product_id: 1, order_id: @order.id)
+      #order_item = OrderItem.create(product_id: 1, order_id: @orders.id)
       expect(@order.valid?).must_equal true
     end
 
