@@ -9,6 +9,18 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+    <nav>
+      <ul>
+        <% if @current_merchant.nil? %>
+          <li><%= link_to "Log In", github_login_path %></li>
+        <% else %>
+          <li><%= link_to "Log Out", logout_path, method: :post %></li>
+          <li><%= link_to "Current Merchant", current_merchant_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
   <body>
     <%= yield %>
   </body>
