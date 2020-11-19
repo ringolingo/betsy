@@ -29,6 +29,7 @@ class Merchant < ApplicationRecord
       end
     end
 
+    return nil if merchant_items.empty?
     return merchant_items
   end
 end

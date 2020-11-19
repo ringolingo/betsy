@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  skip_before_action :require_login, only: [:history]
+
   def index
     @orders = Order.all
   end
@@ -26,6 +28,19 @@ class OrdersController < ApplicationController
     else
       render :edit
       return
+    end
+  end
+
+  def history
+    @order = Order.find_by(id: params[:id])
+
+    if @order == @current_order
+      redirect_to order_path(@current_order) and return
+    elsif @current_merchant.nil?
+      flash[:error] = "You must log in to see that page"
+      redirect_to merchants_path and return
+    else
+      return @current_merchant.filter_order(@order)
     end
   end
 end
