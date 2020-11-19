@@ -1,5 +1,7 @@
 class OrderItemsController < ApplicationController
 
+  def create
+  
   def destroy
     redirect_to orders_path and return if @order_item.nil?
 
