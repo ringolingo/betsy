@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 2020_11_18_204040) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "merchants_orders_joins", force: :cascade do |t|
+  create_table "merchants_orders", force: :cascade do |t|
     t.bigint "merchant_id"
     t.bigint "order_id"
-    t.index ["merchant_id"], name: "index_merchants_orders_joins_on_merchant_id"
-    t.index ["order_id"], name: "index_merchants_orders_joins_on_order_id"
+    t.index ["merchant_id"], name: "index_merchants_orders_on_merchant_id"
+    t.index ["order_id"], name: "index_merchants_orders_on_order_id"
   end
 
   create_table "order_items", force: :cascade do |t|
