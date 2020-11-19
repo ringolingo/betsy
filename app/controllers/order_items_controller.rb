@@ -1,6 +1,7 @@
 class OrderItemsController < ApplicationController
 
   before_action :find_order_item
+  
 
   def create
 
@@ -33,6 +34,7 @@ class OrderItemsController < ApplicationController
       render "orders/index", status: :bad_request
     end
   end
+
 
   def destroy
     redirect_to orders_path and return if @order_item.nil?
