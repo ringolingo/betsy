@@ -1,0 +1,41 @@
+<%= form_with model: @order, url: order_path(@order), method: :patch do |f| %>
+  <div class="form-group">
+    <%= f.label :customer_name, "Name" %>
+    <%= f.text_field :customer_name, class: "form-control", placeholder: "Sleepy Samuel"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email_address, "Email Address" %>
+    <%= f.text_field :email_address, class: "form-control", placeholder: "1ZLLC@gmail.com"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :mailing_address, "Shipping Address" %>
+    <%= f.text_field :mailing_address, class: "form-control", placeholder: "1234 Sleepytown"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cc_number, "Card Number" %>
+    <%= f.number_field :cc_number, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cc_expiration, "Expiration Date" %>
+    <%= f.number_field :cc_expiration, class: "form-control", placeholder: "11/23"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cc_security_code, "Security Code" %>
+    <%= f.number_field :cc_security_code, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :zip_code, "Zip Code" %>
+    <%= f.number_field :zip_code, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Complete Order", class: "btn btn-light" %>
+  </div>
+
+<% end %>
