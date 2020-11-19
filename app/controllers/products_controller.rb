@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  skip_before_action :require_login, only: [:index]
+  before_action :current_merchant, only: [:index]
 
   def index
     @products = Product.all
@@ -18,6 +20,9 @@ class ProductsController < ApplicationController
   end
 
   def create
+    auth_hash = request.env["omniauth.auth"]
+    binding.pry
+
     @product = Product.new(product_params)
     @product.merchant_id = session[:merchant_id]
 
