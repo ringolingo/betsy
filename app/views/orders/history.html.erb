@@ -1,0 +1,19 @@
+<% if @order.merchants.include?(@current_merchant) %>
+  <h2>Order History</h2>
+  <section>
+    <p>Buyer: <%= @order.name %></p>
+    <p>Buyer email: <%= @order.email %></p>
+    <p>Mailing address: <%= @order.address %></p>
+    <p>Credit Card ending in: <%= @order.credit_card_number.to_s.slice(-4..-1).to_i %></p>
+    <p>Credit Card expiring: <%= @order.expiration_date %></p>
+  </section>
+
+  <section>
+    <% @items.each do |item| %>
+      <%= item.product.name %>
+    <% end %>
+  </section>
+
+<% else %>
+  <p>You must login to see that page.</p>
+<% end %>

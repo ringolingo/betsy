@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/auth/github", as: "github_login"
 
   #OmniAuth Github callback route
-  get "auth/:provider/callback", to: "merchant#create", as: "omniauth_callback"
+  get "auth/:provider/callback", to: "merchants#create", as: "omniauth_callback"
 
   resources :products do
     resources :order_items, only: [:create]
@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   resources :merchants # only: [] or expect: []
 
-  resources :orders # only: [] or expect: []
   get "orders/:id/history", to: "orders#history", as: "order_history"
+  resources :orders # only: [] or expect: []
 
   resources :order_items, except: [:create]
 end
