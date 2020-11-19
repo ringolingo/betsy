@@ -95,3 +95,15 @@ CSV.foreach(ORDER_ITEMS_FILE, headers: true).each do |row|
 end
 puts "Added #{OrderItem.count} order_items to the database"
 puts "#{order_items_failures.length} order_items failed to save"
+
+order_items = OrderItem.all
+order_items.each do |item|
+  merchant = item.product.merchant
+  order = item.order
+  merchant.orders << order
+end
+
+merchants = Merchant.all
+merchants.each do |merchant|
+  merchant.orders = merchant.orders.uniq
+end
