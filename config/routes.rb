@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :merchants # only: [] or expect: []
 
   resources :orders # only: [] or expect: []
+  get "orders/:id/history", to: "orders#history", as: "order_history"
 
   resources :order_items, except: [:create]
 end
