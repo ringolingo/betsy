@@ -39,8 +39,9 @@ class OrdersController < ApplicationController
     elsif @current_merchant.nil?
       flash[:error] = "You must log in to see that page"
       redirect_to merchants_path and return
-    else
-      return @current_merchant.filter_order(@order)
     end
+
+    @items = @current_merchant.filter_order(@order)
+    return @items
   end
 end
