@@ -42,17 +42,19 @@ describe Merchant do
   end
 
   describe "relationships" do
-    # @merchant = merchants(:merchant1) TODO why doesn't terminal recognize my .ymls
-    # @product = products(:blanket)
+    before do
+      @merchant = merchants(:merchant1)
+      # @product = products(:blanket)
+    end
 
     it "can have a product" do
-      merchant = Merchant.new(username: "grrrr", email: "aaaaargh@gmail.com")
-      merchant.save
-      product = Product.create!(merchant: merchant, name: "a nice thing", category: "sleep aid", description: "it helps you sleep", price: 1000, stock: 20)
+      # merchant = Merchant.new(username: "grrrr", email: "aaaaargh@gmail.com")
+      # merchant.save
+      product = Product.create!(merchant: @merchant, name: "a nice thing", category: "sleep aid", description: "it helps you sleep", price: 1000, stock: 20)
       product.save
 
-      expect(merchant.products.count).must_equal 1
-      expect(merchant.products).must_include product
+      expect(@merchant.products.count).must_equal 1
+      expect(@merchant.products).must_include product
     end
 
     it "can have an order" do
