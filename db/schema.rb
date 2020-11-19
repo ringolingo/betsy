@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_035430) do
+ActiveRecord::Schema.define(version: 2020_11_18_204040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 2020_11_18_035430) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "merchants_orders_joins", force: :cascade do |t|
+    t.bigint "merchant_id"
+    t.bigint "order_id"
+    t.index ["merchant_id"], name: "index_merchants_orders_joins_on_merchant_id"
+    t.index ["order_id"], name: "index_merchants_orders_joins_on_order_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -48,7 +55,6 @@ ActiveRecord::Schema.define(version: 2020_11_18_035430) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.string "category"
     t.string "description"
     t.integer "price"
     t.string "photo_url"
@@ -56,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_11_18_035430) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "merchant_id"
+    t.string "category"
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
 
