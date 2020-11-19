@@ -6,3 +6,17 @@ blanket:
   price: 30
   photo_url: image.jpeg
   stock: 8
+product1:
+  merchant: merchant1
+  name: pillow
+  category: sleep aid
+  description: it helps you sleep
+  price: 1000
+  stock: 20
+product2:
+  merchant: merchant2
+  name: a nicer pillow
+  category: sleep aid
+  description: zonks you right out
+  price: 2000
+  stock: 40
