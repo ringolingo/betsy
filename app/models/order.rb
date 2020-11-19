@@ -8,9 +8,7 @@ class Order < ApplicationRecord
 
   def check_stock
     result = []
-
     self.order_items.each do |item|
-
       if item.quantity > item.product.stock
         result << [item.product.name, item.product.stock]
       end
