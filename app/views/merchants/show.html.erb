@@ -9,6 +9,15 @@
   <p>Questions about an order? <%= @merchant.email %></p>
 </section>
 
+<section>
+  <h3>Your Products</h3>
+  <% @merchant.products.each do |product| %>
+    <!--TODO - add link/dropdowns to edit product info -->
+    <%= product.name %>
+    <br />
+  <% end %>
+</section>
+
 <!--TODO - set up so this section only shows if this merchant is the logged in user -->
 <section>
   <h3>Order history</h3>
@@ -17,12 +26,13 @@
   <% else %>
     <!--TODO - overall stats, and filter by status -->
     <table>
-
       <thead>
         <tr>
           <th>Date</th>
           <th>Products</th>
           <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Status</th>
         </tr>
       </thead>
 
@@ -30,20 +40,25 @@
         <tbody>
           <tr>
             <td>
-              <%= order.created_at.strftime("%b %d, %Y") %> <!--TODO - link to the order show view -->
+              <%= order.created_at %> <!--TODO - link to the order show view -->
             </td>
-            <% order.order_items.each do |item| %>
+            <% items = @merchant.filter_order(order) %>
               <td>
-                <% if item.product.merchant == @merchant %>
+                <% items.each do |item| %>
                   <%= item.product.name %>
                 <% end %>
               </td>
               <td>
-                <% if item.product.merchant == @merchant %>
+                <% items.each do |item| %>
                   <%= item.quantity %>
                 <% end %>
               </td>
-            <% end %>
+            <td>
+              <%= items.sum { |item| item.product.price } %>
+            </td>
+            <td>
+              <%= order.status %> <!--TODO - link/dropdown to change status -->
+            </td>
           </tr>
         </tbody>
       <% end %>
