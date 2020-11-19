@@ -1,7 +1,8 @@
 one:
+  id: 1
   quantity: 1
-  product: sleepy_time_tea
-  order: a
+  product_id: 1
+  order_id: 1
 two:
   quantity: 4
   product: fuzzy_blanket

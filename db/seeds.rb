@@ -9,7 +9,7 @@
 require 'csv'
 
 MERCHANTS_FILE = Rails.root.join("db", "merchants-seeds.csv")
-ORDER_ITEMS_FILE = Rails.root.join("db", "order-items-seeds.csv")
+ORDER_ITEMS_FILE = Rails.root.join("db", "orders-items-seeds.csv")
 ORDERS_FILE = Rails.root.join("db", "orders-seeds.csv")
 PRODUCTS_FILE = Rails.root.join("db", "products-seeds.csv")
 
@@ -41,9 +41,9 @@ CSV.foreach(ORDERS_FILE, headers: true).each do |row|
   created = order.save
   if !created
     order_failures << order
-    puts "Failed to save order: #{order.inspect}"
+    puts "Failed to save orders: #{order.inspect}"
   else
-    puts "Created order: #{order.inspect}"
+    puts "Created orders: #{order.inspect}"
   end
 end
 

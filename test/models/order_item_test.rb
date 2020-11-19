@@ -55,7 +55,7 @@ describe OrderItem do
       expect(item_1.product).must_be_kind_of Product
     end
 
-    it "has an order" do
+    it "has an orders" do
       item_1 = order_items(:one)
 
       expect(item_1).must_respond_to :order
