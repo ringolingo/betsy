@@ -13,7 +13,8 @@
     For Sale Status: <%= product.for_sale ? "Active" : "Retired" %>
       <% if @merchant == @current_merchant %>
         <%= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch %>
-        <%#= TODO - add button to "edit product?" %>
+        <%= link_to "Update this product?", edit_product_path(product) %>
+        <br/>
       <% end %>
     <br />
     </div>
