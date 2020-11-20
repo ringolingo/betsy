@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
-  skip_before_action :require_login #, only: [:index]
-  before_action :current_merchant, only: [:index]
+  before_action :require_login, except: [:index, :show]
   before_action :find_product, only: [:show, :update, :destroy, :toggle_for_sale]
 
   def index
