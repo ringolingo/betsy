@@ -9,7 +9,7 @@
 require 'csv'
 
 MERCHANTS_FILE = Rails.root.join("db", "merchants-seeds.csv")
-ORDER_ITEMS_FILE = Rails.root.join("db", "orders-items-seeds.csv")
+ORDER_ITEMS_FILE = Rails.root.join("db", "order-items-seeds.csv")
 ORDERS_FILE = Rails.root.join("db", "orders-seeds.csv")
 PRODUCTS_FILE = Rails.root.join("db", "products-seeds.csv")
 
@@ -18,6 +18,8 @@ CSV.foreach(MERCHANTS_FILE, headers: true).each do |row|
   merchant = Merchant.new
   merchant.username = row["username"]
   merchant.email = row["email"]
+  merchant.uid = row["uid"]
+  merchant.provider = row["provider"]
 
   created = merchant.save
   if !created

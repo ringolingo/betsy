@@ -9,12 +9,14 @@ Rails.application.routes.draw do
   get "auth/:provider/callback", to: "merchants#create", as: "omniauth_callback"
   delete "/logout", to: "merchants#logout", as: "logout"
 
+  patch "/products/:id/toggle", to: "products#toggle_for_sale", as: "toggle_for_sale"
   resources :products do
     resources :order_items, only: [:create]
   end # only: [] or expect: []
 
   resources :merchants # only: [] or expect: []
 
+  get "orders/:id/history", to: "orders#history", as: "order_history"
   resources :orders # only: [] or expect: []
 
   resources :order_items, except: [:create]
