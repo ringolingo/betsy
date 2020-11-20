@@ -55,7 +55,7 @@
                   <% end %>
                 </td>
               <td>
-                <%= items.sum { |item| item.product.price } %>
+                <%= display_money(items.sum { |item| item.product.price }) %>
               </td>
               <td>
                 <%= order.status %> <!--TODO - link/dropdown to change status -->

@@ -3,7 +3,7 @@
 <p><%= @product.category %></p>
 <!--TODO - add link to browse by category?-->
 <p><%= @product.description %></p>
-<p><%= @product.price %></p>
+<p><%= display_money(@product.price) %></p>
 <p><%= @product.stock %> in stock</p>
 <!--TODO - photo? -->
 <p></p>
