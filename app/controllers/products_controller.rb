@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   skip_before_action :require_login, only: [:index]
   before_action :current_merchant, only: [:index]
+  before_action :find_product, only: [:show, :update, :destroy, :toggle_for_sale]
 
   def index
     @products = Product.all
@@ -9,8 +10,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
-
     if @product.nil?
       redirect_to products_path
       return
@@ -45,8 +44,6 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @products = Product.find_by(id: params[:id])
-
     if @products.nil?
       head :not_found
       return
@@ -60,19 +57,16 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @products = Product.find_by(id: params[:id])
-
-    if @products.nil?
+    if @product.nil?
       head :not_found
       return
-    elsif @products.destroy
+    elsif @product.destroy
       redirect_to products_path
       return
     end
   end
 
   def toggle_for_sale
-    @product = Product.find_by(id: params[:id])
     @merchant = @product.merchant
     unless @merchant == @current_merchant
       flash[:error] = "You do not have access to change that"
@@ -90,4 +84,7 @@ class ProductsController < ApplicationController
     return params.require(:product).permit(:name, :description, :price, :photo_URL, :stock, :merchant_id, :category)
   end
 
+  def find_product
+    @product = Product.find_by(id: params[:id])
+  end
 end
