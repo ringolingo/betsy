@@ -12,12 +12,9 @@
   <header>
     <nav>
       <ul>
-        <% if @current_merchant.nil? %>
           <li><%= link_to "Log In", github_login_path %></li>
-        <% else %>
-          <li><%= link_to "Log Out", logout_path, method: :post %></li>
-          <li><%= link_to "Current Merchant", current_merchant_path %></li>
-        <% end %>
+          <li><%= link_to "Log Out", logout_path, method: :delete %></li>
+<!--          <li><%#= link_to "Current Merchant", current_merchant_path %></li>-->
       </ul>
     </nav>
   </header>
