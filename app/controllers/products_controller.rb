@@ -1,15 +1,16 @@
 class ProductsController < ApplicationController
   skip_before_action :require_login, only: [:index]
   before_action :current_merchant, only: [:index]
+  before_action :find_product, only: [:show, :update, :destroy, :toggle_for_sale]
 
   def index
     @products = Product.all
+
+    @available_products = Product.where(for_sale: true)
   end
 
   def show
-    @products = Product.find_by(id: params[:id])
-
-    if @products.nil?
+    if @product.nil?
       redirect_to products_path
       return
     end
@@ -21,7 +22,7 @@ class ProductsController < ApplicationController
 
   def create
     auth_hash = request.env["omniauth.auth"]
-    binding.pry
+    # binding.pry
 
     @product = Product.new(product_params)
     @product.merchant_id = session[:user_id]
@@ -43,13 +44,11 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @products = Product.find_by(id: params[:id])
-
-    if @products.nil?
+    if @product.nil?
       head :not_found
       return
-    elsif @products.update(product_params)
-      redirect_to product_path(@products.id)
+    elsif @product.update(product_params)
+      redirect_to product_path(@product.id)
       return
     else
       render :edit
@@ -58,17 +57,26 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @products = Product.find_by(id: params[:id])
-
-    if @products.nil?
+    if @product.nil?
       head :not_found
       return
-    elsif @products.destroy
+    elsif @product.destroy
       redirect_to products_path
       return
     end
   end
 
+  def toggle_for_sale
+    @merchant = @product.merchant
+    unless @merchant == @current_merchant
+      flash[:error] = "You do not have access to change that"
+      redirect_to merchants_path and return
+    end
+
+    @product.toggle_for_sale
+
+    redirect_to merchant_path(@merchant) and return
+  end
 
   private
 
@@ -76,4 +84,7 @@ class ProductsController < ApplicationController
     return params.require(:product).permit(:name, :description, :price, :photo_URL, :stock, :merchant_id, :category)
   end
 
+  def find_product
+    @product = Product.find_by(id: params[:id])
+  end
 end
