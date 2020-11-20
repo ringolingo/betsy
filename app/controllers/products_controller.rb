@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
 
   def create
     auth_hash = request.env["omniauth.auth"]
-    binding.pry
+    # binding.pry
 
     @product = Product.new(product_params)
     @product.merchant_id = session[:user_id]
@@ -44,11 +44,11 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @products.nil?
+    if @product.nil?
       head :not_found
       return
-    elsif @products.update(product_params)
-      redirect_to product_path(@products.id)
+    elsif @product.update(product_params)
+      redirect_to product_path(@product.id)
       return
     else
       render :edit

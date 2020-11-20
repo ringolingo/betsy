@@ -6,6 +6,7 @@ blanket:
   price: 30
   photo_url: image.jpeg
   stock: 8
+  for_sale: true
 product1:
   merchant: merchant1
   name: pillow
@@ -13,6 +14,7 @@ product1:
   description: it helps you sleep
   price: 1000
   stock: 20
+  for_sale: true
 product2:
   merchant: merchant2
   name: a nicer pillow
@@ -20,3 +22,4 @@ product2:
   description: zonks you right out
   price: 2000
   stock: 40
+  for_sale: false
