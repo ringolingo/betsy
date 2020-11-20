@@ -3,21 +3,22 @@
   <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
   <p><%= @merchant.description %></p>
   <p>Questions about an order? <%= @merchant.email %></p>
-<!-- TODO - attached photo?-->
+  <%# TODO - attached photo?  %>
 </section>
 
 <section>
   <h3>Products</h3>
   <% @merchant.products.each do |product| %>
-    <!--TODO - add link/dropdowns to edit product info -->
-    <!--TODO - add link to add product -->
-    <!--TODO - add a dropdown/button to retire product, from sale from this page -->
     <div><%= link_to product.name, product_path(product) %><br/>
     For Sale Status: <%= product.for_sale ? "Active" : "Retired" %>
-      <%= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch %>
+      <% if @merchant == @current_merchant %>
+        <%= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch %>
+        <%#= TODO - add button to "edit product?" %>
+      <% end %>
     <br />
     </div>
   <% end %>
+  <%# TODO - add link to add product (for correct logged in merchant) %>
 </section>
 
 <% if @merchant == @current_merchant %>

@@ -72,6 +72,10 @@ class ProductsController < ApplicationController
   def toggle_for_sale
     @product = Product.find_by(id: params[:id])
     @merchant = @product.merchant
+    unless @merchant == @current_merchant
+      flash[:error] = "You do not have access to change that"
+      redirect_to merchants_path and return
+    end
 
     @product.toggle_for_sale
 
