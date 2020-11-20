@@ -1,0 +1,16 @@
+<main>
+  <section class = "edit-container">
+    <section class = "edit-box">
+      <section class = "form-box">
+        <p>Img goes here</p>
+        <%=@order_item.product.name%>
+        <%= form_with model: @order_item, class: 'edit-task' do |f| %>
+          <div class="form-group">
+            <%= f.select :quantity, (1..@order_item.product.stock).map{|n| n},{}, {class: "form-control"} %>
+          </div>
+          <div class = "button"><%= f.submit "Edit Quantity", class: "task-button" %></div>
+        <% end %>
+      </section>
+    </section>
+  </section>
+</main>

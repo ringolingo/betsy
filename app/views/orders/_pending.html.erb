@@ -16,7 +16,7 @@
       <%order.order_items.each do |order_item| %>
           <%= render partial: "table_data", locals: { data: ["img here",
                                                              link_to(order_item.product.name, product_path(order_item.product)),
-                                                             display_currency(order_item.product.price),
+                                                             display_money(order_item.product.price),
                                                              order_item.quantity,
                                                              link_to("Edit", edit_order_item_path(order_item), class: "btn btn-info"),
                                                              link_to("Delete", order_item_path(order_item), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger")]}%>
@@ -25,9 +25,9 @@
     </tbody>
   </table>
   <section class="order-costs">
-    <p class="end">Subtotal: <%=display_currency(order.sub_total)%></p>
-    <p class="end"> Taxes: <%=display_currency(order.sub_total * tax_rate)%></p>
-    <p class="end">Total: <%=display_currency(order.total(tax: tax_rate, shipping: shipping_cost))%></p>
+    <p class="end">Subtotal: <%=display_money(order.sub_total)%></p>
+    <p class="end"> Taxes: <%=display_money(order.sub_total * tax_rate)%></p>
+    <p class="end">Total: <%=display_money(order.total(tax: tax_rate, shipping: shipping_cost))%></p>
     <div class="end">
       <%= link_to("Continue to checkout", edit_order_path(order), class: "btn btn-info")%>
     </div>

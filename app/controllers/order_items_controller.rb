@@ -28,7 +28,7 @@ class OrderItemsController < ApplicationController
 
     if(save_order && save_order_item)
       flash[:success] = "Item added to cart!"
-      redirect_to orders_path
+      redirect_to order_path(@current_order)
     else
       flash[:error] = "Unable to add item"
       render "orders/index", status: :bad_request
@@ -44,7 +44,7 @@ class OrderItemsController < ApplicationController
 
     if @order_item.destroy
       flash[:success] = "Order item successfully deleted"
-      redirect_to orders_path
+     redirect_to order_path(@order_item.order)
     else
       flash.now[:error] = "Error: unable to delete orders item"
       render "orders/index", status: :bad_request
@@ -60,10 +60,10 @@ class OrderItemsController < ApplicationController
 
     if update
       flash[:success] = "Order item successfully updated"
-      redirect_to orders_path
+      redirect_to order_path(@order_item.order)
     else
       flash.now[:error] = "Error: unable to update orders item"
-      redirect_to orders_path
+      redirect_to order_path(@order_item.order)
       render "orders/index", status: :bad_request
       #render "order/#{@current_order.id}/show", status: :bad_request
     end

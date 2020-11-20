@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  skip_before_action :require_login, except: [:current_merchant]
+  before_action :require_login, only: [:logout]
 
   def index
     @merchants = Merchant.all
