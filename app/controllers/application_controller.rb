@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
 
   before_action :set_current_order
-  before_action :require_login
   before_action :current_merchant
 
 
@@ -23,9 +22,5 @@ class ApplicationController < ActionController::Base
   def set_current_order
     @current_order = Order.find_by(id: session[:order_id])
   end
-
-
-
-
 
 end
