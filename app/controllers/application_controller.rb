@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
 
   before_action :set_current_order
-  before_action :require_login
   before_action :current_merchant
 
 
