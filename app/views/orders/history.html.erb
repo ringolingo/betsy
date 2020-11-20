@@ -29,7 +29,7 @@
           <% @items.each do |item| %>
             <td><%= link_to item.product.name, product_path(item.product) %></td>
             <td><%= item.quantity %></td>
-            <td><%= display_money(item.product.price) %></td>
+            <td><%= display_money(item.product.cost) %></td>
           <% end %>
         </tr>
       </tbody>

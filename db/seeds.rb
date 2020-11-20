@@ -58,6 +58,7 @@ product_failures = []
 CSV.foreach(PRODUCTS_FILE, headers: true).each do |row|
   # name,category,description,price,stock,merchant_id
   product = Product.new
+  product.for_sale = true
   product.name = row["name"]
   product.category = row["category"]
   product.description = row["description"]
