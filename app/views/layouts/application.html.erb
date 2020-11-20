@@ -20,8 +20,10 @@
         <li><%= link_to "Become a Merchant", new_merchant_path %></li>
         <li><%= link_to "Log In", github_login_path %></li>
       <% else %>
+<!--        <li><%#= link_to "Dashboard", merchant_path(session[:user_id]) %></li>-->
         <li><%= link_to "New Product", new_product_path %></li>
         <li><%= link_to "Log Out", logout_path, method: :delete %></li>
+
       <% end %>
       </ul>
     </nav>

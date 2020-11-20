@@ -24,9 +24,7 @@
 
 <div class = "product-tiles">
   <% @products.each do |product| %>
-    <%# next if product.categories.include?(Category.find_by(name: "hidden")) %>
     <div class = "product-tile">
-<!--      <img src="/app/assets/images/dog_sleeping.jpg" alt="Cool Doggy"/>-->
       <%=image_tag("dog_sleeping.jpg", alt: "Example Image", width: 200, height: 300)%>
       <div class = "product-description">
         <a href="<%= product_path(product) %>">
@@ -38,4 +36,3 @@
     </div>
   <% end %>
 </div>
-<!--<div class="pages"><%#= will_paginate @products %></div>-->
