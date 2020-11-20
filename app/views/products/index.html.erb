@@ -2,12 +2,25 @@
 <% if @available_products.empty? %>
   <p>Sorry, no products!</p>
 <% else %>
-  <% @available_products.each do |product| %>
-    <div>
-      <%= link_to product.name, product_path(product) %>
-      <%= display_money(product.price) %>
-      <%= product.category %>
-      <%= link_to product.merchant.username, merchant_path(product.merchant) %>
-    </div>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Seller</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @available_products.each do |product| %>
+        <tr>
+          <td><%= link_to product.name, product_path(product) %></td>
+          <td><%= display_money(product.price) %></td>
+          <td><%= product.category %></td>
+          <td><%= link_to product.merchant.username, merchant_path(product.merchant) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
