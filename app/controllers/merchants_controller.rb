@@ -35,6 +35,11 @@ class MerchantsController < ApplicationController
     redirect_to root_path
   end
 
+  def logout
+    session[:user_id] = nil
+    flash[:success] = "Successfully logged out"
+    redirect_to root_path
+  end
 
   private
 
@@ -42,9 +47,5 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find_by(id: params[:id])
   end
 
-  def logout
-    session[:user_id] = nil
-    flash[:success] = "Successfully logged out"
-    redirect_to root_path
-  end
+
 end
