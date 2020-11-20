@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
-  skip_before_action :require_login, only: [:history]
+  # before_action :require_login, only: [:history]
+  before_action :find_order, except: [:find]
+  before_action :is_this_your_cart?, except: [:find]
+  before_action :still_pending?
 
   def index
     @orders = Order.all
@@ -7,6 +10,24 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
+
+    if @order.nil?
+      flash[:status] = :error
+      flash[:result_text] = "A problem occured: Could not find order"
+      redirect_to root_path
+      return
+    end
+  end
+
+  def edit
+    @order = Order.find_by(id: params[:id])
+    if @order.nil?
+      flash[:status] = :error
+      flash[:result_text] = "A problem occured: Could not find order"
+      redirect_to root_path
+      return
+    end
+
   end
 
   def update
@@ -48,5 +69,11 @@ class OrdersController < ApplicationController
 
     @items = @current_merchant.filter_order(@order)
     return @items
+  end
+
+  private
+
+  def order_params
+    return params.require(:order).permit(:address, :email, :name, :credit_card_number, :expiration, :cvv, :zip_code, :status, :for_sale)
   end
 end
