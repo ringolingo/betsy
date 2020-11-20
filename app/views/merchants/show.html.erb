@@ -18,7 +18,10 @@
     <br />
     </div>
   <% end %>
-  <%# TODO - add link to add product (for correct logged in merchant) %>
+
+  <% if @merchant == @current_merchant %>
+    <%= link_to "Add a new product?", new_product_path %>
+  <% end %>
 </section>
 
 <% if @merchant == @current_merchant %>
