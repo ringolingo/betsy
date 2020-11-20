@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
 
   before_action :set_current_order
-  before_action :require_login
   before_action :current_merchant
 
 
@@ -46,6 +45,7 @@ class ApplicationController < ActionController::Base
     @current_order = Order.find_by(id: session[:order_id])
   end
 
+
   def current_merchant
     if session[:user_id]
       @current_merchant = Merchant.find_by(id: session[:user_id])
@@ -58,7 +58,4 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
-
-
-
 end

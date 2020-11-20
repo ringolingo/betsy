@@ -5,6 +5,13 @@
 <p><%= @product.description %></p>
 <p><%= display_money(@product.price) %></p>
 <p><%= @product.stock %> in stock</p>
+<%= link_to "Purchase Item",  product_order_items_path(@product), method: :post%>
+<%= form_for  :order_item, url: product_order_items_path(@product) do |f| %>
+  <div class="form-group">
+    <%= f.select :quantity, (1..@product.stock).map{|n| n},{}, {class: "form-control"} %>
+  </div>
+  <div class = "button"><%= f.submit "Purchase Item", class: "task-button" %></div>
+<% end %>
 <!--TODO - photo? -->
 <p></p>
 <p><%= @product.orders.length %> sold!</p>

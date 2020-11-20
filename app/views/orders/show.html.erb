@@ -3,9 +3,13 @@
 <!-- if order requested is user's shopping cart -->
 
 <!-- START OF TABLE FORMAT OF CART -->
+<main>
 <section>
+  <%if @order.status == "pending" %>
+    <%= render partial: "pending", locals: { order: @order }%>
+  <%end%>
 
-<% if @order.id == session[:order_id] %>
+  <% if @order.id == session[:order_id] %>
   <% if @order.order_items.count == 0 %>
     <div>
       <p> There are no items in your shopping cart. </p>
@@ -56,7 +60,7 @@
   <%end%>
 </section>
 
-    <!--if one of the order's merchants is logged in and @order is paid, shows customer details and only merchant's order items-->
+    if one of the order's merchants is logged in and @order is paid, shows customer details and only merchant's order items
   <% if session[:merchant_id] && @order.return_merchants.include?(@current_merchant) %>
   <h2>Order <%= @order.id %>: Items Requested From Your Store</h2>
   <% @order.return_merchant_items(session[:merchant_id]).each do |item| %>
@@ -115,8 +119,5 @@
       <p>Order Status: <%= @order.status %></p>
 
   <% end %>
-
-  <%if @order.status == "pending" %>
-    <%= render partial: "pending", locals: { order: @order }%>
-  <%end%>
+  </main>
 
