@@ -7,9 +7,9 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @products = Product.find_by(id: params[:id])
+    @product = Product.find_by(id: params[:id])
 
-    if @products.nil?
+    if @product.nil?
       redirect_to products_path
       return
     end

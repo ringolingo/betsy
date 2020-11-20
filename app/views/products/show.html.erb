@@ -1,0 +1,10 @@
+<h2><%= @product.name %></h2>
+<p><%= link_to @product.merchant.username, merchant_path(@product.merchant) %></p>
+<p><%= @product.category %></p>
+<!--TODO - add link to browse by category?-->
+<p><%= @product.description %></p>
+<p><%= @product.price %></p>
+<p><%= @product.stock %> in stock</p>
+<!--TODO - photo? -->
+<p></p>
+<p><%= @product.orders.length %> sold!</p>
