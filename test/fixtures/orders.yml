@@ -1,9 +1,17 @@
 betty:
   id: 1
   status: paid
-  sub_total: 5000
-  order_total: 7000
   name: Betty Elms
+  address: 1234 Mulholland Dr, Seattle, WA 98122
+  email: bbb@bmail.com
+  credit_card_number: 12345678
+  expiration_date: <%= Time.new("1984").strftime("%Y-%m-%d")%>
+  cvv: 123
+  zip_code: 22026
+mike:
+  id: 2
+  status: paid
+  name: Mike Meow
   address: 1234 Mulholland Dr, Seattle, WA 98122
   email: bbb@bmail.com
   credit_card_number: 12345678
@@ -22,3 +30,4 @@ order1:
   cvv: 098
   zip_code: 98104
   merchants: merchant1, merchant2
+

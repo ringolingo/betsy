@@ -48,5 +48,33 @@ describe Order do
       expect(order_item.order.name).must_equal "Betty Elms"
     end
 
+    end
+
+  describe 'custom methods' do
+
+    describe 'total' do
+      it 'will return the total' do
+        expect(@order.sub_total).must_equal 19000
+      end
+
+      #TODO: edge cases
+      it 'will return 0 if nothing if all order items have quantity of 0' do
+
+
+      end
+    end
+
+    describe 'total' do
+
+      it 'will return the total plus taxes and shipping' do
+        expect(@order.total(tax: 0.065, shipping: 500)).must_equal 20735
+      end
+      #TODO: edge cases
+      it 'will return 0 if nothing is in the order' do
+
+      end
+    end
+
+
   end
 end
