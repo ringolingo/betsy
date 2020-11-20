@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  skip_before_action :require_login, only: [:history]
+  before_action :require_login, only: [:history]
 
   def index
     @orders = Order.all
@@ -7,6 +7,12 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
+  end
+
+  def edit
+
+    @order = Order.find_by(id: params[:id])
+    redirect_to orders_path and return if @order.nil?
   end
 
   def update
@@ -49,4 +55,6 @@ class OrdersController < ApplicationController
     @items = @current_merchant.filter_order(@order)
     return @items
   end
+
+  #params should be defined here
 end
