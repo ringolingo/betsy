@@ -8,21 +8,47 @@
 
 <section>
   <h3>Products</h3>
-  <% @merchant.products.each do |product| %>
-    <div><%= link_to product.name, product_path(product) %><br/>
-    For Sale Status: <%= product.for_sale ? "Active" : "Retired" %>
-      <% if @merchant == @current_merchant %>
-        <%= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch %>
-        <%= link_to "Update this product?", edit_product_path(product) %>
-        <br/>
-      <% end %>
-    <br />
-    </div>
-  <% end %>
-
   <% if @merchant == @current_merchant %>
     <%= link_to "Add a new product?", new_product_path %>
   <% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>For Sale?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @merchant.products.each do |product| %>
+        <tr>
+          <td>
+            <%= link_to product.name, product_path(product) %>
+            <% if @merchant == @current_merchant %>
+              <br/>
+              <%= link_to "Update this product?", edit_product_path(product), class: "btn btn-primary" %>
+            <% end %>
+          </td>
+          <td>
+            <%= product.description %>
+          </td>
+          <td>
+            <%= display_money(product.price) %>
+          </td>
+          <td>
+            <%= product.for_sale ? "Active" : "Retired" %>
+            <% if @merchant == @current_merchant %>
+              <%= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch, class: "btn btn-secondary" %>
+            <% end %>
+          </td>
+      <% end %>
+    </tbody>
+  </table>
+
+
 </section>
 
 <% if @merchant == @current_merchant %>
@@ -32,7 +58,7 @@
       <p>You have no past orders</p>
     <% else %>
       <!--TODO - overall stats, and filter by status -->
-      <table>
+      <table class="table">
         <thead>
           <tr>
             <th>Date</th>
