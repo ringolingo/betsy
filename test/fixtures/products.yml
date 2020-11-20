@@ -3,6 +3,14 @@ blanket:
   name: cozy blanket
   category: bedding
   description: A nice warm blanket for napping
-  price: 30
+  price: 3000
   photo_url: image.jpeg
-  stock: 8
+  stock: 100
+diffuser:
+  id: 2
+  name: coil diffuser
+  category: equipment
+  description: very calming
+  price: 5000
+  photo_url: image.jpeg
+  stock: 100
