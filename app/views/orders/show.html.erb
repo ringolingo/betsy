@@ -1,3 +1,4 @@
+<main>
 <% if @order.id == session[:order_id] %>
   <% if @order.order_items.count == 0 %>
     <div>
@@ -10,22 +11,28 @@
 
 
     <!--if one of the order's merchants is logged in and @order is paid, shows customer details and only merchant's order items-->
-  <% if session[:merchant_id] && @order.return_merchants.include?(@current_merchant) %>  #checks to see if the user is logged in and (returns false if none of the items in that order belong to the
+  <% if session[:merchant_id] && @order.return_merchants.include?(@current_merchant) %>
   <h2>Order <%= @order.id %>: Items Requested From Your Store</h2>
   <% @order.return_merchant_items(session[:merchant_id]).each do |item| %>
     <p>Product: <%= link_to item.product.name, product_path(item.product) %></p>
     <p>Quantity: <%= item.quantity %><p>
   <%end%>
 
-  <h4>Customer Info</h4>
+    <h4>Customer Info</h4>
 
-  <p>Name: <%= @order.name %></p>
-  <p>Email Address: <%= @order.email %></p>
-  <p>Mailing Address: <%= @order.address %></p>
-  <p>Credit Card: **** **** **** <%= @order.credit_card_number.to_s[-4..-1]%></p>
-  <p>Credit Card Expiration: <%= @order.expiration_date %>
-  <p>Cart Status: <%= @order.status %></p>
-  <p>Order placed: <%= @order.updated_at.strftime("%F") %>
-
+    <p>Name: <%= @order.name %></p>
+    <p>Email Address: <%= @order.email %></p>
+    <p>Mailing Address: <%= @order.address %></p>
+    <p>Credit Card: **** **** **** <%= @order.credit_card_number.to_s[-4..-1]%></p>
+    <p>Credit Card Expiration: <%= @order.expiration_date %>
+    <p>Cart Status: <%= @order.status %></p>
+    <p>Order placed: <%= @order.updated_at.strftime("%F") %>
+  <% end %>
 
   <% end %>
+
+  <%if @order.status == "pending" %>
+    <%= render partial: "pending", locals: { order: @order }%>
+  <%end%>
+
+</main>
