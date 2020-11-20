@@ -86,4 +86,5 @@ class ProductsController < ApplicationController
   def find_product
     @product = Product.find_by(id: params[:id])
   end
+
 end

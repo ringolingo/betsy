@@ -1,13 +1,38 @@
 <h2>Browse our comfy-cozy products</h2>
-<% if @available_products.empty? %>
-  <p>Sorry, no products!</p>
-<% else %>
-  <% @available_products.each do |product| %>
-    <div>
-      <%= product.name %>
-      <%= display_money(product.price) %>
-      <%= product.category %>
-      <%= link_to product.merchant.username, merchant_path(product.merchant) %>
+<%# if @available_products.empty? %>
+<!--  <p>Sorry, no products!</p>-->
+<%# else %>
+  <%# @available_products.each do |product| %>
+<!--    <div>-->
+      <%#= product.name %>
+      <%#= display_money(product.price) %>
+      <%#= product.category %>
+      <%#= link_to product.merchant.username, merchant_path(product.merchant) %>
+<!--    </div>-->
+  <%# end %>
+<%# end %>
+
+
+<div class="nav-products">
+  <h4>Categories</h4>
+  <ul>
+    <% Product.category.each do |category| %>
+        <li><%= link_to "#{category}", products_path(category) %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class = "product-tiles">
+  <% @products.each do |product| %>
+    <div class = "product-tile">
+      <%=image_tag("dog_sleeping.jpg", alt: "Example Image", width: 200, height: 300)%>
+      <div class = "product-description">
+        <a href="<%= product_path(product) %>">
+          <h6 class="card-title"><%= product.name %></h6>
+          <p class="card-text"><%= product.merchant.username %></p>
+          <p class="card-text">$<%= product.price %></p>
+        </a>
+      </div>
     </div>
   <% end %>
-<% end %>
+</div>
