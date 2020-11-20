@@ -13,6 +13,15 @@
 <%# end %>
 
 
+<div class="nav-products">
+  <h4>Categories</h4>
+  <ul>
+    <% Product.category.each do |category| %>
+        <li><%= link_to "#{category}", products_path(category) %></li>
+    <% end %>
+  </ul>
+</div>
+
 <div class = "product-tiles">
   <% @products.each do |product| %>
     <%# next if product.categories.include?(Category.find_by(name: "hidden")) %>
