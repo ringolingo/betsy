@@ -4,6 +4,8 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+
+    @available_products = Product.where(for_sale: true)
   end
 
   def show
