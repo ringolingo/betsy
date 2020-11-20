@@ -9,7 +9,7 @@
 require 'csv'
 
 MERCHANTS_FILE = Rails.root.join("db", "merchants-seeds.csv")
-ORDER_ITEMS_FILE = Rails.root.join("db", "orders-items-seeds.csv")
+ORDER_ITEMS_FILE = Rails.root.join("db", "order-items-seeds.csv")
 ORDERS_FILE = Rails.root.join("db", "orders-seeds.csv")
 PRODUCTS_FILE = Rails.root.join("db", "products-seeds.csv")
 

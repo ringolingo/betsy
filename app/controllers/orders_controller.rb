@@ -3,6 +3,10 @@ class OrdersController < ApplicationController
     @orders = Order.all
   end
 
+  def show
+    @order = Order.find_by(id: params[:id])
+  end
+
   def update
     result = @current_order.check_stock
     if result.any?
