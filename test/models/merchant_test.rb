@@ -69,4 +69,32 @@ describe Merchant do
       expect(order.merchants).must_include merchant
     end
   end
+
+  describe "filter_order" do
+    before do
+      @current_merchant = merchants(:merchant1)
+      @merchant2 = merchants(:merchant2)
+      @order = orders(:order1)
+    end
+
+    it "returns products belonging to logged in merchant" do
+      items = @current_merchant.filter_order(@order)
+
+      expect(items).must_include order_items(:oi1)
+    end
+
+    it "does not return other merchants' products" do
+      items = @current_merchant.filter_order(@order)
+
+      expect(items).wont_include order_items(:oi2)
+    end
+
+    it "returns nil if logged in user has no products in order" do
+      @current_merchant = merchants(:merchant3)
+
+      items = @current_merchant.filter_order(@order)
+
+      expect(items).must_be_nil
+    end
+  end
 end

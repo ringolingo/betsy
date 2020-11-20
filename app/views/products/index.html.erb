@@ -1,0 +1,13 @@
+<h2>Browse our comfy-cozy products</h2>
+<% if @available_products.empty? %>
+  <p>Sorry, no products!</p>
+<% else %>
+  <% @available_products.each do |product| %>
+    <div>
+      <%= product.name %>
+      <%= display_money(product.price) %>
+      <%= product.category %>
+      <%= link_to product.merchant.username, merchant_path(product.merchant) %>
+    </div>
+  <% end %>
+<% end %>
