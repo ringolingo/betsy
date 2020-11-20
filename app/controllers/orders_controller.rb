@@ -1,12 +1,18 @@
 class OrdersController < ApplicationController
   #skip_before_action :require_login, only: [:history]
-
+  skip_before_action :require_login
   def index
     @orders = Order.all
   end
 
   def show
     @order = Order.find_by(id: params[:id])
+  end
+
+  def edit
+
+    @order = Order.find_by(id: params[:id])
+    redirect_to orders_path and return if @order.nil?
   end
 
   def update
