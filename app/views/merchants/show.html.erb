@@ -12,8 +12,11 @@
     <!--TODO - add link/dropdowns to edit product info -->
     <!--TODO - add link to add product -->
     <!--TODO - add a dropdown/button to retire product, from sale from this page -->
-    <%= link_to product.name, product_path(product) %>
+    <div><%= link_to product.name, product_path(product) %><br/>
+    For Sale Status: <%= product.for_sale ? "Active" : "Retired" %>
+      <%= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch %>
     <br />
+    </div>
   <% end %>
 </section>
 

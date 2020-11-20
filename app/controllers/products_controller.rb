@@ -69,6 +69,14 @@ class ProductsController < ApplicationController
     end
   end
 
+  def toggle_for_sale
+    @product = Product.find_by(id: params[:id])
+    @merchant = @product.merchant
+
+    @product.toggle_for_sale
+
+    redirect_to merchant_path(@merchant) and return
+  end
 
   private
 
