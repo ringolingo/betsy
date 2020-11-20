@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   #OmniAuth Github callback route
   get "auth/:provider/callback", to: "merchants#create", as: "omniauth_callback"
 
+  patch "/products/:id/toggle", to: "products#toggle_for_sale", as: "toggle_for_sale"
   resources :products do
     resources :order_items, only: [:create]
   end # only: [] or expect: []
