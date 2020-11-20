@@ -6,6 +6,7 @@ blanket:
   price: 3000
   photo_url: image.jpeg
   stock: 100
+  for_sale: true
 diffuser:
   id: 2
   name: coil diffuser
@@ -14,3 +15,21 @@ diffuser:
   price: 5000
   photo_url: image.jpeg
   stock: 100
+  for_sale: true
+product1:
+  merchant: merchant1
+  name: pillow
+  category: sleep aid
+  description: it helps you sleep
+  price: 1000
+  stock: 20
+  for_sale: true
+product2:
+  merchant: merchant2
+  name: a nicer pillow
+  category: sleep aid
+  description: zonks you right out
+  price: 2000
+  stock: 40
+  for_sale: false
+
