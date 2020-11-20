@@ -54,7 +54,7 @@ describe Order do
 
     describe 'total' do
       it 'will return the total' do
-        expect(@order.total).must_equal 19000
+        expect(@order.sub_total).must_equal 19000
       end
 
       #TODO: edge cases
@@ -64,12 +64,11 @@ describe Order do
       end
     end
 
-    describe 'sub_total' do
+    describe 'total' do
 
       it 'will return the total plus taxes and shipping' do
-        expect(@order.sub_total(0.065, 500)).must_equal 20735
+        expect(@order.total(tax: 0.065, shipping: 500)).must_equal 20735
       end
-
       #TODO: edge cases
       it 'will return 0 if nothing is in the order' do
 

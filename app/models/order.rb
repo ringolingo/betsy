@@ -24,11 +24,11 @@ class Order < ApplicationRecord
     end
   end
 
-  def total
-    return self.order_items.all.sum{|order_item| (order_item.quantity * order_item.product.price)}
+  def total(tax:, shipping:)
+    return sub_total + (sub_total * tax).round + shipping
   end
 
-  def sub_total(tax, shipping)
-    return total + (total * tax).round + shipping
+  def sub_total
+    return self.order_items.all.sum{|order_item| (order_item.quantity * order_item.product.price)}
   end
 end

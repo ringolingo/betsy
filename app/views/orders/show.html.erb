@@ -1,0 +1,7 @@
+<main>
+
+  <%if @order.status == "pending" %>
+    <%= render partial: "pending", locals: { order: @order }%>
+  <%end%>
+
+</main>
