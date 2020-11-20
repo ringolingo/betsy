@@ -1,31 +1,31 @@
-name,category,description,price,stock,merchant_id
-Summer Star,pajamas,Power Girl,1162,5,8
-Café Mug,night lights,Batgirl,9370,9,5
-Express Pie,night lights,Raven,7773,13,2
-Reg's Cake,sleep aids,Vixen,1434,5,8
-Heart Equinox,sleep aids,Wonder Woman,5278,7,2
-Express Cup,sleep aids,Lady Cain,5820,14,2
-Goodbye Java,bedding,Vixen,2383,19,8
-Pumpkin-spice Coffee,pajamas,Black Canary,3167,16,8
-Café Extract,night lights,Wonder Girl,6590,11,3
-Thanksgiving Java,sleep aids,Hawkgirl,319,5,1
-Holiday Bean,pajamas,Hawkgirl,4659,8,9
-KrebStar Extract,bedding,Raven,6843,17,3
-Heart Delight,pajamas,Supergirl,8549,7,7
-Seattle Java,night lights,Batgirl,7656,24,6
-Spilt America,night lights,Vixen,4117,4,4
-Veranda Breaker,bedding,Raven,5640,19,2
-Hello Equinox,bedding,Mera,6506,9,9
-Blue Cup,pajamas,Black Canary,3077,4,2
-Cascara Mug,pajamas,Hawkgirl,9846,13,10
-Winter Forrester,bedding,Wonder Girl,6591,3,4
-KrebStar Solstice,bedding,Power Girl,8621,19,8
-Reg's Mug,sleep aids,Hawkgirl,6484,19,5
-Hello Forrester,night lights,Lady Cain,779,12,8
-Melty Cup,night lights,Raven,2618,23,4
-Seattle Been,bedding,Wonder Woman,7462,19,8
-Blue Cake,pajamas,Hawkgirl,1904,4,7
-Green Breaker,sleep aids,Batgirl,4217,18,4
-Spilt Symphony,bedding,Lady Cain,1532,24,2
-Veranda Nuts,pajamas,Batwoman,535,6,10
-Postmodern Look,pajamas,Batwoman,5338,5,6
+name,category,description,price,stock,merchant_id,for_sale
+Summer Star,pajamas,Power Girl,1162,5,8,true
+Café Mug,night lights,Batgirl,9370,9,5,true
+Express Pie,night lights,Raven,7773,13,2,true
+Reg's Cake,sleep aids,Vixen,1434,5,8,true
+Heart Equinox,sleep aids,Wonder Woman,5278,7,2,true
+Express Cup,sleep aids,Lady Cain,5820,14,2,true
+Goodbye Java,bedding,Vixen,2383,19,8,true
+Pumpkin-spice Coffee,pajamas,Black Canary,3167,16,8,true
+Café Extract,night lights,Wonder Girl,6590,11,3,true
+Thanksgiving Java,sleep aids,Hawkgirl,319,5,1,true
+Holiday Bean,pajamas,Hawkgirl,4659,8,9,true
+KrebStar Extract,bedding,Raven,6843,17,3,true
+Heart Delight,pajamas,Supergirl,8549,7,7,true
+Seattle Java,night lights,Batgirl,7656,24,6,true
+Spilt America,night lights,Vixen,4117,4,4,true
+Veranda Breaker,bedding,Raven,5640,19,2,true
+Hello Equinox,bedding,Mera,6506,9,9,true
+Blue Cup,pajamas,Black Canary,3077,4,2,true
+Cascara Mug,pajamas,Hawkgirl,9846,13,10,true
+Winter Forrester,bedding,Wonder Girl,6591,3,4,true
+KrebStar Solstice,bedding,Power Girl,8621,19,8,true
+Reg's Mug,sleep aids,Hawkgirl,6484,19,5,true
+Hello Forrester,night lights,Lady Cain,779,12,8,true
+Melty Cup,night lights,Raven,2618,23,4,true
+Seattle Been,bedding,Wonder Woman,7462,19,8,true
+Blue Cake,pajamas,Hawkgirl,1904,4,7,true
+Green Breaker,sleep aids,Batgirl,4217,18,4,true
+Spilt Symphony,bedding,Lady Cain,1532,24,2,true
+Veranda Nuts,pajamas,Batwoman,535,6,10,true
+Postmodern Look,pajamas,Batwoman,5338,5,6,true
