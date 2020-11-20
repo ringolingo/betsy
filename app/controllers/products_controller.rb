@@ -47,6 +47,9 @@ class ProductsController < ApplicationController
     if @product.nil?
       head :not_found
       return
+    elsif @product.merchant != @current_merchant
+      flash[:error] = "You must log in to edit this product"
+      redirect_to merchants_path and return
     elsif @product.update(product_params)
       redirect_to product_path(@product.id)
       return
