@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-
+  skip_before_action :require_login #, only: [:index]
   before_action :find_order_item
   
 
@@ -24,11 +24,11 @@ class OrderItemsController < ApplicationController
 
     order_item = OrderItem.new(order: @current_order, product: product, quantity: params[:order_item][:quantity])
 
-    save_order_item = order_item.save
+    save_order_item = order_item.save!
 
     if(save_order && save_order_item)
       flash[:success] = "Item added to cart!"
-      redirect_to orders_path
+      redirect_to order_path(@current_order)
     else
       flash[:error] = "Unable to add item"
       render "orders/index", status: :bad_request
