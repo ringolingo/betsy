@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
       @current_order.decrement_stock
       flash[:status] = :success
       flash[:result_text] = "Order submitted! Enjoy your self-care with vibes."
+
       redirect_to order_path(@current_order)
       return
     else

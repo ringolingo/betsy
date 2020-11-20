@@ -6,7 +6,7 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find_by(id: params[:id])
+    find_merchant
 
     if @merchant.nil?
       flash[:error] = "No such person"
@@ -33,5 +33,11 @@ class MerchantsController < ApplicationController
 
     session[:user_id] = merchant.id
     redirect_to root_path
+  end
+
+  private
+
+  def find_merchant
+    @merchant = Merchant.find_by(id: params[:id])
   end
 end
