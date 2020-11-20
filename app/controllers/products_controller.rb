@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  skip_before_action :require_login, only: [:index, :show]
-  # before_action :current_merchant, only: [:index]
+
+  before_action :require_login, except: [:index, :show]
   before_action :find_product, only: [:show, :edit, :update, :destroy, :toggle_for_sale]
 
   def index
@@ -100,4 +100,5 @@ class ProductsController < ApplicationController
   def find_product
     @product = Product.find_by(id: params[:id])
   end
+
 end

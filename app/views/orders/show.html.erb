@@ -1,5 +1,15 @@
+<h1> Your order: </h1>
+
+<!-- if order requested is user's shopping cart -->
+
+<!-- START OF TABLE FORMAT OF CART -->
 <main>
-<% if @order.id == session[:order_id] %>
+<section>
+  <%if @order.status == "pending" %>
+    <%= render partial: "pending", locals: { order: @order }%>
+  <%end%>
+
+  <% if @order.id == session[:order_id] %>
   <% if @order.order_items.count == 0 %>
     <div>
       <p> There are no items in your shopping cart. </p>
@@ -8,9 +18,49 @@
       </div>
     </div>
   <%end%>
+    <h2>Your shopping cart:</h2>
 
+    <table class="table-sm table-bordered table-hover cart">
+      <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th style="width: 17%">Quantity</th>
+        <th style="width: 17%">Price</th>
+        <th scope="col">Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @order.order_items.each do |order_item| %>
+        <tr>
+          <th scope="row">
+            <%= link_to image_tag(order_item.product.photo_URL, width: "30%"), product_path(order_item.product) %>
+            <%= link_to order_item.product.name, product_path(order_item.product) %>
+          </th>
+          <th scope="row">
+            <%= form_tag order_order_item_path(@order, order_item), method: :patch do %>
+              <%= select_tag(:new_quantity, options_for_select((1..order_item.product.stock), order_item.quantity))%>
+              <%= submit_tag "Edit Quantity", class: "btn btn-light" %>
+            <%end%>
+          </th>
+          <th scope="row">
+            <%= number_to_currency(order_item.total)%>
+          </th>
+          <th scope="row">
+            <%= form_tag order_order_item_path(@order, order_item), method: :delete do %>
+              <%= submit_tag "Remove This Item",  class: "btn btn-light" %>
+            <%end%>
+          </th>
+        </tr>
+      <%end%>
+      </tbody>
+    </table>
+    <p> <strong> Total Cost: <%= @order.cost %> </strong> </p>
+    <br>
+    <%= link_to "Let's Get Cozy", edit_order_path(@order), class: "btn btn-lg btn-light" %>
+  <%end%>
+</section>
 
-    <!--if one of the order's merchants is logged in and @order is paid, shows customer details and only merchant's order items-->
+    if one of the order's merchants is logged in and @order is paid, shows customer details and only merchant's order items
   <% if session[:merchant_id] && @order.return_merchants.include?(@current_merchant) %>
   <h2>Order <%= @order.id %>: Items Requested From Your Store</h2>
   <% @order.return_merchant_items(session[:merchant_id]).each do |item| %>
@@ -27,12 +77,47 @@
     <p>Credit Card Expiration: <%= @order.expiration_date %>
     <p>Cart Status: <%= @order.status %></p>
     <p>Order placed: <%= @order.updated_at.strftime("%F") %>
-  <% end %>
+
+      <!-- if no logged-in user, or if logged-in user doesn't match any of @order's merchants -->
+  <% else %>
+    <table class="table-sm table-bordered table-hover cart">
+    <p> Order ID: <%= @order.id %>
+      <thead>
+      <tr>
+        <th style="width: 30%">Product</th>
+        <th style="width: 17%">Product Description</th>
+        <th style="width: 17%">Price</th>
+        <th style="width: 17%">Date and Time ordered</th>
+        <th style="width: 5%">Quantity</th>
+      </tr>
+      </thead>
+      <% @order.order_items.arrange_by_created_at.each do |item| %>
+
+        <tbody>
+        <tr>
+          <th scope="row">
+            <%= link_to image_tag(item.product.photo_URL, width: "30%"), product_path(item.product) %>
+            <%= link_to item.product.name, product_path(item.product) %>
+          </th>
+          <th scope="row">
+        <p><%= item.product.description %></p>
+        </th>
+        <th scope="row">
+          <p> <%= item.product.cost %> </p>
+        </th>
+        <th scope="row">
+          <p> <%= item.product.updated_at.strftime("%F") %></p>
+        </th>
+        <th scope="row">
+          <p><%= item.quantity %><p>
+        </th>
+        </tr>
+      <% end %>
+      </tbody>
+      </table>
+      <p>Total Cost:<strong> <%= @order.total %></strong></p>
+      <p>Order Status: <%= @order.status %></p>
 
   <% end %>
+  </main>
 
-  <%if @order.status == "pending" %>
-    <%= render partial: "pending", locals: { order: @order }%>
-  <%end%>
-
-</main>
