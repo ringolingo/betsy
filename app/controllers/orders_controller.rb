@@ -1,8 +1,10 @@
 class OrdersController < ApplicationController
-  # before_action :require_login, only: [:history]
-  before_action :find_order, except: [:find]
-  before_action :is_this_your_cart?, except: [:find]
+
+  before_action :find_order
+  before_action :is_this_your_cart
   before_action :still_pending?
+
+  before_action :require_login, only: [:history]
 
   def index
     @orders = Order.all
@@ -28,6 +30,12 @@ class OrdersController < ApplicationController
       return
     end
 
+  end
+
+  def edit
+
+    @order = Order.find_by(id: params[:id])
+    redirect_to orders_path and return if @order.nil?
   end
 
   def update
