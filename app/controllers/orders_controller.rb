@@ -1,4 +1,9 @@
 class OrdersController < ApplicationController
+
+  before_action :find_order
+  before_action :is_this_your_cart
+  before_action :still_pending?
+
   before_action :require_login, only: [:history]
 
   def index
@@ -7,6 +12,24 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
+
+    if @order.nil?
+      flash[:status] = :error
+      flash[:result_text] = "A problem occured: Could not find order"
+      redirect_to root_path
+      return
+    end
+  end
+
+  def edit
+    @order = Order.find_by(id: params[:id])
+    if @order.nil?
+      flash[:status] = :error
+      flash[:result_text] = "A problem occured: Could not find order"
+      redirect_to root_path
+      return
+    end
+
   end
 
   def edit
@@ -56,5 +79,9 @@ class OrdersController < ApplicationController
     return @items
   end
 
-  #params should be defined here
+  private
+
+  def order_params
+    return params.require(:order).permit(:address, :email, :name, :credit_card_number, :expiration, :cvv, :zip_code, :status, :for_sale)
+  end
 end
