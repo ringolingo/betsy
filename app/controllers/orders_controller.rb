@@ -55,4 +55,6 @@ class OrdersController < ApplicationController
     @items = @current_merchant.filter_order(@order)
     return @items
   end
+
+  #params should be defined here
 end
