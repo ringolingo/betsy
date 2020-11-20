@@ -5,7 +5,6 @@ class Order < ApplicationRecord
   validates :status, presence: true, inclusion: { in: %w(pending paid),
                message: "%{value} is not a valid status" }
 
-
   def check_stock
     result = []
 
@@ -23,5 +22,13 @@ class Order < ApplicationRecord
       item.product.stock -= item.quantity
       item.product.save
     end
+  end
+
+  def total(tax:, shipping:)
+    return sub_total + (sub_total * tax).round + shipping
+  end
+
+  def sub_total
+    return self.order_items.all.sum{|order_item| (order_item.quantity * order_item.product.price)}
   end
 end

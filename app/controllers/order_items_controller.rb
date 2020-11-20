@@ -35,6 +35,9 @@ class OrderItemsController < ApplicationController
     end
   end
 
+  def edit
+    redirect_to orders_path and return if @order_item.nil?
+  end
 
   def destroy
     redirect_to orders_path and return if @order_item.nil?
