@@ -9,9 +9,31 @@
   </section>
 
   <section>
-    <% @items.each do |item| %>
-      <%= item.product.name %>
-    <% end %>
+    <p>Status: <%= @order.status %></p>
+    <p>Subtotal: <%= @order.sub_total %></p>
+    <p>Total: <%= @order.order_total %></p>
+  </section>
+
+  <section>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Purchased</th>
+          <th>Quantity</th>
+          <th>Price per unit</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <% @items.each do |item| %>
+            <td><%= link_to item.product.name, product_path(item.product) %></td>
+            <td><%= item.quantity %></td>
+            <td><%= item.product.price %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
   </section>
 
 <% else %>
