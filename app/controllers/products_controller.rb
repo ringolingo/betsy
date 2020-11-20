@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
       flash[:error] = "No such product"
       redirect_to products_path and return
     elsif @product.merchant =! @current_merchant
-      flash[:error] = "You must log in to edit this product"
+      flash[:error] = "You must log in to edit this product "
       redirect_to merchants_path and return
     end
   end
