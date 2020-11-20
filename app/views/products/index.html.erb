@@ -4,6 +4,7 @@
   <div>
     <%= product.name %>
     <%= display_money(product.price) %>
+    <%= product.category %>
     <%= link_to product.merchant.username, merchant_path(product.merchant) %>
   </div>
 <% end %>
