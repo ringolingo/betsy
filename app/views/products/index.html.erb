@@ -4,7 +4,7 @@
 <% else %>
   <% @available_products.each do |product| %>
     <div>
-      <%= product.name %>
+      <%= link_to product.name, product_path(product) %>
       <%= display_money(product.price) %>
       <%= product.category %>
       <%= link_to product.merchant.username, merchant_path(product.merchant) %>
