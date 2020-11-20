@@ -1,5 +1,10 @@
 <h2><%= @product.name %></h2>
 <p><%= link_to @product.merchant.username, merchant_path(@product.merchant) %></p>
+
+<% if @product.merchant == @current_merchant %>
+  <p><%= link_to "update this product", edit_product_path(@product) %></p>
+<% end %>
+
 <p><%= @product.category %></p>
 <!--TODO - add link to browse by category?-->
 <p><%= @product.description %></p>

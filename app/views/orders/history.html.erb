@@ -10,12 +10,12 @@
 
   <section>
     <p>Status: <%= @order.status %></p>
-    <p>Subtotal: <%= display_money(@order.sub_total) %></p>
-    <p>Total: <%= display_money(@order.order_total) %></p>
+    <%# TODO: add order subtotal %>
+    <%# TODO: add order total %>
   </section>
 
   <section>
-    <table>
+    <table class="table">
       <thead>
         <tr>
           <th>Product Purchased</th>

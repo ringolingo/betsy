@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
+
   before_action :require_login, except: [:index, :show]
-  before_action :find_product, only: [:show, :update, :destroy, :toggle_for_sale]
+  before_action :find_product, only: [:show, :edit, :update, :destroy, :toggle_for_sale]
 
   def index
     @products = Product.all
@@ -42,10 +43,23 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+    if @product.nil?
+      flash[:error] = "No such product"
+      redirect_to products_path and return
+    elsif @product.merchant =! @current_merchant
+      flash[:error] = "You must log in to edit this product "
+      redirect_to merchants_path and return
+    end
+  end
+
   def update
     if @product.nil?
       head :not_found
       return
+    elsif @product.merchant != @current_merchant
+      flash[:error] = "You must log in to edit this product"
+      redirect_to merchants_path and return
     elsif @product.update(product_params)
       redirect_to product_path(@product.id)
       return
@@ -80,7 +94,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    return params.require(:product).permit(:name, :description, :price, :photo_URL, :stock, :merchant_id, :category)
+    return params.require(:product).permit(:name, :description, :price, :photo_url, :stock, :merchant_id, :category, :for_sale)
   end
 
   def find_product
