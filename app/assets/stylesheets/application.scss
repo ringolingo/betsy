@@ -16,3 +16,28 @@
 @import "bootstrap";
 
 @import "**/*";
+
+.edit-container {
+  padding: 0 15px 0 0;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.edit-box{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.form-box{
+  background-color: grey;
+  width: 40%;
+  margin: 4px;
+  border-style: solid;
+  border-radius: 15px;
+  padding: 10px;
+}
