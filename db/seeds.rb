@@ -18,6 +18,8 @@ CSV.foreach(MERCHANTS_FILE, headers: true).each do |row|
   merchant = Merchant.new
   merchant.username = row["username"]
   merchant.email = row["email"]
+  merchant.uid = row["uid"]
+  merchant.provider = row["provider"]
 
   created = merchant.save
   if !created

@@ -1,0 +1,41 @@
+<% if @order.merchants.include?(@current_merchant) %>
+  <h2>Order History</h2>
+  <section>
+    <p>Buyer: <%= @order.name %></p>
+    <p>Buyer email: <%= @order.email %></p>
+    <p>Mailing address: <%= @order.address %></p>
+    <p>Credit Card ending in: <%= @order.credit_card_number.to_s.slice(-4..-1).to_i %></p>
+    <p>Credit Card expiring: <%= @order.expiration_date %></p>
+  </section>
+
+  <section>
+    <p>Status: <%= @order.status %></p>
+    <p>Subtotal: <%= display_money(@order.sub_total) %></p>
+    <p>Total: <%= display_money(@order.order_total) %></p>
+  </section>
+
+  <section>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Purchased</th>
+          <th>Quantity</th>
+          <th>Price per unit</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <% @items.each do |item| %>
+            <td><%= link_to item.product.name, product_path(item.product) %></td>
+            <td><%= item.quantity %></td>
+            <td><%= display_money(item.product.price) %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+<% else %>
+  <p>You must login to see that page.</p>
+<% end %>

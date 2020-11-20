@@ -14,5 +14,15 @@ class Product < ApplicationRecord
     return ['bedding', 'sleep aids', 'pajamas', 'night lights']
   end
 
+  def toggle_for_sale
+    if self.for_sale
+      self.for_sale = false
+    else
+      self.for_sale = true
+    end
+
+    self.save
+  end
+
 end
 
