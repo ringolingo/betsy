@@ -44,6 +44,21 @@ describe OrderItemsController do
 
       expect(flash[:success]).must_equal "Order item successfully updated"
     end
+
+    it 'will respond with error if quantity is nil' do
+
+      order_item_params[:order_item][:quantity] = nil
+
+      id = OrderItem.first.id
+      expect{
+        patch order_item_path(id), params: order_item_params
+      }.wont_change "OrderItem.count"
+
+      expect(flash[:error]["title"]).must_equal "Error: unable to update cart"
+      expect(flash[:error]["errors"][0]).must_equal "quantity: can't be blank - is not a number"
+
+      must_respond_with :bad_request
+    end
   end
 
   #add edge case
@@ -82,9 +97,23 @@ describe OrderItemsController do
         post product_order_items_path(products(:blanket).id), params: order_item_params
       }.wont_change "OrderItem.count"
 
-      expect(flash[:error]).must_equal "There's not enough of this item to complete your request"
+      expect(flash[:error]["title"]).must_equal "There's not enough of this item to complete your request"
 
       must_respond_with :redirect
+    end
+
+    it 'will respond with error if quantity is nil' do
+
+      order_item_params[:order_item][:quantity] = nil
+
+      expect{
+        post product_order_items_path(products(:blanket).id), params: order_item_params
+      }.wont_change "OrderItem.count"
+
+      expect(flash[:error]["title"]).must_equal "Unable to add product to cart"
+      expect(flash[:error]["errors"][0]).must_equal "quantity: can't be blank - is not a number"
+
+      must_respond_with :bad_request
     end
   end
 end
