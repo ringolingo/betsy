@@ -1,0 +1,11 @@
+<main>
+  <h1>Categories</h1>
+
+  <ul>
+    <% @categories.each do |c| %>
+      <li><%= c.category.capitalize %></li>
+    <% end %>
+  </ul>
+
+  <%= link_to "Add a new category", new_category_path, class: "btn btn-small" %>
+</main>
