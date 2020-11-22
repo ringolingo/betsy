@@ -1,14 +1,14 @@
 class OrderItemsController < ApplicationController
 
   before_action :find_order_item
-  
+
   def create
 
     product = Product.find_by(id: params[:product_id])
 
-    #check if quantity is > stock
+
     if params[:order_item][:quantity].to_i > product.stock
-      flash[:error] = "There's not enough of this item to complete your request"
+      flash[:error] = error_flash("There's not enough of this item to complete your request")
       redirect_to product_path(product) and return
     end
 
@@ -33,7 +33,7 @@ class OrderItemsController < ApplicationController
       flash[:success] = "Item added to cart!"
       redirect_to order_path(@current_order)
     else
-      flash[:error] = "Unable to add item"
+      flash[:error] = error_flash("Unable to add product to cart",  order_item.errors)
       render "orders/index", status: :bad_request
     end
   end
@@ -49,8 +49,8 @@ class OrderItemsController < ApplicationController
       flash[:success] = "Order item successfully deleted"
      redirect_to order_path(@order_item.order)
     else
-      flash.now[:error] = "Error: unable to delete orders item"
-      render "orders/index", status: :bad_request
+      flash[:error] = error_flash("Unable to remove product from cart")
+      render "homepages/index", status: :bad_request
     end
 
   end
@@ -65,10 +65,8 @@ class OrderItemsController < ApplicationController
       flash[:success] = "Order item successfully updated"
       redirect_to order_path(@order_item.order)
     else
-      flash.now[:error] = "Error: unable to update orders item"
-      redirect_to order_path(@order_item.order)
-      render "orders/index", status: :bad_request
-      #render "order/#{@current_order.id}/show", status: :bad_request
+      flash.now[:error] = error_flash("Error: unable to update cart", @order_item.errors)
+      render "homepages/index", status: :bad_request
     end
   end
 

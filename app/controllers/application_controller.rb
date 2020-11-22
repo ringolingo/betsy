@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
   before_action :set_current_order
   before_action :current_merchant
 
-
-
   def find_order
     if params[:order_id]
       @order = Order.find_by(id: params[:order_id])
@@ -57,5 +55,17 @@ class ApplicationController < ActionController::Base
       flash[:error] = "You must be logged in to do that"
       redirect_to root_path
     end
+  end
+
+  def error_flash(title,errors = nil)
+    error_flash = Hash.new
+    error_flash["title"] = title
+
+    error_flash["errors"] = construct_error_messages(errors)
+    return error_flash
+  end
+
+  def construct_error_messages(errors)
+    return errors ? errors.messages.map{|error_type, msg| "#{error_type.to_s.gsub('_', ' ')}: #{msg.join(" - ")}" unless msg.empty?} : []
   end
 end
