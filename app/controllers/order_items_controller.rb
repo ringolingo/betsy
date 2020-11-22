@@ -2,12 +2,15 @@ class OrderItemsController < ApplicationController
 
   before_action :find_order_item
   
-
   def create
 
-    #check if quantity is > stock
-
     product = Product.find_by(id: params[:product_id])
+
+    #check if quantity is > stock
+    if params[:order_item][:quantity].to_i > product.stock
+      flash[:error] = "There's not enough of this item to complete your request"
+      redirect_to product_path(product) and return
+    end
 
     save_order = true
 
