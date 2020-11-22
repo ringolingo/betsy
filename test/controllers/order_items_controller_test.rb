@@ -5,7 +5,7 @@ describe OrderItemsController do
   let(:order_item_params){
     {
         order_item: {
-            quantity: 10
+            quantity: 2
         }
     }
   }
@@ -72,6 +72,19 @@ describe OrderItemsController do
       must_respond_with :redirect
 
 
+    end
+
+    it 'will not create new OrderItem if product stock is < quantity' do
+
+      order_item_params[:order_item][:quantity] = 666
+
+      expect{
+        post product_order_items_path(products(:blanket).id), params: order_item_params
+      }.wont_change "OrderItem.count"
+
+      expect(flash[:error]).must_equal "There's not enough of this item to complete your request"
+
+      must_respond_with :redirect
     end
   end
 end
