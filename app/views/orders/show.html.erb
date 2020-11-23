@@ -5,7 +5,7 @@
 <!-- START OF TABLE FORMAT OF CART -->
 <main>
 <section>
-  <%if @order.status == "pending" %>
+  <%if @order.status == "pending" && @order.id == session[:order_id] %>
     <%= render partial: "pending", locals: { order: @order }%>
   <%end%>
 
@@ -33,7 +33,7 @@
       <% @order.order_items.each do |order_item| %>
         <tr>
           <th scope="row">
-            <%= link_to image_tag(order_item.product.photo_URL, width: "30%"), product_path(order_item.product) %>
+            <%= link_to image_tag(order_item.product.photo_url, width: "30%"), product_path(order_item.product) %>
             <%= link_to order_item.product.name, product_path(order_item.product) %>
           </th>
           <th scope="row">
@@ -43,7 +43,7 @@
             <%end%>
           </th>
           <th scope="row">
-            <%= number_to_currency(order_item.total)%>
+            <%= display_money(order_item.product.price)%>
           </th>
           <th scope="row">
             <%= form_tag order_order_item_path(@order, order_item), method: :delete do %>
@@ -54,7 +54,7 @@
       <%end%>
       </tbody>
     </table>
-    <p> <strong> Total Cost: <%= @order.cost %> </strong> </p>
+    <p> <strong> Total Cost: <%= display_money(@order.total(tax: tax_rate, shipping: shipping_cost))%> </strong> </p>
     <br>
     <%= link_to "Let's Get Cozy", edit_order_path(@order), class: "btn btn-lg btn-light" %>
   <%end%>
@@ -96,14 +96,14 @@
         <tbody>
         <tr>
           <th scope="row">
-            <%= link_to image_tag(item.product.photo_URL, width: "30%"), product_path(item.product) %>
+            <%= link_to image_tag(item.product.photo_url, width: "30%"), product_path(item.product) %>
             <%= link_to item.product.name, product_path(item.product) %>
           </th>
           <th scope="row">
         <p><%= item.product.description %></p>
         </th>
         <th scope="row">
-          <p> <%= item.product.cost %> </p>
+          <p> <%= item.product.price%> </p>
         </th>
         <th scope="row">
           <p> <%= item.product.updated_at.strftime("%F") %></p>
@@ -115,7 +115,7 @@
       <% end %>
       </tbody>
       </table>
-      <p>Total Cost:<strong> <%= @order.total %></strong></p>
+      <p>Total Cost:<strong> <%= display_money(@order.total(tax: tax_rate, shipping: shipping_cost)) %></strong></p>
       <p>Order Status: <%= @order.status %></p>
 
   <% end %>
