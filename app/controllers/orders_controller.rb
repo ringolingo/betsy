@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
     find_order
     if @order.nil?
       flash[:status] = :error
-      flash[:result_text] = "A problem occured: Could not find order"
+      flash[:result_text] = "A problem occurred: Could not find order"
       redirect_to root_path
       return
     end
@@ -31,10 +31,10 @@ class OrdersController < ApplicationController
 
   end
 
-  def edit
-    find_order
-    redirect_to orders_path and return if @order.nil?
-  end
+  # def edit
+  #   find_order
+  #   redirect_to orders_path and return if @order.nil?
+  # end
 
   def update
     result = @current_order.check_stock
