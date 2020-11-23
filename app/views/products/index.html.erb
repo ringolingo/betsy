@@ -4,7 +4,7 @@
   <%#= link_to "#{category.category}", category_path(category.id) %>
 <%# end %>
 
-<% if @available_products.empty? %>
+<% if @available_products.nil? %>
   <p>Sorry, no products!</p>
 <% else %>
   <table class="table">
