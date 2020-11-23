@@ -53,7 +53,7 @@ describe Merchant do
       product = Product.create!(merchant: @merchant, name: "a nice thing", category: "sleep aid", description: "it helps you sleep", price: 1000, stock: 20)
       product.save
 
-      expect(@merchant.products.count).must_equal 1
+      expect(@merchant.products.count).must_equal 4
       expect(@merchant.products).must_include product
     end
 

@@ -16,11 +16,7 @@ class Product < ApplicationRecord
   end
 
   def toggle_for_sale
-    if self.for_sale
-      self.for_sale = false
-    else
-      self.for_sale = true
-    end
+    self.for_sale = !self.for_sale
 
     self.save
   end
