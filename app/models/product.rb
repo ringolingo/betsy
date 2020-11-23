@@ -11,8 +11,16 @@ class Product < ApplicationRecord
   # validates :photo_url, presence: true ** figure out how to validate image links
   validates :stock, presence: true, numericality: { greater_than_or_equal_to: 0, message: "Stock cannot be below 0"}
 
-  def self.category
-    return ['bedding', 'sleep aids', 'pajamas', 'night lights']
+  def self.by_category(id)
+    all_products = Product.all.where(active: true)
+    category_products = []
+
+    all_products.each do |product|
+      if product.categories.find_by(id: id)
+        category_products << product
+      end
+    end
+    return category_products
   end
 
   def toggle_for_sale
