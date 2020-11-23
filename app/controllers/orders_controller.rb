@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
 
+
   # before_action :find_order
-  # # before_action :is_this_your_cart
-  # # before_action :are_products_active?, only: [:update]
-  # # before_action :does_order_have_items?, only: [:update]
+  # before_action :is_this_your_cart
+  # before_action :are_products_active?, only: [:update]
+  # before_action :does_order_have_items?, only: [:update]
 
   before_action :require_login, only: [:history]
 
