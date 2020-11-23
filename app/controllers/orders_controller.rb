@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
 
 
-  # before_action :find_order
-  # before_action :is_this_your_cart
+  before_action :find_order
+  before_action :is_this_your_cart
   # before_action :are_products_active?, only: [:update]
-  # before_action :does_order_have_items?, only: [:update]
+  before_action :does_order_have_items?, only: [:update]
 
   before_action :require_login, only: [:history]
 
@@ -13,22 +13,21 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find_by(id: params[:id])
-
+    # @order = Order.find_by(id: params[:id])
     if @order.nil?
       flash[:status] = :error
-      flash[:result_text] = "A problem occured: Could not find order"
+      flash[:result_text] = "A problem occurred: Could not find order"
       redirect_to root_path
       return
     end
   end
 
   def edit
-    @order = Order.find_by(id: params[:id])
+    # @order = Order.find_by(id: params[:id])
     if @order.nil?
       flash[:status] = :error
-      flash[:result_text] = "A problem occured: Could not find order"
-      redirect_to orders_path
+      flash[:result_text] = "A problem occurred: Could not find order"
+      redirect_to root_path
       return
     end
 
@@ -62,7 +61,7 @@ class OrdersController < ApplicationController
   end
 
   def history
-    @order = Order.find_by(id: params[:id])
+    # @order = Order.find_by(id: params[:id])
 
     if @order == @current_order
       redirect_to order_path(@current_order) and return
