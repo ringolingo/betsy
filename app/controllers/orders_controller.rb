@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   before_action :find_order
-  before_action :is_this_your_cart
+  before_action :is_this_your_cart?
   before_action :still_pending?
 
   before_action :require_login, only: [:history]

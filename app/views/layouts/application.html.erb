@@ -29,6 +29,28 @@
     </nav>
   </header>
   <body>
+    <section class="alert__container">
+      <% flash.each do |name, message| %>
+        <%if(name == "error" && message.is_a?(Hash)) %>
+          <div class="alert alert-warning">
+            <span><%=message["title"]%></span>
+            <ul>
+              <%message["errors"].each do |msg|%>
+                <%unless(msg.empty?) %>
+                  <li><%=msg%></li>
+                <%end%>
+              <%end %>
+            </ul>
+          </div>
+        <%else%>
+          <div class="alert alert-success">
+              <span>
+                <%= message %>
+              </span>
+          </div>
+        <%end%>
+      <%end%>
+    </section>
     <%= yield %>
   </body>
 </html>
