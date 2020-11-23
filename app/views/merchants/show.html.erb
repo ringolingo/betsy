@@ -1,9 +1,20 @@
 <section>
   <h2><%= @merchant.username %></h2>
+
+  <%# if @merchant.avatar.attached? %>
+  <!-- render the merchant's avatar image -->
+  <%# else %>
+    <div><%= image_tag("dog_sleeping.jpg", :alt => "a dog sleeping in a bed, representative of your friendly site builders", :width => 200 ) %></div>
+  <%# end %>
+
   <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
   <p><%= @merchant.description %></p>
-  <p>Questions about an order? <%= @merchant.email %></p>
-  <%# TODO - attached photo?  %>
+  <% if @merchant == @current_merchant %>
+    <%= link_to "Update Your Store", edit_merchant_path(@merchant) %>
+  <% end %>
+
+
+  <!--  <p>Questions about an order? <%#= @merchant.email %></p>-->
 </section>
 
 <section>
@@ -22,30 +33,32 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% @merchant.products.each do |product| %>
-        <tr>
-          <td>
-            <%= link_to product.name, product_path(product) %>
-            <% if @merchant == @current_merchant %>
-              <br/>
-              <%= link_to "Update this product?", edit_product_path(product), class: "btn btn-primary" %>
-            <% end %>
-          </td>
-          <td>
-            <%= product.description %>
-          </td>
-          <td>
-            <%= display_money(product.price) %>
-          </td>
-          <td>
-            <%= product.for_sale ? "Active" : "Retired" %>
-            <% if @merchant == @current_merchant %>
-              <%= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch, class: "btn btn-secondary" %>
-            <% end %>
-          </td>
-      <% end %>
-    </tbody>
+    <% unless @merchant.products.empty? %>
+      <tbody>
+        <% @merchant.sort_products.each do |product| %>
+          <tr>
+            <td>
+              <%= link_to product.name, product_path(product) %>
+              <% if @merchant == @current_merchant %>
+                <br/>
+                <%= link_to "Update this product?", edit_product_path(product), class: "btn btn-primary" %>
+              <% end %>
+            </td>
+            <td>
+              <%= product.description %>
+            </td>
+            <td>
+              <%= display_money(product.price) %>
+            </td>
+            <td>
+              <%= product.for_sale ? "Active" : "Retired" %>
+              <% if @merchant == @current_merchant %>
+                <%= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch, class: "btn btn-secondary" %>
+              <% end %>
+            </td>
+        <% end %>
+      </tbody>
+    <% end %>
   </table>
 
 
