@@ -2,7 +2,12 @@
   <h2><%= @merchant.username %></h2>
   <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
   <p><%= @merchant.description %></p>
-<!--  <p>Questions about an order? <%#= @merchant.email %></p>-->
+  <% if @merchant == @current_merchant %>
+    <%= link_to "Update Your Store", edit_merchant_path(@merchant) %>
+  <% end %>
+
+<!--  <img src="", alt="Profile photo for <%# @merchant.username %>">-->
+  <!--  <p>Questions about an order? <%#= @merchant.email %></p>-->
   <%# TODO - attached photo?  %>
 </section>
 
