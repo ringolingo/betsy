@@ -1,0 +1,25 @@
+<%= form_with model: @merchant do |f| %>
+  <div>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div>
+    <%= f.submit "Update Your Store" %>
+  </div>
+<% end %>

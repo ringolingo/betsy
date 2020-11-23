@@ -1,13 +1,12 @@
 class MerchantsController < ApplicationController
   before_action :require_login, only: [:logout]
+  before_action :find_merchant, only: [:show, :edit, :update]
 
   def index
     @merchants = Merchant.all
   end
 
   def show
-    find_merchant
-
     if @merchant.nil?
       flash[:error] = "No such person"
       redirect_to merchants_path and return
@@ -33,6 +32,36 @@ class MerchantsController < ApplicationController
 
     session[:user_id] = merchant.id
     redirect_to root_path
+  end
+
+  def edit
+    if @merchant.nil?
+      flash[:status] = :danger
+      flash[:result_text] = "Sorry, merchant not found."
+      redirect_to merchants_path and return
+    elsif @merchant != @current_merchant
+      flash[:status] = :danger
+      flash[:result_text] = "You must log in to edit your page."
+      redirect_to merchants_path and return
+    end
+  end
+
+  def update
+    if @merchant.nil?
+      flash[:status] = :danger
+      flash[:result_text] = "Sorry, merchant not found."
+      redirect_to merchants_path and return
+    elsif @merchant != @current_merchant
+      flash[:status] = :danger
+      flash[:result_text] = "You must log in to edit your page"
+      redirect_to merchants_path and return
+    end
+
+    if @merchant.update(merchant_params)
+      redirect_to merchant_path(@merchant) and return
+    else
+      render :edit and return
+    end
   end
 
   def logout
