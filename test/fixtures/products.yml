@@ -1,4 +1,5 @@
 blanket:
+  merchant: merchant1
   id: 1
   name: cozy blanket
   category: bedding
@@ -8,6 +9,7 @@ blanket:
   stock: 100
   for_sale: true
 diffuser:
+  merchant: merchant2
   id: 2
   name: coil diffuser
   category: equipment
@@ -32,4 +34,11 @@ product2:
   price: 2000
   stock: 40
   for_sale: false
-
+product3:
+  merchant: merchant1
+  name: the nicest pillow
+  category: sleep aid
+  description: luxurious
+  price: 4000
+  stock: 10
+  for_sale: false
