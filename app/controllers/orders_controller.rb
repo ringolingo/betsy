@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
 
 
-  before_action :find_order
-  before_action :is_this_your_cart
-  # before_action :are_products_active?, only: [:update]
+  before_action :find_order, except: [:find]
+  before_action :is_this_your_cart?, except: [:find]
+  before_action :are_products_active?, only: [:update]
+  before_action :still_pending?, except: [:show, :find, :search]
   before_action :does_order_have_items?, only: [:update]
 
   before_action :require_login, only: [:history]
@@ -79,6 +80,15 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def does_order_have_items?
+    if @order.order_items.empty?
+      flash.now[:status] = :danger
+      flash.now[:result_text] = "This order has no items to check out."
+      render 'products/main', status: :bad_request
+      return
+    end
+  end
 
   def order_params
     return params.require(:order).permit(:address, :email, :name, :credit_card_number, :expiration, :cvv, :zip_code, :status, :for_sale)
