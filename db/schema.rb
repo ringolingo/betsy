@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2020_11_20_051550) do
     t.integer "stock"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "category"
     t.bigint "merchant_id"
+    t.string "category"
     t.boolean "for_sale"
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
