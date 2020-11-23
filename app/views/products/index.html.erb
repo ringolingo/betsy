@@ -1,8 +1,8 @@
 <h2>Browse our comfy-cozy products</h2>
-
-<% @categories.each do |category| %>
-  <%= link_to "#{category.category}", category_path(category.id) %>
-<% end %>
+<!--<h4> Search by Category: </h4>-->
+<%# @categories.each do |category| %>
+  <%#= link_to "#{category.category}", category_path(category.id) %>
+<%# end %>
 
 <% if @available_products.empty? %>
   <p>Sorry, no products!</p>
