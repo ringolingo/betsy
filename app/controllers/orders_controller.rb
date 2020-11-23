@@ -11,8 +11,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find_by(id: params[:id])
-
+    find_order
     if @order.nil?
       flash[:status] = :error
       flash[:result_text] = "A problem occured: Could not find order"
@@ -22,10 +21,10 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = Order.find_by(id: params[:id])
+    find_order
     if @order.nil?
       flash[:status] = :error
-      flash[:result_text] = "A problem occured: Could not find order"
+      flash[:result_text] = "A problem occurred: Could not find order"
       redirect_to root_path
       return
     end
@@ -33,8 +32,7 @@ class OrdersController < ApplicationController
   end
 
   def edit
-
-    @order = Order.find_by(id: params[:id])
+    find_order
     redirect_to orders_path and return if @order.nil?
   end
 
@@ -66,7 +64,7 @@ class OrdersController < ApplicationController
   end
 
   def history
-    @order = Order.find_by(id: params[:id])
+    find_order
 
     if @order == @current_order
       redirect_to order_path(@current_order) and return
@@ -80,6 +78,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def find_order
+    @order = Order.find_by(id: params[:id])
+  end
 
   def order_params
     return params.require(:order).permit(:address, :email, :name, :credit_card_number, :expiration, :cvv, :zip_code, :status, :for_sale)
