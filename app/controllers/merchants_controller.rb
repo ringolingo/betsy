@@ -47,5 +47,7 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find_by(id: params[:id])
   end
 
-
+  def merchant_params
+    params.require(:merchant).permit(:username, :email, :description, :uid, :provider, :avatar)
+  end
 end
