@@ -2,7 +2,20 @@ class Merchant < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
   validates :uid, uniqueness: {scope: :provider}
-  # validates :username, presence: true
+  validate :acceptable_avatar, on: :update
+
+  def acceptable_avatar
+    return unless avatar.attached?
+
+    unless avatar.byte_size <= 1.megabyte
+      errors.add(:avatar, "must be under 1MB")
+    end
+
+    acceptable_types = ["image/png", "image/jpeg"]
+    unless acceptable_types.include?(avatar.content_type)
+      errors.add(:avatar, "must be a JPEG or PNG")
+    end
+  end
 
   def self.build_from_github(auth_hash)
     merchant = Merchant.new
