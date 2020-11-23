@@ -60,7 +60,7 @@
   <%end%>
 </section>
 
-    if one of the order's merchants is logged in and @order is paid, shows customer details and only merchant's order items
+<!--    if one of the order's merchants is logged in and @order is paid, shows customer details and only merchant's order items-->
   <% if session[:merchant_id] && @order.return_merchants.include?(@current_merchant) %>
   <h2>Order <%= @order.id %>: Items Requested From Your Store</h2>
   <% @order.return_merchant_items(session[:merchant_id]).each do |item| %>
