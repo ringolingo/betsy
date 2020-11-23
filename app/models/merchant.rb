@@ -32,4 +32,17 @@ class Merchant < ApplicationRecord
     return nil if merchant_items.empty?
     return merchant_items
   end
+
+  def sort_products
+    products = []
+
+    active = Product.where(for_sale: true, merchant: self).order(created_at: :desc)
+    products << active
+
+    retired = Product.where(for_sale: false, merchant: self).order(created_at: :desc)
+    products << retired
+
+    return nil if products.flatten.empty?
+    return products.flatten
+  end
 end
