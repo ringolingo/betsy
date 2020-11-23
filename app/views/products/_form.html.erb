@@ -27,7 +27,7 @@
 
   <div class="form-group">
     <%= f.label :category, "Category" %>
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |f| %>
+    <%= f.collection_check_boxes :category, Category.all, :id, :category do |f| %>
       <br>
       <%= f.check_box %>
       <%= f.label %>
