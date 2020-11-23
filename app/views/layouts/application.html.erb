@@ -10,25 +10,45 @@
   </head>
 
   <header>
-    <nav>
-      <ul>
       <li><%= link_to "Home", root_path %></li>
       <li><%= link_to "All Products", products_path %></li>
+      <li><%= link_to "Search by Category", categories_path %></li>
       <li><%= link_to "All Merchants", merchants_path %></li>
+
 
       <% if @current_merchant.nil? %>
         <li><%= link_to "Become a Merchant", new_merchant_path %></li>
         <li><%= link_to "Log In", github_login_path %></li>
       <% else %>
-<!--        <li><%#= link_to "Dashboard", merchant_path(session[:user_id]) %></li>-->
+        <li><%= link_to "Dashboard", merchant_path(session[:user_id]) %></li>
         <li><%= link_to "New Product", new_product_path %></li>
         <li><%= link_to "Log Out", logout_path, method: :delete %></li>
 
       <% end %>
-      </ul>
-    </nav>
   </header>
   <body>
+    <section class="alert__container">
+      <% flash.each do |name, message| %>
+        <%if(name == "error" && message.is_a?(Hash)) %>
+          <div class="alert alert-warning">
+            <span><%=message["title"]%></span>
+            <ul>
+              <%message["errors"].each do |msg|%>
+                <%unless(msg.empty?) %>
+                  <li><%=msg%></li>
+                <%end%>
+              <%end %>
+            </ul>
+          </div>
+        <%else%>
+          <div class="alert alert-success">
+              <span>
+                <%= message %>
+              </span>
+          </div>
+        <%end%>
+      <%end%>
+    </section>
     <%= yield %>
   </body>
 </html>

@@ -1,8 +1,10 @@
 class OrdersController < ApplicationController
 
+
   before_action :find_order
   before_action :is_this_your_cart
-  before_action :still_pending?
+  # before_action :are_products_active?, only: [:update]
+  before_action :does_order_have_items?, only: [:update]
 
   before_action :require_login, only: [:history]
 
@@ -30,11 +32,6 @@ class OrdersController < ApplicationController
     end
 
   end
-
-  # def edit
-  #   @order = Order.find_by(id: params[:id])
-  #   redirect_to orders_path and return if @order.nil?
-  # end
 
   def update
     result = @current_order.check_stock
@@ -75,6 +72,10 @@ class OrdersController < ApplicationController
 
     @items = @current_merchant.filter_order(@order)
     return @items
+  end
+
+  def search
+    render action: 'show'
   end
 
   private
