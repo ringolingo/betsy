@@ -2,10 +2,16 @@ merchant1:
   username: Merchant One
   email: merchant@one.com
   orders: order1
+  provider: github
+  uid: 123
 merchant2:
   username: Merchant Two
   email: merchant@two.com
   orders: order1
+  provider: github
+  uid: 456
 merchant3:
   username: Merchant Three
   email: merchant@three.com
+  provider: github
+  uid: 789
