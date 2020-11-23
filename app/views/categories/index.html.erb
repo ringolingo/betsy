@@ -2,8 +2,8 @@
   <h1>Categories</h1>
 
   <ul>
-    <% @categories.each do |c| %>
-      <li><%= c.category.capitalize %></li>
+     <% @categories.each do |category| %>
+      <%= link_to "#{category.category}", category_path(category.id) %>
     <% end %>
   </ul>
 
