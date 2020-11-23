@@ -41,6 +41,7 @@ describe ProductsController do
       product = products(:product1)
       perform_login(merchant)
       status = product.for_sale
+      @current_merchant = Merchant.find_by(id: session[:user_id])
 
       patch toggle_for_sale_path(product)
 
@@ -53,6 +54,7 @@ describe ProductsController do
       product = products(:product3)
       perform_login(merchant)
       status = product.for_sale
+      @current_merchant = Merchant.find_by(id: session[:user_id])
 
       patch toggle_for_sale_path(product)
 
