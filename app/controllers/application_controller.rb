@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_current_order
   before_action :current_merchant
+  # before_action :all_categories
+  # before_action :all_merchants
 
   def find_order
     if params[:order_id]
@@ -12,7 +14,7 @@ class ApplicationController < ActionController::Base
       @order = Order.find_by(id: session[:order_id])
     end
     if @order.nil?
-      flash.now[:status] = :danger
+      # flash.now[:status] = :danger
       flash.now[:result_text] = "Sorry, order not found."
       render 'products/index', status: :bad_request
       return
@@ -37,12 +39,37 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def are_products_active?
+    inactive_items = []
+    @order.order_items.each do |item|
+      if item.product.for_sale == false
+        inactive_items << item
+      end
+    end
+    if inactive_items.any?
+      inactive_items.each do |item|
+        item.destroy
+      end
+      flash.now[:status] = :danger
+      flash.now[:result_text] = "Sorry, you have requested products that are now inactive on our site. We have removed them from your cart. Please carry on with your order!"
+      render 'products/main', status: :bad_request
+      return
+    end
+  end
+
   private
+
+  # def all_categories
+  #   @all_categories = Category.all
+  # end
+  #
+  # def all_merchants
+  #   @all_merchants = Merchant.all
+  # end
 
   def set_current_order
     @current_order = Order.find_by(id: session[:order_id])
   end
-
 
   def current_merchant
     if session[:user_id]

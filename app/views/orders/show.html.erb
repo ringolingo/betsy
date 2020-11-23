@@ -78,9 +78,10 @@
     <p>Cart Status: <%= @order.status %></p>
     <p>Order placed: <%= @order.updated_at.strftime("%F") %>
 
-      <!-- if no logged-in user, or if logged-in user doesn't match any of @order's merchants -->
+      <!-- if no logged-in user, or if logged-in user doesn't match any of @order's merchants, serves as CONFIRMATION PAGE (need to make so can't access again) -->
   <% else %>
     <table class="table-sm table-bordered table-hover cart">
+    <p>Please SAVE or keep record of this page. This serves as your RECEIPT.</p>
     <p> Order ID: <%= @order.id %>
       <thead>
       <tr>
@@ -103,7 +104,7 @@
         <p><%= item.product.description %></p>
         </th>
         <th scope="row">
-          <p> <%= item.product.price%> </p>
+          <p> <%= display_money(item.product.price)%> </p>
         </th>
         <th scope="row">
           <p> <%= item.product.updated_at.strftime("%F") %></p>
