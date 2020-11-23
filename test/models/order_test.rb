@@ -34,8 +34,8 @@ describe Order do
 
   describe 'relationships' do
 
-    describe 'will be invalid without OrderItem' do
-
+    it "has many order items" do
+      expect(existing_order).must_respond_to :order_items
     end
 
     it 'OrderItem can add an Order' do
