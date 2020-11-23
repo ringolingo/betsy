@@ -9,13 +9,11 @@ describe MerchantsController do
     end
 
     it "responds with success when there are no merchants" do
-      raise NotImplementedError
-      # TODO - why can't we destroy merchants?
-      # Merchant.destroy_all
-      #
-      # get merchants_path
-      #
-      # must_respond_with :success
+      Merchant.destroy_all
+
+      get merchants_path
+
+      must_respond_with :success
     end
   end
 
