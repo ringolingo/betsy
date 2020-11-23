@@ -10,6 +10,7 @@ class Product < ApplicationRecord
   validates :price , presence: true, numericality: { greater_than: 0, message: "Price must be greater than 0"}
   # validates :photo_url, presence: true ** figure out how to validate image links
   validates :stock, presence: true, numericality: { greater_than_or_equal_to: 0, message: "Stock cannot be below 0"}
+  validates :for_sale, presence: true
 
   def self.category
     return ['bedding', 'sleep aids', 'pajamas', 'night lights']
