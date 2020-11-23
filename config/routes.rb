@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   get "orders/:id/history", to: "orders#history", as: "order_history"
 
   resources :order_items, except: [:create]
+
+  resources :categories
 end
