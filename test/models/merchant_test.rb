@@ -97,4 +97,34 @@ describe Merchant do
       expect(items).must_be_nil
     end
   end
+
+  describe "sort_products" do
+    before do
+      @merchant = merchants(:merchant2)
+
+      @sort = @merchant.sort_products
+    end
+
+    it "puts active products before retired products" do
+      expect(@sort.last).must_equal products(:product2)
+    end
+
+    it "puts newer products before older products" do
+      expect(@sort.first).must_equal products(:product4)
+    end
+
+    it "returns nil if merchant has no products" do
+      none_merchant = merchants(:merchant3)
+
+      sort = none_merchant.sort_products
+
+      expect(sort).must_be_nil
+    end
+
+    it "returns all products" do
+      count = @merchant.products.size
+
+      expect(@sort.size).must_equal count
+    end
+  end
 end
