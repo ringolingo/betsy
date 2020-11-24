@@ -74,5 +74,6 @@ ActiveRecord::Schema.define(version: 2020_11_23_005724) do
     t.boolean "for_sale"
     t.string "photo_url", default: "https://i.ibb.co/sHTKJ62/moon.jpg"
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
+  end
 
 end
