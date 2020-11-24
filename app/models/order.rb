@@ -45,6 +45,7 @@ class Order < ApplicationRecord
   end
 
   def total(tax:, shipping:)
+    return 0 if sub_total == 0
     return sub_total + (sub_total * tax).round + shipping
   end
 
