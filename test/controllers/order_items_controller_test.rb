@@ -9,17 +9,20 @@ describe OrderItemsController do
         }
     }
   }
+
+  let(:order_item){
+      order_items(:one)
+  }
   describe 'destroy' do
     it "can destroy an existing OrderItem" do
-
-      id = OrderItem.first.id
+      order_item.order.update!(status: 'pending')
       expect{
-        delete order_item_path(id)
+        delete order_order_item_path(order_item.order, order_item)
       }.must_change "OrderItem.count", -1
 
       expect(flash[:success]).must_equal "Order item successfully deleted"
 
-      test_order_item = OrderItem.find_by(id: id)
+      test_order_item = OrderItem.find_by(id: OrderItem.first.id)
 
       expect(test_order_item).must_be_nil
 
@@ -34,7 +37,7 @@ describe OrderItemsController do
 
       id = OrderItem.first.id
       expect{
-        patch order_item_path(id), params: order_item_params
+        patch order_order_item_path(id), params: order_item_params
       }.wont_change "OrderItem.count"
 
       must_respond_with :redirect
