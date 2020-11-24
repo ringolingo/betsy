@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
       render :edit, status: :bad_request
       return
     end
-    
+
     params[:order][:status] = "paid"
 
     if @current_order.update(order_params)
