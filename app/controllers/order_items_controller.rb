@@ -62,23 +62,17 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    #
-    # redirect_to orders_path and return if @order_item.nil?
-    #
-    # update = @order_item.update(order_item_params)
-    #
-    # if update
-    #   flash[:success] = "Order item successfully updated"
-    #   redirect_to order_path(@order_item.order)
-    # else
-    #   flash.now[:error] = error_flash("Error: unable to update cart", @order_item.errors)
-    #   render "homepages/index", status: :bad_request
-    # end
-    @order_item.quantity = params[:new_quantity]
-    @order_item.save
-    flash[:status] = :success
-    flash[:result_text] = "Quantity updated!"
-    redirect_to order_path(session[:order_id])
+    redirect_to orders_path and return if @order_item.nil?
+
+    update = @order_item.update(order_item_params)
+
+    if update
+      flash[:success] = "Cart successfully updated"
+      redirect_to order_path(@order_item.order)
+    else
+      flash.now[:error] = error_flash("Error: unable to update cart", @order_item.errors)
+      render "homepages/index", status: :bad_request
+    end
   end
 
   def ship_order_item
@@ -104,9 +98,8 @@ class OrderItemsController < ApplicationController
 
   def validate_quantity
     if params[:quantity] && params[:quantity].to_i < 1 || params[:new_quantity] && params[:new_quantity].to_i < 1
-      flash.now[:status] = :danger
-      flash.now[:result_text] = "Please add more quantity."
-      render 'products/main', status: :bad_request
+      flash.now[:error] = error_flash("Please add more quantity.",  order_item.errors)
+      render 'products/index', status: :bad_request
       return
     end
   end

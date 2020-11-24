@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 2020_11_24_030501) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "categories_products", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_categories_products_on_category_id"
+    t.index ["product_id"], name: "index_categories_products_on_product_id"
+  end
+
   create_table "merchants", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -76,12 +83,12 @@ ActiveRecord::Schema.define(version: 2020_11_24_030501) do
     t.string "name"
     t.string "address"
     t.string "email"
-    t.datetime "expiration_date"
     t.integer "cvv"
     t.integer "zip_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "credit_card_number"
+    t.string "expiration_date"
   end
 
   create_table "products", force: :cascade do |t|

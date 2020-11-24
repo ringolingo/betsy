@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
   end
 
   def update
+
     result = @current_order.check_stock
     if result.any?
       result.each do |entry|
@@ -43,10 +44,12 @@ class OrdersController < ApplicationController
       return
     end
 
+    params[:order][:status] = "paid"
+
     if @current_order.update(order_params)
-      @current_order.status = "paid"
-      @current_order.save
-      session.delete(:order_id)
+      # @current_order.status = "paid"
+      # @current_order.save
+      #session.delete(:order_id)
       @current_order.decrement_stock
       flash[:status] = :success
       flash[:result_text] = "Order submitted! Enjoy your self-care with vibes."
@@ -54,8 +57,9 @@ class OrdersController < ApplicationController
       redirect_to order_path(@current_order)
       return
     else
-      render :edit
-      return
+      #render with bad request?
+      flash[:error] = error_flash("Unable to complete order",  @current_order.errors)
+      redirect_to edit_order_path(@current_order) and return
     end
   end
 
@@ -98,6 +102,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    return params.require(:order).permit(:address, :email, :name, :credit_card_number, :expiration, :cvv, :zip_code, :status, :for_sale)
+    return params.require(:order).permit(:address, :email, :name, :credit_card_number, :expiration_date, :cvv, :zip_code, :status, :for_sale)
   end
 end
