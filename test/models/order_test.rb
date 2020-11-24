@@ -245,24 +245,5 @@ describe Order do
         expect(@order.sub_total).must_equal 0
       end
     end
-
-    describe "mark_as_shipped" do
-      before do
-        @paid_item = order_items(:oi1)
-        @pending_item = order_items(:oi2)
-      end
-
-      it "changes order item in a paid order to shipped" do
-        @paid_item.mark_as_shipped
-
-        expect(@paid_item.shipped).must_equal true
-      end
-
-      it "does nothing if order status is not paid" do
-        @pending_item.mark_as_shipped
-
-        expect(@pending_item.shipped).must_equal false
-      end
-    end
   end
 end
