@@ -98,6 +98,7 @@ class ProductsController < ApplicationController
       redirect_to root_path
     end
     @products = Product.by_category(params[:id])
+    @available_products = Product.by_category(params[:id])
   end
 
   private

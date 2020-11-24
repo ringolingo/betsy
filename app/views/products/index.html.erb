@@ -7,29 +7,29 @@
 <% if @available_products.nil? %>
   <p>Sorry, no products!</p>
   <% elsif params[:category_id] %>
-    <h2> Products filtered: <%= Category.find(params[:category_id]).category %></h2>
+    <h2> Products filtered by: <%= Category.find(params[:category_id]).category %></h2>
 
-    <div class="card-columns" style="margin-top:30px">
+<!--    <div class="card-columns" style="margin-top:30px">-->
 
 
-      <% @available_products.each do |product| %>
+      <%# @available_products.find_by(id: params[:id]).each do |product| %>
 
-        <div class="card w-75 mx-auto border border-info" style="width: 90%;" >
-          <%=image_tag(product.photo_url, class: "card-img-top", alt: "moon")%>
-          <div class="card-body">
-            <h5 class="card-title"><%=link_to product.name, product_path(product)%></h5>
-            <p class="card-text"><%=product.description%></p>
-          </div>
-          <!-- List group -->
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Price:<%= display_money(product.price) %> </li>
-            <li class="list-group-item">Category: <%=product.category%></li>
-            <li class="list-group-item">Seller: <%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
-            <li class="list-group-item"><%= product.stock %> in stock </li>
-          </ul>
-        </div>
-      <% end %>
-    </div>
+<!--        <div class="card w-75 mx-auto border border-info" style="width: 90%;" >-->
+          <%#=image_tag(product.photo_url, class: "card-img-top", alt: "moon")%>
+<!--          <div class="card-body">-->
+<!--            <h5 class="card-title"><%#=link_to product.name, product_path(product)%></h5>-->
+<!--            <p class="card-text"><%#=product.description%></p>-->
+<!--          </div>-->
+<!--          <!-- List group -->-->
+<!--          <ul class="list-group list-group-flush">-->
+<!--            <li class="list-group-item">Price:<%#= display_money(product.price) %> </li>-->
+<!--            <li class="list-group-item">Category: <%#=product.category%></li>-->
+<!--            <li class="list-group-item">Seller: <%#= link_to product.merchant.username, merchant_path(product.merchant) %></li>-->
+<!--            <li class="list-group-item"><%#= product.stock %> in stock </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+      <%# end %>
+<!--    </div>-->
 
 <% else %>
   <h2 class = "text-center">Browse our comfy-cozy products</h2>
