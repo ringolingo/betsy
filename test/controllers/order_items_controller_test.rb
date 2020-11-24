@@ -10,19 +10,19 @@ describe OrderItemsController do
     }
   }
 
-  let(:order_item){
-      order_items(:one)
-  }
   describe 'destroy' do
     it "can destroy an existing OrderItem" do
-      order_item.order.update!(status: 'pending')
+
+      post product_order_items_path(products(:blanket).id), params: order_item_params
+      order_item = OrderItem.order("created_at").last
+
       expect{
         delete order_order_item_path(order_item.order, order_item)
       }.must_change "OrderItem.count", -1
 
       expect(flash[:success]).must_equal "Order item successfully deleted"
 
-      test_order_item = OrderItem.find_by(id: OrderItem.first.id)
+      test_order_item = OrderItem.find_by(id: order_item.id)
 
       expect(test_order_item).must_be_nil
 
@@ -32,29 +32,33 @@ describe OrderItemsController do
   end
 
   describe 'update' do
+    before do
+      post product_order_items_path(products(:blanket).id), params: {order_item: {quantity: 3}}
+      @order_item = OrderItem.order("created_at").last
+    end
 
     it "can update an existing OrderItem" do
 
-      id = OrderItem.first.id
+
       expect{
-        patch order_order_item_path(id), params: order_item_params
+        patch order_order_item_path(@order_item.order, @order_item), params: order_item_params
       }.wont_change "OrderItem.count"
 
       must_respond_with :redirect
 
-      test_order_item = OrderItem.find_by(id: id)
+      test_order_item = OrderItem.find_by(id: @order_item.id)
       expect(test_order_item.quantity).must_equal order_item_params[:order_item][:quantity]
 
-      expect(flash[:success]).must_equal "Order item successfully updated"
+      expect(flash[:success]).must_equal "Cart successfully updated"
     end
 
     it 'will respond with error if quantity is nil' do
 
       order_item_params[:order_item][:quantity] = nil
 
-      id = OrderItem.first.id
+
       expect{
-        patch order_item_path(id), params: order_item_params
+        patch order_order_item_path(@order_item.order, @order_item), params: order_item_params
       }.wont_change "OrderItem.count"
 
       expect(flash[:error]["title"]).must_equal "Error: unable to update cart"
@@ -89,9 +93,28 @@ describe OrderItemsController do
 
       must_respond_with :redirect
 
-
     end
 
+    it 'will create a new order_item if current_order is paid' do
+
+      post product_order_items_path(products(:blanket).id), params: order_item_params
+
+      order = Order.order("created_at").last
+      order.update(status: 'paid')
+
+      expect{
+        post product_order_items_path(products(:blanket).id), params: order_item_params
+      }.must_change "OrderItem.count", 1
+
+      new_order_item = OrderItem.order("created_at").last
+
+      expect(new_order_item.quantity).must_equal order_item_params[:order_item][:quantity]
+
+      expect(flash[:success]).must_equal "Item added to cart!"
+
+      must_respond_with :redirect
+
+    end
     it 'will not create new OrderItem if product stock is < quantity' do
 
       order_item_params[:order_item][:quantity] = 666
