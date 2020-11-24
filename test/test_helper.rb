@@ -42,4 +42,10 @@ class ActiveSupport::TestCase
 
     return user
   end
+
+  def current_merchant
+    if session[:user_id]
+      @current_merchant = Merchant.find_by(id: session[:user_id])
+    end
+  end
 end
