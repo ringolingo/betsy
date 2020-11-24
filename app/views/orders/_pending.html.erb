@@ -4,29 +4,42 @@
   <table class = 'table'>
     <thead>
       <tr>
-        <th></th>
-        <th>Product Name</th>
-        <th>Item Price</th>
-        <th>Quantity</th>
-        <th>Edit</th>
-        <th>Remove from Cart</th>
+        <th scope="col">Product</th>
+        <th style="width: 17%">Quantity</th>
+        <th style="width: 17%">Price</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
       <%order.order_items.each do |order_item| %>
-          <%= render partial: "table_data", locals: { data: ["img here",
-                                                             link_to(order_item.product.name, product_path(order_item.product)),
-                                                             display_money(order_item.product.price),
-                                                             order_item.quantity,
-                                                             link_to("Edit", edit_order_item_path(order_item), class: "btn btn-info"),
-                                                             link_to("Delete", order_item_path(order_item), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger")]}%>
-
+      <tr>
+        <th scope="row">
+          <%= link_to image_tag(order_item.product.photo_url, width: "30%"), product_path(order_item.product) %>
+          <%= link_to order_item.product.name, product_path(order_item.product) %>
+        </th>
+        <th scope="row">
+          <%= form_with( model: order_item, url: order_order_item_path(order, order_item), method: :patch) do |f| %>
+            <div class="form-group">
+              <%= f.select :quantity, (1..order_item.product.stock),{}, {class: "form-control"} %>
+            </div>
+            <div class = "button"><%= f.submit "Edit Quantity", class: "task-button" %></div>
+          <% end %>
+        </th>
+        <th scope="row">
+          <%= display_money(order_item.product.price)%>
+        </th>
+        <th scope="row">
+          <%= form_tag order_order_item_path(order, order_item), method: :delete do %>
+            <%= submit_tag "Remove This Item",  class: "btn btn-light", data: {confirm: "Are you sure you want to remove #{order_item.product.name.upcase}?"}, class: "btn btn-danger" %>
+          <%end%>
+        </th>
+      </tr>
       <%end%>
     </tbody>
   </table>
   <section class="order-costs">
     <p class="end">Subtotal: <%=display_money(order.sub_total)%></p>
-    <p class="end"> Taxes: <%=display_money(order.sub_total * tax_rate)%></p>
+    <p class="end"> Taxes: <%=display_money((order.sub_total * tax_rate).round)%></p>
     <p class="end">Total: <%=display_money(order.total(tax: tax_rate, shipping: shipping_cost))%></p>
     <div class="end">
       <%= link_to("Continue to checkout", edit_order_path(order), class: "btn btn-info")%>
