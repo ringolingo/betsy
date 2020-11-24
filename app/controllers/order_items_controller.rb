@@ -5,11 +5,8 @@ class OrderItemsController < ApplicationController
   before_action :still_pending?, except: :create
   before_action :find_order_item, except: :create
   before_action :are_products_active?, except: [:destroy, :create]
-  before_action :find_product, only: :create
-  before_action :available_product?, only: :create,
   before_action :validate_quantity, only: [:create, :update]
 
-  before_action :find_order_item
 
   def create
 
