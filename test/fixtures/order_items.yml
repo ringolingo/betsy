@@ -23,7 +23,9 @@ oi1:
   quantity: 1
   product: product1
   order: order1
+  shipped: false
 oi2:
   quantity: 2
   product: product2
   order: order2
+  shipped: false
