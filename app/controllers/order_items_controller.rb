@@ -14,7 +14,7 @@ class OrderItemsController < ApplicationController
 
     save_order = true
 
-    if @current_order.nil?
+    if @current_order.nil? || @current_order.status == 'paid'
 
       order = Order.new(status: "pending")
 
