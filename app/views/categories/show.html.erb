@@ -1,3 +1,4 @@
 <h2><%= "Viewing all #{@category.category}" %></h2>
 <p> edit and delete options here</p>
 
+<h5><%= link_to "#{category.category_name}", category_products_path(category[:id]) %></h5>
