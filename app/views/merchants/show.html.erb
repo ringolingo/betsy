@@ -66,7 +66,14 @@
 
 <% if @merchant == @current_merchant %>
   <section>
-    <h3>Order history</h3>
+    <h3>Your Stats</h3>
+    <% if @merchant.orders.empty? %>
+      <p>You have no past orders</p>
+    <% else %>
+      <p>In progress!</p>
+    <% end %>
+
+  <h3>Order history</h3>
     <% if @merchant.orders.empty? %>
       <p>You have no past orders</p>
     <% else %>
@@ -77,7 +84,8 @@
             <th>Date</th>
             <th>Products</th>
             <th>Quantity</th>
-            <th>Subtotal</th>
+            <th>Product Subtotals</th>
+            <th>Order Subtotal</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -86,12 +94,17 @@
           <tbody>
             <tr>
               <td>
-                <%= link_to order.created_at, order_history_path(order) %> <!--TODO - link to the order show view -->
+                <%= link_to order.created_at.strftime("%b %e %Y, %l:%M"), order_history_path(order) %> <!--TODO - link to the order show view -->
               </td>
               <% items = @merchant.filter_order(order) %>
                 <td>
                   <% items.each do |item| %>
                     <%= link_to item.product.name, product_path(item.product) %>
+                    <% if item.shipped %>
+                      - shipped
+                    <% else %>
+                      <%= link_to "Mark as shipped", { action: "ship_order_item", controller: "order_items", id: item.id }, method: :patch  %>
+                    <% end %>
                     <br/>
                   <% end %>
                 </td>
@@ -101,9 +114,15 @@
                     <br/>
                   <% end %>
                 </td>
-              <td>
-                <%= display_money(items.sum { |item| item.product.price }) %>
-              </td>
+                <td>
+                  <% items.each do |item| %>
+                    <%= display_money(item.line_item_total) %>
+                    <br/>
+                  <% end %>
+                </td>
+                <td>
+                  <%= display_money(items.sum { |item| item.product.price }) %>
+                </td>
               <td>
                 <%= order.status %> <!--TODO - link/dropdown to change status -->
               </td>

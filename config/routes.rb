@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  root to: 'homepages#index'
+  root to: 'products#index'
 
   get '/orders/find', to: 'orders#find', as: "find_my_order"
   get '/orders/search', to: 'orders#search', as: "search_order"
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   get "orders/:id/history", to: "orders#history", as: "order_history"
 
+  patch "order_items/:id/ship", to: "order_items#ship_order_item", as: "ship_order_item"
   resources :order_items, except: [:create]
 
   resources :categories do
