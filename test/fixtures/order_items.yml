@@ -34,3 +34,8 @@ oi3:
   product: product3
   order: order2
   shipped: false
+oi4:
+  quantity: 2
+  product: product4
+  order: order1
+  shipped: false
