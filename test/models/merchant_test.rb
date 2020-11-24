@@ -44,29 +44,20 @@ describe Merchant do
   describe "relationships" do
     before do
       @merchant = merchants(:merchant1)
-      # @product = products(:blanket)
+      @product = products(:blanket)
     end
 
     it "can have a product" do
-      # merchant = Merchant.new(username: "grrrr", email: "aaaaargh@gmail.com")
-      # merchant.save
-      product = Product.create!(merchant: @merchant, name: "a nice thing", category: "sleep aid", description: "it helps you sleep", price: 1000, stock: 20)
-      product.save
-
-      expect(@merchant.products.count).must_equal 4
-      expect(@merchant.products).must_include product
+      expect(@merchant.products.count).must_equal 3
+      expect(@merchant.products).must_include @product
     end
 
     it "can have an order" do
-      merchant = Merchant.new(username: "grr", email: "aaargh@gmail.com")
-      merchant.save
-      order = Order.new(status: "paid")
-      order.save
-      merchant.orders << order
+      order = orders(:betty)
+      @merchant.orders << order
 
-      expect(merchant.orders.count).must_equal 1
-      expect(merchant.orders).must_include order
-      expect(order.merchants).must_include merchant
+      expect(@merchant.orders).must_include order
+      expect(order.merchants).must_include @merchant
     end
   end
 

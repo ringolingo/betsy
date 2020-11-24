@@ -1,31 +1,31 @@
 name,category,description,price,stock,merchant_id,for_sale
-Summer Star,pajamas,Power Girl,1162,5,8,true
-Café Mug,night lights,Batgirl,9370,9,5,true
-Express Pie,night lights,Raven,7773,13,2,true
-Reg's Cake,sleep aids,Vixen,1434,5,8,true
-Heart Equinox,sleep aids,Wonder Woman,5278,7,2,true
-Express Cup,sleep aids,Lady Cain,5820,14,2,true
-Goodbye Java,bedding,Vixen,2383,19,8,true
-Pumpkin-spice Coffee,pajamas,Black Canary,3167,16,8,true
-Café Extract,night lights,Wonder Girl,6590,11,3,true
-Thanksgiving Java,sleep aids,Hawkgirl,319,5,1,true
-Holiday Bean,pajamas,Hawkgirl,4659,8,9,true
-KrebStar Extract,bedding,Raven,6843,17,3,true
-Heart Delight,pajamas,Supergirl,8549,7,7,true
-Seattle Java,night lights,Batgirl,7656,24,6,true
-Spilt America,night lights,Vixen,4117,4,4,true
-Veranda Breaker,bedding,Raven,5640,19,2,true
-Hello Equinox,bedding,Mera,6506,9,9,true
-Blue Cup,pajamas,Black Canary,3077,4,2,true
-Cascara Mug,pajamas,Hawkgirl,9846,13,10,true
-Winter Forrester,bedding,Wonder Girl,6591,3,4,true
-KrebStar Solstice,bedding,Power Girl,8621,19,8,true
-Reg's Mug,sleep aids,Hawkgirl,6484,19,5,true
-Hello Forrester,night lights,Lady Cain,779,12,8,true
-Melty Cup,night lights,Raven,2618,23,4,true
-Seattle Been,bedding,Wonder Woman,7462,19,8,true
-Blue Cake,pajamas,Hawkgirl,1904,4,7,true
-Green Breaker,sleep aids,Batgirl,4217,18,4,true
-Spilt Symphony,bedding,Lady Cain,1532,24,2,true
-Veranda Nuts,pajamas,Batwoman,535,6,10,true
-Postmodern Look,pajamas,Batwoman,5338,5,6,true
+Footed Pajamas,pajamas,keep your feet warm!,1162,5,8,true
+Multicolor Lamp,night lights,scare away the dark with fun colors,9370,9,5,true
+Motion Sensor Lights,night lights,only turns on when you need them,7773,13,2,true
+White Noise Machine,sleep aids,plays your choice of rain or ocean sounds,1434,5,8,true
+Sleep Mask,sleep aids,blocks out light that keeps you up,5278,7,2,true
+Oil Diffuser,sleep aids,disperses natural oils to help you relax,5820,14,2,true
+Weighted Blanket,bedding,like a thunder shirt but for people,2383,19,8,true
+Onesie,pajamas,wrap yourself up in comfort,3167,16,8,true
+Himalayan Salt Lamp,night lights,piiiiiink,6590,11,3,true
+Sleepy Time Tea,sleep aids,wind down at the end of the day with a mug of delicious herbal tea,319,5,1,true
+Sleep Shirt,pajamas,IT'S ENORMOUS,4659,8,9,true
+Comforter Set,bedding,cotton comforter with matching pillow cases,6843,17,3,true
+Flannel PJ Set,pajamas,perfect for sitting in front of the fire on a winter night,8549,7,7,true
+Old Timey Lamp,night lights,leave the lamp on so you can see how cool your lamp is,7656,24,6,true
+Night Sky Projector,night lights,beams stars across the ceiling of your room,4117,4,4,true
+Mattress Topper,bedding,hypoallergenic memory foam mattress pad,5640,19,2,true
+Wedge Pillow,bedding,it's a pillow shaped like a block of cheese,6506,9,9,true
+Sweat Pants,pajamas,on Zoom no one knows you're wearing pajama bottoms,3077,4,2,true
+Silk Chemise,pajamas,keeps you cool (temperature-wise) and cool (style-wise),9846,13,10,true
+Water Bed,bedding,you know you've secretly always wanted one,6591,3,4,true
+Dinosaur Sheets,bedding,they're fun!,8621,19,8,true
+Guided Meditation Tapes,sleep aids,if you still have a tape deck these lessons will put you right to sleep,6484,19,5,true
+Cat Night Light,night lights,it's a night light shaped like a cat,779,12,8,true
+Timer Operated Night Light,night lights,slowly dims light to help you fall asleep,2618,23,4,true
+Majestic Bed Canopy,bedding,sleep like a fancy person,7462,19,8,true
+Superhero PJs,pajamas,PJs wiwth a superhero logo on them,1904,4,7,true
+Sleepy Drops,sleep aids,all natural liquid herbal supplement,4217,18,4,true
+Mattress,bedding,you can bounce SO HIGH on this thing,1532,24,2,true
+Slippers,pajamas,for when your feet are cold but you still have to get out of bed,535,6,10,true
+Cami,pajamas,lightweight wear for warm weather,5338,5,6,true

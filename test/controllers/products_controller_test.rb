@@ -38,10 +38,11 @@ describe ProductsController do
   describe "toggle_for_sale" do
     it "retires an active product" do
       merchant = merchants(:merchant1)
-      product = products(:product1)
       perform_login(merchant)
+      current_merchant
+
+      product = products(:product1)
       status = product.for_sale
-      @current_merchant = Merchant.find_by(id: session[:user_id])
 
       patch toggle_for_sale_path(product)
 
@@ -51,10 +52,11 @@ describe ProductsController do
 
     it "makes a retired product active again" do
       merchant = merchants(:merchant1)
-      product = products(:product3)
       perform_login(merchant)
+      current_merchant
+
+      product = products(:product3)
       status = product.for_sale
-      @current_merchant = Merchant.find_by(id: session[:user_id])
 
       patch toggle_for_sale_path(product)
 
