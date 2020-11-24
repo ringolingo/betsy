@@ -26,5 +26,8 @@ Rails.application.routes.draw do
 
   resources :order_items, except: [:create]
 
-  resources :categories
+  resources :categories do
+    resources :products, include: [:index, :show, :create]
+  end
+
 end
