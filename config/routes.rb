@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :order_items, only: [:create]
   end # only: [] or expect: []
 
+  get "/merchants/:id/orders", to: "orders#select_status", as: "select_status"
   resources :merchants # only: [] or expect: []
 
   get "orders/:id/history", to: "orders#history", as: "order_history"
