@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(version: 2020_11_23_202929) do
     t.integer "stock"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "merchant_id"
     t.string "category"
+    t.bigint "merchant_id"
     t.boolean "for_sale"
     t.string "photo_url", default: "https://i.ibb.co/sHTKJ62/moon.jpg"
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
