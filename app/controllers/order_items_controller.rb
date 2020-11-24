@@ -49,7 +49,6 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    p 'here'
     redirect_to orders_path and return if @order_item.nil?
 
     if @order_item.destroy
@@ -88,9 +87,8 @@ class OrderItemsController < ApplicationController
 
   def validate_quantity
     if params[:quantity] && params[:quantity].to_i < 1 || params[:new_quantity] && params[:new_quantity].to_i < 1
-      flash.now[:status] = :danger
-      flash.now[:result_text] = "Please add more quantity."
-      render 'products/main', status: :bad_request
+      flash.now[:error] = error_flash("Please add more quantity.",  order_item.errors)
+      render 'products/index', status: :bad_request
       return
     end
   end

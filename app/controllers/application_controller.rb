@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_this_your_cart?
+    #raise
     if @order.status == "pending" && @order.id != session[:order_id]
       flash.now[:status] = :danger
       flash.now[:result_text] = "You are not authorized to view this pending order."
