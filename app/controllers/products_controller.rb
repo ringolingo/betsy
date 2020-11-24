@@ -25,6 +25,7 @@ class ProductsController < ApplicationController
     # binding.pry
 
     @product = Product.new(product_params)
+    @product.categories
     @product.merchant_id = session[:user_id]
 
     if @product.save
@@ -95,6 +96,7 @@ class ProductsController < ApplicationController
       redirect_to root_path
     end
     @products = Product.by_category(params[:id])
+    @available_products = Product.by_category(params[:id])
   end
 
   private
