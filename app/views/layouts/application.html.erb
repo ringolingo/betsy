@@ -14,6 +14,7 @@
       <li><%= link_to "All Products", products_path %></li>
       <li><%= link_to "Search by Category", categories_path %></li>
       <li><%= link_to "All Merchants", merchants_path %></li>
+      <li><%= link_to "Find My Order", find_my_order_path %></li>
 
 
       <% if @current_merchant.nil? %>
@@ -23,7 +24,12 @@
         <li><%= link_to "Dashboard", merchant_path(session[:user_id]) %></li>
         <li><%= link_to "New Product", new_product_path %></li>
         <li><%= link_to "Log Out", logout_path, method: :delete %></li>
+      <% end %>
 
+      <% if session[:order_id] %>
+        <li>
+          <button><%= link_to "View Shopping Cart", order_path(session[:order_id]) %></button>
+        </li>
       <% end %>
   </header>
   <body>
