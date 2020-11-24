@@ -5,19 +5,20 @@
 <!-- START OF TABLE FORMAT OF CART -->
 <main>
 <section>
-  <%if @order.status == "pending" && @order.id == session[:order_id] %>
-    <%= render partial: "pending", locals: { order: @order }%>
-  <%end%>
+  <%#if @order.status == "pending" && @order.id == session[:order_id] %>
+    <%#= render partial: "pending", locals: { order: @order }%>
+  <%#end%>
 
-  <% if @order.id == session[:order_id] %>
-  <% if @order.order_items.count == 0 %>
-    <div>
-      <p> There are no items in your shopping cart. </p>
+  <% if @order.status == "pending" && @order.id == session[:order_id] %>
+    <% if @order.order_items.count == 0 %>
       <div>
-        <%= link_to "Browse Our Selection!", products_path, class: "btn btn-light" %>
+        <p> There are no items in your shopping cart. </p>
+        <div>
+          <%= link_to("Browse Our Selection!", products_path , class: "btn btn-info")%>
+        </div>
       </div>
-    </div>
-  <%end%>
+    <%else%>
+
     <h2>Your shopping cart:</h2>
 
     <table class="table-sm table-bordered table-hover cart">
@@ -47,7 +48,7 @@
           </th>
           <th scope="row">
             <%= form_tag order_order_item_path(@order, order_item), method: :delete do %>
-              <%= submit_tag "Remove This Item",  class: "btn btn-light" %>
+              <%= submit_tag "Remove This Item",  class: "btn btn-light", data: {confirm: "Are you sure you want to remove #{order_item.product.name.upcase}?"}, class: "btn btn-danger" %>
             <%end%>
           </th>
         </tr>
@@ -56,9 +57,10 @@
     </table>
     <p> <strong> Total Cost: <%= display_money(@order.total(tax: tax_rate, shipping: shipping_cost))%> </strong> </p>
     <br>
-    <%= link_to "Let's Get Cozy", edit_order_path(@order), class: "btn btn-lg btn-light" %>
+    <%= link_to("Continue to checkout", edit_order_path(@order), class: "btn btn-info")%>
   <%end%>
 </section>
+  <%end%>
 
 <!--    if one of the order's merchants is logged in and @order is paid, shows customer details and only merchant's order items-->
   <% if session[:merchant_id] && @order.return_merchants.include?(@current_merchant) %>
@@ -77,9 +79,9 @@
     <p>Credit Card Expiration: <%= @order.expiration_date %>
     <p>Cart Status: <%= @order.status %></p>
     <p>Order placed: <%= @order.updated_at.strftime("%F") %>
-
+  <%end%>
       <!-- if no logged-in user, or if logged-in user doesn't match any of @order's merchants, serves as CONFIRMATION PAGE (need to make so can't access again) -->
-  <% else %>
+  <% if @order == @current_order && @order.status == "paid" %>
     <table class="table-sm table-bordered table-hover cart">
     <p>Please SAVE or keep record of this page. This serves as your RECEIPT.</p>
     <p> Order ID: <%= @order.id %>
