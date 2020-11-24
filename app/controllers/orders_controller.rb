@@ -1,13 +1,11 @@
 class OrdersController < ApplicationController
-
-
   before_action :find_order, except: [:find]
   before_action :is_this_your_cart?, except: [:find]
   before_action :are_products_active?, only: [:update]
   before_action :still_pending?, except: [:show, :find, :search]
   before_action :does_order_have_items?, only: [:update]
 
-  before_action :require_login, only: [:history]
+  # before_action :require_login, only: [:history]
 
   def index
     @orders = Order.all

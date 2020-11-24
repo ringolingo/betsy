@@ -1,6 +1,12 @@
 class OrderItemsController < ApplicationController
 
-  before_action :find_order_item
+  before_action :find_order, except: :create
+  before_action :is_this_your_cart?, except: :create
+  before_action :still_pending?, except: :create
+  before_action :find_order_item, except: :create
+  before_action :are_products_active?, except: [:destroy, :create]
+  before_action :validate_quantity, only: [:create, :update]
+
 
   def create
 
@@ -56,18 +62,23 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-
-    redirect_to orders_path and return if @order_item.nil?
-
-    update = @order_item.update(order_item_params)
-
-    if update
-      flash[:success] = "Order item successfully updated"
-      redirect_to order_path(@order_item.order)
-    else
-      flash.now[:error] = error_flash("Error: unable to update cart", @order_item.errors)
-      render "homepages/index", status: :bad_request
-    end
+    #
+    # redirect_to orders_path and return if @order_item.nil?
+    #
+    # update = @order_item.update(order_item_params)
+    #
+    # if update
+    #   flash[:success] = "Order item successfully updated"
+    #   redirect_to order_path(@order_item.order)
+    # else
+    #   flash.now[:error] = error_flash("Error: unable to update cart", @order_item.errors)
+    #   render "homepages/index", status: :bad_request
+    # end
+    @order_item.quantity = params[:new_quantity]
+    @order_item.save
+    flash[:status] = :success
+    flash[:result_text] = "Quantity updated!"
+    redirect_to order_path(session[:order_id])
   end
 
   private
@@ -78,6 +89,15 @@ class OrderItemsController < ApplicationController
 
   def order_item_params
     return params.require(:order_item).permit(:quantity)
+  end
+
+  def validate_quantity
+    if params[:quantity] && params[:quantity].to_i < 1 || params[:new_quantity] && params[:new_quantity].to_i < 1
+      flash.now[:status] = :danger
+      flash.now[:result_text] = "Please add more quantity."
+      render 'products/main', status: :bad_request
+      return
+    end
   end
 
 end
