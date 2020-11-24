@@ -45,9 +45,6 @@ class CategoriesController < ApplicationController
     if @category.nil?
       head :not_found
       return
-    elsif @category.merchant != @current_merchant
-      flash[:error] = "You must log in to edit this category"
-      redirect_to merchants_path and return
     elsif @category.update(category_params)
       redirect_to category_path(@category.id)
       return
