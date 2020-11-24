@@ -77,14 +77,14 @@ class OrdersController < ApplicationController
     render action: 'show'
   end
 
-  def select_status(status)
-    @merchant = Merchant.find_by(id: params[:id])
-    unless @merchant == @current_merchant
-      redirect_to merchant_path(@merchant) and return
-    end
-
-    return Order.select_status(status: status, merchant: @merchant)
-  end
+  # def select_status(status: all) -- TODO Ringo - delete?
+  #   @merchant = Merchant.find_by(id: params[:id])
+  #   unless @merchant == @current_merchant
+  #     redirect_to merchant_path(@merchant) and return
+  #   end
+  #
+  #   return Order.select_status(status: status, merchant: @merchant)
+  # end
 
   private
 
