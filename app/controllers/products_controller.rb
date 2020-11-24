@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
       redirect_to product_path(@product)
       return
     else
-      flash.now[:error] = error_flash("Error. Unable to create product.", @product.errors.messages)
+      flash.now[:error] = error_flash("Error. Unable to create product.", @product.errors)
       render :new
       return
     end
