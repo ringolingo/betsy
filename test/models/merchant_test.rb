@@ -118,4 +118,18 @@ describe Merchant do
       expect(@sort.size).must_equal count
     end
   end
+
+  describe "total_revenue" do
+    it "correctly returns total revenue for all of a merchant's orders" do
+      merchant = merchants(:merchant2)
+
+      expect(merchant.total_revenue).must_equal 11198
+    end
+
+    it "returns 0 if merchant has no orders" do
+      merchant = merchants(:merchant3)
+
+      expect(merchant.total_revenue).must_equal 0
+    end
+  end
 end

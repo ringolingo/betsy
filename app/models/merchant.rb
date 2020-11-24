@@ -46,6 +46,10 @@ class Merchant < ApplicationRecord
     return merchant_items
   end
 
+  def total_revenue
+
+  end
+
   def sort_products
     products = []
 
