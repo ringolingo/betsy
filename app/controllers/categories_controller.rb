@@ -9,6 +9,13 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
+  def show
+    if @category.nil?
+      redirect_to categories_path
+      return
+    end
+  end
+
   def create
     @category = Category.new(category_params)
 
