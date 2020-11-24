@@ -12,7 +12,7 @@ class OrderItem < ApplicationRecord
   def mark_as_shipped
     return nil unless self.order.status == "paid"
 
-    self.status = "complete"
+    self.shipped = true
     self.save
   end
 end

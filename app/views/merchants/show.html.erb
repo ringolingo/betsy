@@ -92,6 +92,11 @@
                 <td>
                   <% items.each do |item| %>
                     <%= link_to item.product.name, product_path(item.product) %>
+                    <% if item.shipped %>
+                      - shipped
+                    <% else %>
+                      <%= button_to "Mark as shipped", { action: "ship_order_item", controller: "order_items", id: item.id }, method: :patch  %>
+                    <% end %>
                     <br/>
                   <% end %>
                 </td>

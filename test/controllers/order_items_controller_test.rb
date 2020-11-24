@@ -1,3 +1,4 @@
+
 require "test_helper"
 
 describe OrderItemsController do
@@ -114,6 +115,29 @@ describe OrderItemsController do
       expect(flash[:error]["errors"][0]).must_equal "quantity: can't be blank - is not a number"
 
       must_respond_with :bad_request
+    end
+  end
+
+  describe "custom methods" do
+    describe "ship_order_item" do
+      before do
+        @order_item = order_items(:oi1)
+        @merchant = merchants(:merchant1)
+      end
+
+      it "responds with success when logged in merchant changes status" do
+        perform_login(@merchant)
+
+        patch ship_order_item_path(@order_item)
+
+        must_respond_with :success
+      end
+
+      it "responds with redirect when merchant is not logged in" do
+        patch ship_order_item_path(@order_item)
+
+        must_respond_with :unauthorized
+      end
     end
   end
 end
