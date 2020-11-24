@@ -6,13 +6,13 @@
 <main>
 <% if @available_products.nil? %>
   <p>Sorry, no products!</p>
-  <% elsif params[:category_id] %>
-    <h2> Products filtered by: <%= Category.find(params[:category_id]).category %></h2>
+  <%# elsif params[:category_id] %>
+<!--    <h2> Products filtered by: <%#= Category.find(params[:category_id]).category %></h2>-->
 
 <!--    <div class="card-columns" style="margin-top:30px">-->
 
 
-      <%# @available_products.where(category_id: params[:category_id]).each do |product| %>
+      <%#  Category.find_by(id:  params[:category_id]).products.each |product| do %>
 
 <!--        <div class="card w-75 mx-auto border border-info" style="width: 90%;" >-->
           <%#=image_tag(product.photo_url, class: "card-img-top", alt: "moon")%>
