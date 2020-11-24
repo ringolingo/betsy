@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     if @order.status != "pending"
       flash.now[:status] = :danger
       flash.now[:result_text] = "Sorry, you cannot modify a checked-out order."
-      render 'products/main', status: :unauthorized
+      render 'products/index', status: :unauthorized
       return
     end
   end
