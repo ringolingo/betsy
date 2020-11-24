@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       @order = Order.find_by(id: params[:order_id])
     elsif params[:id]
       @order = Order.find_by(id: params[:id])
-    elsif session[:order_id] && session[:order_id] != nil
+    else session[:order_id] && session[:order_id] != nil
       @order = Order.find_by(id: session[:order_id])
     end
     if @order.nil?
