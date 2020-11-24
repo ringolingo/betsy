@@ -245,5 +245,45 @@ describe Order do
         expect(@order.sub_total).must_equal 0
       end
     end
+
+    describe "select_status" do
+      it "returns all of a merchant's paid orders" do
+        merchant = merchants(:merchant2)
+        status = "paid"
+
+        requested = Order.select_status(status: status, merchant: merchant)
+
+        expected(requested.count).must_equal 1
+        expect(requested.first).must_equal orders(:order1)
+      end
+
+      it "returns all of a merchant's pending orders" do
+        merchant = merchants(:merchant2)
+        status = "pending"
+
+        requested = Order.select_status(status: status, merchant: merchant)
+
+        expect(requested.count).must_equal 1
+        expect(requested.first).must_equal orders(:order2)
+      end
+
+      it "returns an empty array if merchant has no orders of that kind" do
+        merchant = merchants(:merchant1)
+        status = "pending"
+
+        requested = Order.select_status(status: status, merchant: merchant)
+
+        expect(requested.empty?).must_equal true
+      end
+
+      it "returns an empty array if merchant has no orders" do
+        merchant = merchants(:merchant3)
+        status = "paid"
+
+        requested = Order.select_status(status: status, merchant: merchant)
+
+        expect(requested.empty?).must_equal true
+      end
+    end
   end
 end
