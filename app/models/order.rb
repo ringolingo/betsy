@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   has_many :order_items
   has_and_belongs_to_many :merchants
   has_many :products, through: :order_items
-  validates :status, presence: true, inclusion: { in: %w(pending paid),
+  validates :status, presence: true, inclusion: { in: %w(pending paid complete cancelled),
                message: "%{value} is not a valid status" }
   validates :name, presence: true, if: :paid?
   validates :address, presence: true, if: :paid?

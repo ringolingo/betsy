@@ -8,4 +8,10 @@ class OrderItem < ApplicationRecord
     return OrderItem.order(created_at: :asc)
   end
 
+  def mark_as_shipped
+    # return nil unless self.order.status == "paid"
+    #
+    # self.status = "complete"
+    # self.save
+  end
 end
