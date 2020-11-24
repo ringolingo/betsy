@@ -61,4 +61,14 @@ class Order < ApplicationRecord
   def sub_total
     return self.order_items.all.sum{|order_item| (order_item.quantity * order_item.product.price)}
   end
+
+  def self.select_status(status: "all", merchant:)
+    username = merchant.username
+
+    if status == "all"
+      return Order.joins(:merchants).where(merchants: { username: username }).uniq
+    else
+      return Order.joins(:merchants).where(merchants: { username: username }, status: status).uniq
+    end
+  end
 end
