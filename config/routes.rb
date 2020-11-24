@@ -27,5 +27,8 @@ Rails.application.routes.draw do
   patch "order_items/:id/ship", to: "order_items#ship_order_item", as: "ship_order_item"
   resources :order_items, except: [:create]
 
-  resources :categories
+  resources :categories do
+    resources :products, include: [:index, :show, :create]
+  end
+
 end

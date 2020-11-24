@@ -4,62 +4,13 @@
 
 <!-- START OF TABLE FORMAT OF CART -->
 <main>
-<section>
-  <%#if @order.status == "pending" && @order.id == session[:order_id] %>
-    <%#= render partial: "pending", locals: { order: @order }%>
-  <%#end%>
 
   <% if @order.status == "pending" && @order.id == session[:order_id] %>
     <% if @order.order_items.count == 0 %>
-      <div>
-        <p> There are no items in your shopping cart. </p>
-        <div>
-          <%= link_to("Browse Our Selection!", products_path , class: "btn btn-info")%>
-        </div>
-      </div>
+      <%= render partial: "no_items"%>
     <%else%>
-
-    <h2>Your shopping cart:</h2>
-
-    <table class="table-sm table-bordered table-hover cart">
-      <thead>
-      <tr>
-        <th scope="col">Product</th>
-        <th style="width: 17%">Quantity</th>
-        <th style="width: 17%">Price</th>
-        <th scope="col">Delete</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @order.order_items.each do |order_item| %>
-        <tr>
-          <th scope="row">
-            <%= link_to image_tag(order_item.product.photo_url, width: "30%"), product_path(order_item.product) %>
-            <%= link_to order_item.product.name, product_path(order_item.product) %>
-          </th>
-          <th scope="row">
-            <%= form_tag order_order_item_path(@order, order_item), method: :patch do %>
-              <%= select_tag(:new_quantity, options_for_select((1..order_item.product.stock), order_item.quantity))%>
-              <%= submit_tag "Edit Quantity", class: "btn btn-light" %>
-            <%end%>
-          </th>
-          <th scope="row">
-            <%= display_money(order_item.product.price)%>
-          </th>
-          <th scope="row">
-            <%= form_tag order_order_item_path(@order, order_item), method: :delete do %>
-              <%= submit_tag "Remove This Item",  class: "btn btn-light", data: {confirm: "Are you sure you want to remove #{order_item.product.name.upcase}?"}, class: "btn btn-danger" %>
-            <%end%>
-          </th>
-        </tr>
-      <%end%>
-      </tbody>
-    </table>
-    <p> <strong> Total Cost: <%= display_money(@order.total(tax: tax_rate, shipping: shipping_cost))%> </strong> </p>
-    <br>
-    <%= link_to("Continue to checkout", edit_order_path(@order), class: "btn btn-info")%>
-  <%end%>
-</section>
+      <%= render partial: "pending", locals: { order: @order }%>
+    <%end%>
   <%end%>
 
 <!--    if one of the order's merchants is logged in and @order is paid, shows customer details and only merchant's order items-->

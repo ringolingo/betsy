@@ -15,33 +15,33 @@
   <p>Please provide the following information to complete your order. Please don't give us your real credit card--this is a student project and our data security is less than upper-crust. </p>
 <%= form_with model: @order, url: order_path(@order), method: :patch do |f| %>
   <div class="form-group">
-    <%= f.label :customer_name, "Name" %>
-    <%= f.text_field :customer_name, class: "form-control", placeholder: "Sleepy Samuel"  %>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Sleepy Samuel"  %>
   </div>
 
   <div class="form-group">
-    <%= f.label :email_address, "Email Address" %>
-    <%= f.text_field :email_address, class: "form-control", placeholder: "1ZLLC@gmail.com"  %>
+    <%= f.label :email, "Email Address" %>
+    <%= f.text_field :email, class: "form-control", placeholder: "1ZLLC@gmail.com"  %>
   </div>
 
   <div class="form-group">
-    <%= f.label :mailing_address, "Shipping Address" %>
-    <%= f.text_field :mailing_address, class: "form-control", placeholder: "1234 Sleepytown"  %>
+    <%= f.label :address, "Shipping Address" %>
+    <%= f.text_field :address, class: "form-control", placeholder: "1234 Sleepytown"  %>
   </div>
 
   <div class="form-group">
-    <%= f.label :cc_number, "Card Number" %>
-    <%= f.number_field :cc_number, class: "form-control"  %>
+    <%= f.label :credit_card_number, "Card Number" %>
+    <%= f.number_field :credit_card_number, class: "form-control"  %>
   </div>
 
   <div class="form-group">
-    <%= f.label :cc_expiration, "Expiration Date" %>
-    <%= f.text_field :cc_expiration, class: "form-control", placeholder: "11/23"  %>
+    <%= f.label :expiration_date, "Expiration Date" %>
+    <%= f.text_field :expiration_date, class: "form-control", placeholder: "11/23"  %>
   </div>
 
   <div class="form-group">
-    <%= f.label :cc_security_code, "Security Code" %>
-    <%= f.number_field :cc_security_code, class: "form-control" %>
+    <%= f.label :cvv, "Security Code" %>
+    <%= f.number_field :cvv, class: "form-control" %>
   </div>
 
   <div class="form-group">
