@@ -57,6 +57,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+
   private
 
   # def all_categories
