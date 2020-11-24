@@ -25,7 +25,7 @@ class MerchantsController < ApplicationController
       if merchant.save
         flash[:success] = "Logged in as new Merchant  #{merchant.username}"
       else
-        flash[:error] = "Could not create Merchant account #{merchant.error}"
+        flash[:error] = error_flash("Could not create Merchant account", merchant.errors)
         return redirect_to root_path
       end
     end
@@ -40,8 +40,7 @@ class MerchantsController < ApplicationController
       flash[:result_text] = "Sorry, merchant not found."
       redirect_to merchants_path and return
     elsif @merchant != @current_merchant
-      flash[:status] = :danger
-      flash[:result_text] = "You must log in to edit your page."
+      flash[:error] = error_flash("You must log in to edit your page.")
       redirect_to merchants_path and return
     end
   end
@@ -52,8 +51,7 @@ class MerchantsController < ApplicationController
       flash[:result_text] = "Sorry, merchant not found."
       redirect_to merchants_path and return
     elsif @merchant != @current_merchant
-      flash[:status] = :danger
-      flash[:result_text] = "You must log in to edit your page"
+      flash[:error] = error_flash("You must log in to edit your page")
       redirect_to merchants_path and return
     end
 

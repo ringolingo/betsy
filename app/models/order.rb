@@ -4,8 +4,17 @@ class Order < ApplicationRecord
   has_many :products, through: :order_items
   validates :status, presence: true, inclusion: { in: %w(pending paid),
                message: "%{value} is not a valid status" }
-  #validates :name, presence: true
+  validates :name, presence: true, if: :paid?
+  validates :address, presence: true, if: :paid?
+  validates :email, presence: true, if: :paid?
+  validates :expiration_date, presence: true, if: :paid?
+  validates :cvv, presence: true, numericality: { only_integer: true, greater_than: 99, less_than: 10000, message: "CVV is incorrectly formatted"}, if: :paid?
+  validates :zip_code, presence: true, numericality: { only_integer: true, less_than: 99951,message: "Zip Code is incorrectly formatted"}, if: :paid?
+  validates :credit_card_number, presence: true, numericality: { only_integer: true, greater_than: 99999999999999, less_than: 10000000000000000,message: "Credit card number is incorrectly formatted"}, if: :paid?
 
+  def paid?
+    status == "paid"
+  end
 
   def return_merchants
     merchants = []
