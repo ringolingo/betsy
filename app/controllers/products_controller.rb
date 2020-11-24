@@ -34,10 +34,7 @@ class ProductsController < ApplicationController
       redirect_to product_path(@product)
       return
     else
-      flash.now[:status] = :failure
-      flash.now[:error] = "Error. Unable to create product."
-      flash.now[:messages] = @product.errors.messages
-
+      flash.now[:error] = error_flash("Error. Unable to create product.", @product.errors.messages)
       render :new
       return
     end
@@ -45,10 +42,10 @@ class ProductsController < ApplicationController
 
   def edit
     if @product.nil?
-      flash[:error] = "No such product"
+      flash[:error] = error_flash("No such product")
       redirect_to products_path and return
     elsif @product.merchant =! @current_merchant
-      flash[:error] = "You must log in to edit this product "
+      flash[:error] = error_flash("You must log in to edit this product ")
       redirect_to merchants_path and return
     end
   end
@@ -58,7 +55,7 @@ class ProductsController < ApplicationController
       head :not_found
       return
     elsif @product.merchant != @current_merchant
-      flash[:error] = "You must log in to edit this product"
+      flash[:error] = error_flash("You do not have access to change that")
       redirect_to merchants_path and return
     elsif @product.update(product_params)
       redirect_to product_path(@product.id)
@@ -82,7 +79,7 @@ class ProductsController < ApplicationController
   def toggle_for_sale
     @merchant = @product.merchant
     unless @merchant == @current_merchant
-      flash[:error] = "You do not have access to change that"
+      flash[:error] = error_flash("You do not have access to change that")
       redirect_to merchants_path and return
     end
 
