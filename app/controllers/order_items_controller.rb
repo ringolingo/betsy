@@ -49,6 +49,7 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
+    p 'here'
     redirect_to orders_path and return if @order_item.nil?
 
     if @order_item.destroy
