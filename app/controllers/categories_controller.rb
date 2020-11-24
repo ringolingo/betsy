@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-  # skip_before_action :require_login
 
   def index
     @categories = Category.all
@@ -16,11 +15,8 @@ class CategoriesController < ApplicationController
       flash[:success] = 'You have made a new category.'
       redirect_to categories_path
     else
-      flash.now[:warning] = 'Category was not created'
-      @category.errors.messages.each do |field, msg|
-        flash.now[field] = msg
-      end
-      render :new
+      flash[:error] = error_flash('Category was not created', @category.errors)
+      render :new, status: :bad_request
     end
   end
 
