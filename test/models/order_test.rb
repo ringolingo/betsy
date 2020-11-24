@@ -253,8 +253,8 @@ describe Order do
 
         requested = Order.select_status(status: status, merchant: merchant)
 
-        expected(requested.count).must_equal 1
-        expect(requested.first).must_equal orders(:order1)
+        expect(requested.count).must_equal 1
+        expect(requested[0]).must_equal orders(:order1)
       end
 
       it "returns all of a merchant's pending orders" do
@@ -265,6 +265,14 @@ describe Order do
 
         expect(requested.count).must_equal 1
         expect(requested.first).must_equal orders(:order2)
+      end
+
+      it "returns all of a merchant's orders if given no status" do
+        merchant = merchants(:merchant2)
+
+        requested = Order.select_status(merchant: merchant)
+
+        expect(requested.count).must_equal 2
       end
 
       it "returns an empty array if merchant has no orders of that kind" do
