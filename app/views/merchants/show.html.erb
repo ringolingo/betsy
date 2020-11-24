@@ -8,13 +8,10 @@
   <% end %>
 
   <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
-  <p><%= @merchant.description %></p>
+  <p>About <%= @merchant.username %>: <%= @merchant.description %></p>
   <% if @merchant == @current_merchant %>
     <%= link_to "Update Your Store", edit_merchant_path(@merchant) %>
   <% end %>
-
-
-  <!--  <p>Questions about an order? <%#= @merchant.email %></p>-->
 </section>
 
 <section>
@@ -70,7 +67,24 @@
     <% if @merchant.orders.empty? %>
       <p>You have no past orders</p>
     <% else %>
-      <p>In progress!</p>
+      <table class="table">
+        <tr>
+          <th>Total Revenue from Etzzz</th>
+          <td><%= display_money(@merchant.total_revenue) %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Revenue from completed orders</th>
+          <td><%= display_money(@merchant.total_revenue("complete")) %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Revenue from paid orders</th>
+          <td><%= display_money(@merchant.total_revenue("paid")) %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Revenue from pending orders</th>
+          <td><%= display_money(@merchant.total_revenue("complete")) %></td>
+        </tr>
+      </table>
     <% end %>
 
   <h3>Order history</h3>
