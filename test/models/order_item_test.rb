@@ -82,6 +82,20 @@ describe OrderItem do
         expect(@pending_item.shipped).must_equal false
       end
     end
-  end
 
+    describe "line_item_total" do
+      it "returns item price times number of items in order" do
+        # order = orders(:order2)
+        item = order_items(:oi2)
+
+        expect(item.line_item_total).must_equal 4000
+      end
+
+      it "returns zero if no quantity" do
+        item = order_items(:oi3)
+
+        expect(item.line_item_total).must_equal 0
+      end
+    end
+  end
 end

@@ -15,4 +15,10 @@ class OrderItem < ApplicationRecord
     self.shipped = true
     self.save
   end
+
+  def line_item_total
+    return 0 if self.quantity == 0
+
+    return (self.quantity * self.product.price)
+  end
 end
