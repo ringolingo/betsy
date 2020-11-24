@@ -10,9 +10,11 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @category = Category.find_by(id: params[:id])
     if @category.nil?
       redirect_to categories_path
       return
+
     end
   end
 
