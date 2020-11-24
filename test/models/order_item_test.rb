@@ -64,7 +64,38 @@ describe OrderItem do
   end
 
   describe "custom methods" do
-    #ADD TESTS
-  end
+    describe "mark_as_shipped" do
+      before do
+        @paid_item = order_items(:oi1)
+        @pending_item = order_items(:oi2)
+      end
 
+      it "changes order item in a paid order to shipped" do
+        @paid_item.mark_as_shipped
+
+        expect(@paid_item.shipped).must_equal true
+      end
+
+      it "does nothing if order status is not paid" do
+        @pending_item.mark_as_shipped
+
+        expect(@pending_item.shipped).must_equal false
+      end
+    end
+
+    describe "line_item_total" do
+      it "returns item price times number of items in order" do
+        # order = orders(:order2)
+        item = order_items(:oi2)
+
+        expect(item.line_item_total).must_equal 4000
+      end
+
+      it "returns zero if no quantity" do
+        item = order_items(:oi3)
+
+        expect(item.line_item_total).must_equal 0
+      end
+    end
+  end
 end

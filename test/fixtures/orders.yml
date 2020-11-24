@@ -28,4 +28,6 @@ order1:
   cvv: 098
   zip_code: 98104
   merchants: merchant1, merchant2
-
+order2:
+  status: pending
+  merchants: merchant2

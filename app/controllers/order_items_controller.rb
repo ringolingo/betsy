@@ -1,11 +1,11 @@
 class OrderItemsController < ApplicationController
 
-  before_action :find_order, except: :create
-  before_action :is_this_your_cart?, except: :create
-  before_action :still_pending?, except: :create
+  before_action :find_order, except: [:create, :ship_order_item]
+  before_action :is_this_your_cart?, except: [:create, :ship_order_item]
+  before_action :still_pending?, except: [:create, :ship_order_item]
   before_action :find_order_item, except: :create
-  before_action :are_products_active?, except: [:destroy, :create]
-  before_action :validate_quantity, only: [:create, :update]
+  before_action :are_products_active?, except: [:destroy, :create, :ship_order_item]
+  # before_action :validate_quantity, only: [:create, :update]
 
 
   def create
@@ -73,6 +73,17 @@ class OrderItemsController < ApplicationController
       flash.now[:error] = error_flash("Error: unable to update cart", @order_item.errors)
       render "homepages/index", status: :bad_request
     end
+  end
+
+  def ship_order_item
+    unless @order_item.order.merchants.include?(@current_merchant)
+      flash.now[:status] = :danger
+      flash.now[:result_text] = "You must log in to perform that action"
+      redirect_to merchants_path, status: :unauthorized
+    end
+
+    @order_item.mark_as_shipped
+    redirect_to merchant_path(@current_merchant)
   end
 
   private
