@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_202929) do
+ActiveRecord::Schema.define(version: 2020_11_24_025851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_202929) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "product_id"
     t.bigint "order_id"
+    t.boolean "shipped"
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
@@ -90,8 +91,8 @@ ActiveRecord::Schema.define(version: 2020_11_23_202929) do
     t.integer "stock"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "category"
     t.bigint "merchant_id"
+    t.string "category"
     t.boolean "for_sale"
     t.string "photo_url", default: "https://i.ibb.co/sHTKJ62/moon.jpg"
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
