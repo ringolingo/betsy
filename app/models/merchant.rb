@@ -46,6 +46,21 @@ class Merchant < ApplicationRecord
     return merchant_items
   end
 
+  def total_revenue(status = "all")
+    return 0 if self.orders.empty?
+
+    requested_orders = Order.select_status(status: status, merchant: self)
+    return 0 if requested_orders.empty?
+
+    all_items = []
+    requested_orders.each do |order|
+      order_items = filter_order(order)
+      all_items += order_items
+    end
+
+    return all_items.sum { |item| item.line_item_total }
+  end
+
   def sort_products
     products = []
 

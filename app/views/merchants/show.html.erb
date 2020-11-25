@@ -1,5 +1,5 @@
-<section>
-  <h2><%= @merchant.username %></h2>
+<section class="text-center">
+  <h2 class="text-center"><%= @merchant.username %></h2>
 
   <% if @merchant.avatar.attached? %>
     <div><%= image_tag @merchant.avatar.variant(resize_to_limit: [200, nil]) %></div>
@@ -8,21 +8,21 @@
   <% end %>
 
   <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
-  <p><%= @merchant.description %></p>
-  <% if @merchant == @current_merchant %>
-    <%= link_to "Update Your Store", edit_merchant_path(@merchant) %>
-  <% end %>
+  <p>About <%= @merchant.username %>: <%= @merchant.description %></p>
+  <div>
+    <% if @merchant == @current_merchant %>
+      <%= link_to "Update Your Store", edit_merchant_path(@merchant) %>
+    <% end %>
+  </div>
 
-
-  <!--  <p>Questions about an order? <%#= @merchant.email %></p>-->
+  <div>
+    <% if @merchant == @current_merchant %>
+      <%= link_to "Add a new product?", new_product_path %>
+    <% end %>
+  </div>
 </section>
 
 <section>
-  <h3>Products</h3>
-  <% if @merchant == @current_merchant %>
-    <%= link_to "Add a new product?", new_product_path %>
-  <% end %>
-
   <table class="table">
     <thead>
       <tr>
@@ -70,7 +70,42 @@
     <% if @merchant.orders.empty? %>
       <p>You have no past orders</p>
     <% else %>
-      <p>In progress!</p>
+      <table class="table">
+        <tr>
+          <th>Total Revenue from Etzzz</th>
+          <td><%= display_money(@merchant.total_revenue) %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Revenue from completed orders</th>
+          <td><%= display_money(@merchant.total_revenue("complete")) %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Revenue from paid orders</th>
+          <td><%= display_money(@merchant.total_revenue("paid")) %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Revenue from pending orders</th>
+          <td><%= display_money(@merchant.total_revenue("complete")) %></td>
+        </tr>
+      </table>
+      <table class="table">
+        <tr>
+          <th>Total Orders with Etzzz</th>
+          <td><%= @merchant.orders.count %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Completed orders</th>
+          <td><%= Order.select_status(status: "complete", merchant: @merchant).count %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Paid orders</th>
+          <td><%= Order.select_status(status: "paid", merchant: @merchant).count %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Pending orders</th>
+          <td><%= Order.select_status(status: "pending", merchant: @merchant).count %></td>
+        </tr>
+      </table>
     <% end %>
 
   <h3>Order history</h3>
