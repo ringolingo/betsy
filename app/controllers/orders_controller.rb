@@ -63,20 +63,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # def history
-  #   # @order = Order.find_by(id: params[:id])
-  #
-  #   if @order == @current_order
-  #     redirect_to order_path(@current_order) and return
-  #   elsif @current_merchant.nil?
-  #     flash[:error] = "You must log in to see that page"
-  #     redirect_to merchants_path and return
-  #   end
-  #
-  #   @items = @current_merchant.filter_order(@order)
-  #   return @items
-  # end
-
   def search
     render action: 'show'
   end

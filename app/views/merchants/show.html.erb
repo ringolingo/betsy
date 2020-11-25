@@ -146,7 +146,6 @@
                    data-parent="#accordionEx">
                 <div class="card-body">
               <% items = @merchant.filter_order(order) %>
-                  <%# raise StandardError %>
                   <% items.each do |item| %>
                     <%= item.product_id %>
                     <%= link_to item.product.name, product_path(item.product) %>

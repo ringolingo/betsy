@@ -24,8 +24,6 @@ Rails.application.routes.draw do
 
   resources :merchants # only: [] or expect: []
 
-  # get "orders/:id/history", to: "orders#history", as: "order_history"
-
   patch "order_items/:id/ship", to: "order_items#ship_order_item", as: "ship_order_item"
   resources :order_items, except: [:create]
 
