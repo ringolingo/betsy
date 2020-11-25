@@ -16,12 +16,12 @@
 <%= form_with model: @order, url: order_path(@order), method: :patch do |f| %>
   <div class="form-group">
     <%= f.label :name, "Name" %>
-    <%= f.text_field :name, class: "form-control", placeholder: "Sleepy Samuel"  %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Sleepy Sammy"  %>
   </div>
 
   <div class="form-group">
     <%= f.label :email, "Email Address" %>
-    <%= f.text_field :email, class: "form-control", placeholder: "1ZLLC@gmail.com"  %>
+    <%= f.text_field :email, class: "form-control", placeholder: "catchinwsnzs@gmail.com"  %>
   </div>
 
   <div class="form-group">
@@ -41,16 +41,16 @@
 
   <div class="form-group">
     <%= f.label :cvv, "Security Code" %>
-    <%= f.number_field :cvv, class: "form-control" %>
+    <%= f.number_field :cvv, class: "form-control", placeholder: "321" %>
   </div>
 
   <div class="form-group">
     <%= f.label :zip_code, "Zip Code" %>
-    <%= f.number_field :zip_code, class: "form-control" %>
+    <%= f.number_field :zip_code, class: "form-control", placeholder: "232384" %>
   </div>
 
   <div class="form-group">
-    <%= f.submit "Complete Order", class: "btn btn-light" %>
+    <%= f.submit "Complete Order", class: "task-button" %>
   </div>
 
 <% end %>

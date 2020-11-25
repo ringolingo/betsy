@@ -39,7 +39,8 @@
   </table>
   <section class="order-costs">
     <p class="end">Subtotal: <%=display_money(order.sub_total)%></p>
-    <p class="end"> Taxes: <%=display_money((order.sub_total * tax_rate).round)%></p>
+    <p class="end">Shipping: $5.00</p>
+    <p class="end">Taxes: <%=display_money((order.sub_total * tax_rate).round)%></p>
     <p class="end">Total: <%=display_money(order.total(tax: tax_rate, shipping: shipping_cost))%></p>
     <div class="end">
       <%= link_to("Continue to checkout", edit_order_path(order), class: "btn btn-info")%>
