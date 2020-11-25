@@ -30,5 +30,14 @@ class Product < ApplicationRecord
     self.save
   end
 
+  def avg_rating
+    reviews = self.reviews
+    if reviews.count > 0
+      total = reviews.reduce(0) { |sum, review| sum + review.rating }
+      avg = total/reviews.count
+
+      return avg
+    end
+  end
 end
 

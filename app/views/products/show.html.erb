@@ -1,3 +1,5 @@
+<%= render partial: "/layouts/flash_errors" %>
+
 <h2><%= @product.name %></h2>
 <p><%= link_to @product.merchant.username, merchant_path(@product.merchant) %></p>
 <%= image_tag(@product.photo_url, alt: "moon") %>
@@ -21,3 +23,35 @@
 <!--TODO - photo? -->
 <p></p>
 <p><%= @product.orders.length %> sold!</p>
+
+<div class="reviews">
+  <h2>Reviews</h2>
+  <section class="rating">Average Rating:
+    <% if @product.reviews.length >= 1 %>
+      <% @product.avg_rating.round.times do %>
+        <% "*" %>
+      <% end %>
+    <% end %>
+  </section>
+
+  <div class="table-responsive-md">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Rating</th>
+        <th scope="col">Review</th>
+        <th scope="col">Edit</th>
+      </tr>
+      </thead>
+    <tbody>
+      <tr>
+        <% @product.reviews.each do |review| %>
+          <td><%= review.rating%></td>
+          <td> <%= review.description%></td>
+          <td><%= link_to 'Edit', edit_review_path(review) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

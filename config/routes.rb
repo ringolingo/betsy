@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   delete "/logout", to: "merchants#logout", as: "logout"
 
   patch "/products/:id/toggle", to: "products#toggle_for_sale", as: "toggle_for_sale"
+
+  resources :reviews, :except => [:show]
+
   resources :products do
     resources :order_items, only: [:create]
   end # only: [] or expect: []
