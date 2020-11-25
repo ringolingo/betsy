@@ -112,8 +112,13 @@
     <% else %>
       <!--TODO - overall stats, and filter by status -->
 
+      <%= form_with(url: merchant_path(@merchant), method: :get, local: true) do |form| %>
+        <%= form.label "Filter orders by status" %>
+        <%= form.select :merchant_order_status, ["all", "pending", "paid", "complete", "cancelled"] %>
+        <%= form.submit "Filter" %>
+      <% end%>
 
-        <% @merchant.orders.each do |order| %>
+      <% @merchant_order_history.each do |order| %>
           <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
             <!-- Accordion card -->

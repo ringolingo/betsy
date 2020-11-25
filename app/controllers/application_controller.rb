@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
       end
       flash.now[:status] = :danger
       flash.now[:result_text] = "Sorry, you have requested products that are now inactive on our site. We have removed them from your cart. Please carry on with your order!"
-      render 'products/main', status: :bad_request
+      render 'products/index', status: :bad_request
       return
     end
   end
