@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
       return
     end
-    @reviews = Review.where(product_id: @product)
+    @reviews = Review.where(product: @product)
   end
 
   def new
