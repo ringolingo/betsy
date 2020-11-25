@@ -146,6 +146,7 @@
                    data-parent="#accordionEx">
                 <div class="card-body">
               <% items = @merchant.filter_order(order) %>
+                  <%# raise StandardError %>
                   <% items.each do |item| %>
                     <%= item.product_id %>
                     <%= link_to item.product.name, product_path(item.product) %>
@@ -153,7 +154,7 @@
                     <%= display_money(item.line_item_total) %>
                     <% if item.shipped %>
                       - shipped
-                    <% else %>
+                    <% elsif item.order.status == "paid" %>
                       <%= link_to "Mark as shipped", { action: "ship_order_item", controller: "order_items", id: item.id }, method: :patch  %>
                     <% end %>
                     <br/>
@@ -173,6 +174,8 @@
                 </div>
               </div>
             </div>
+          </div>
+          </table>
         <% end %>
 
   <% end %>

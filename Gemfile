@@ -31,6 +31,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem "omniauth"
 gem "omniauth-github"
+gem 'simplecov', require: false, group: :test
+
 
 
 group :development, :test do
