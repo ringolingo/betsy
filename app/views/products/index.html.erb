@@ -47,7 +47,11 @@
         <!-- List group -->
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Price:<%= display_money(product.price) %> </li>
-          <li class="list-group-item">Category: <%=product.category%></li>
+          <li class="list-group-item">Category:
+            <% product.categories.each do |category| %>
+              <%= link_to category.category, category_path(category) %>
+            <% end %>
+          </li>
           <li class="list-group-item">Seller: <%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
           <li class="list-group-item"><%= product.stock %> in stock </li>
         </ul>
