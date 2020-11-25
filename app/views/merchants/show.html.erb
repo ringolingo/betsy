@@ -137,7 +137,7 @@
                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
                    aria-controls="collapseOne1">
                   <h5 class="mb-0">
-                    <%= link_to order.created_at.strftime("%b %e %Y, %l:%M"), order_history_path(order) %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
+                    <%= order.created_at.strftime("%b %e %Y, %l:%M") %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
                   </h5>
                 </a>
               </div>
