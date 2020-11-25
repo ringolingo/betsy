@@ -1,20 +1,19 @@
 require "test_helper"
 describe Product do
+
+  before do
+    @merchant = merchants(:merchant1)
+    @new_product = Product.new(
+        name: "ultra cozy blanket",
+        description: "A nice warm blanket for napping",
+        price: 30,
+        photo_url: "image.jpeg",
+        stock: 8,
+        merchant: @merchant
+    )
+  end
+
   describe "validations" do
-
-    before do
-      @merchant = merchants(:merchant1)
-      @new_product = Product.new(
-          name: "ultra cozy blanket",
-          category: "bedding",
-          description: "A nice warm blanket for napping",
-          price: 30,
-          photo_url: "image.jpeg",
-          stock: 8,
-          merchant: @merchant
-      )
-    end
-
     # it 'must have a merchant' do
     #   # Is this necessary ?
     # end
@@ -54,22 +53,31 @@ describe Product do
       expect(@new_product.valid?).must_equal false
     end
   end
+  describe 'custome methods' do
+    describe "toggle for sale" do
+      it "makes an unavailable product available" do
+        product = products(:product1)
 
-  describe "toggle for sale" do
-    it "makes an unavailable product available" do
-      product = products(:product1)
+        product.toggle_for_sale
 
-      product.toggle_for_sale
+        expect(product.for_sale).must_equal false
+      end
 
-      expect(product.for_sale).must_equal false
+      it "makes an available product unavailable" do
+        product = products(:product2)
+
+        product.toggle_for_sale
+
+        expect(product.for_sale).must_equal true
+      end
     end
 
-    it "makes an available product unavailable" do
-      product = products(:product2)
-
-      product.toggle_for_sale
-
-      expect(product.for_sale).must_equal true
+    describe 'avg_rating' do
+      it 'calculates avg rating' do
+        @new_product.reviews << reviews(:one)
+        @new_product.reviews << reviews(:two)
+        expect(@new_product.avg_rating).must_equal 1
+      end
     end
   end
 end

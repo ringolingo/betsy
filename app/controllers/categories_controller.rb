@@ -1,8 +1,5 @@
 class CategoriesController < ApplicationController
 
-  def index
-    @categories = Category.all
-  end
 
   def new
     @category = Category.new
@@ -29,38 +26,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def edit
-    if @category.nil?
-      flash[:error] = "No such category"
-      redirect_to categorys_path and return
-    elsif @category.merchant =! @current_merchant
-      flash[:error] = "You must log in to edit this category "
-      redirect_to merchants_path and return
-    end
-  end
-
-  def update
-    if @category.nil?
-      head :not_found
-      return
-    elsif @category.update(category_params)
-      redirect_to category_path(@category.id)
-      return
-    else
-      render :edit
-      return
-    end
-  end
-
-  def destroy
-    if @category.nil?
-      head :not_found
-      return
-    elsif @category.destroy
-      redirect_to category_path
-      return
-    end
-  end
 
   private
 

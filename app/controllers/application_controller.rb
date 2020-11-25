@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :current_merchant
   before_action :find_merchants
   before_action :find_categories
-  # before_action :all_categories
-  # before_action :all_merchants
+
 
   def find_order
     if params[:order_id]
@@ -42,38 +41,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def are_products_active?
-    #unneccesary method?
-    #inactive_items = @order.order_items.filter{|order_item| order_item.product.for_sale == false}
-
-    inactive_items = []
-    @order.order_items.each do |item|
-      if item.product.for_sale == false
-        inactive_items << item
-      end
-    end
-    if inactive_items.any?
-      inactive_items.each do |item|
-        item.destroy
-      end
-      flash.now[:status] = :danger
-      flash.now[:result_text] = "Sorry, you have requested products that are now inactive on our site. We have removed them from your cart. Please carry on with your order!"
-      render 'products/index', status: :bad_request
-      return
-    end
-  end
-
 
 
   private
 
-  # def all_categories
-  #   @all_categories = Category.all
-  # end
-  #
-  # def all_merchants
-  #   @all_merchants = Merchant.all
-  # end
 
   def set_current_order
     @current_order = Order.find_by(id: session[:order_id])
