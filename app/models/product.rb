@@ -36,6 +36,8 @@ class Product < ApplicationRecord
       avg = total/reviews.count
 
       return avg
+    else
+      return 0
     end
   end
 end

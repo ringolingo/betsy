@@ -4,8 +4,6 @@ class OrderItemsController < ApplicationController
   before_action :is_this_your_cart?, except: [:create, :ship_order_item]
   before_action :still_pending?, except: [:create, :ship_order_item]
   before_action :find_order_item, except: :create
-  before_action :are_products_active?, except: [:destroy, :create, :ship_order_item]
-
 
 
   def create
