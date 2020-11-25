@@ -29,7 +29,7 @@
   <section class="rating">Average Rating:
     <% if @product.reviews.length >= 1 %>
       <% @product.avg_rating.round.times do %>
-        <img src="https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/Star-Full.png" alt="rating star" height="25" width="25">
+        <% "*" %>
       <% end %>
     <% end %>
   </section>
@@ -43,7 +43,7 @@
         <th scope="col">Edit</th>
       </tr>
       </thead>
-      <tbody>
+    <tbody>
       <tr>
         <% @product.reviews.each do |review| %>
           <td><%= review.rating%></td>
@@ -51,7 +51,7 @@
           <td><%= link_to 'Edit', edit_review_path(review) %></td>
           </tr>
         <% end %>
-        </tbody>
+      </tbody>
     </table>
   </div>
 </div>
