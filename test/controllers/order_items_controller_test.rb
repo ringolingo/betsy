@@ -143,6 +143,13 @@ describe OrderItemsController do
 
       must_respond_with :bad_request
     end
+
+    it 'will increase the number of orders  merchant of product has' do
+      expect{
+        post product_order_items_path(products(:blanket).id), params: order_item_params
+      }.must_change "products(:blanket).merchant.orders.count", 1
+    end
+
   end
 
   describe "custom methods" do
