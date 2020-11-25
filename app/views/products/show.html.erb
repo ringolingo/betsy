@@ -21,3 +21,35 @@
 <!--TODO - photo? -->
 <p></p>
 <p><%= @product.orders.length %> sold!</p>
+
+<div class="reviews">
+  <h2>Reviews</h2>
+  <section class="rating">Average Rating:
+    <% if @product.reviews.length >= 1 %>
+      <% @product.avg_rating.round.times do %>
+        <img src="https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/Star-Full.png" alt="rating star" height="25" width="25">
+      <% end %>
+    <% end %>
+  </section>
+
+  <div class="table-responsive-md">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Rating</th>
+        <th scope="col">Review</th>
+        <th scope="col">Edit</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <% @product.reviews.each do |review| %>
+          <td><%= review.rating%></td>
+          <td> <%= review.description%></td>
+          <td><%= link_to 'Edit', edit_review_path(review) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+  </div>
