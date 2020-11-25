@@ -4,18 +4,8 @@
 
 
 
-<h2><%= @product.name %></h2>
-<p><%= link_to @product.merchant.username, merchant_path(@product.merchant) %></p>
-<%= image_tag(@product.photo_url, alt: "moon") %>
 
-<p></p>
-<% @product.categories.each do |category| %>
-  <%= link_to category.category, category_path(category) %>
-<% end %>
 
-<% if @product.merchant == @current_merchant %>
-  <p><%= link_to "update this product", edit_product_path(@product) %></p>
-<% end %>
 
 
 <%# TODO - check this correctly redirects once category/product table set up %>
@@ -60,11 +50,13 @@
         <p><%=@product.description%></p>
       </div>
 
+
+
       <div class="product-detail-categories">
         <h6>Categories:</h6>
         <ul>
         <% @product.categories.each do |cat|%>
-          <li><%=cat.category%></li>
+          <li><%=link_to(cat.category, category_path(cat))%></li>
           <%end%>
         </ul>
       </div>
@@ -90,6 +82,11 @@
           <div class = "button"><%= f.submit "Purchase Item", class: "task-button" %></div>
         <% end %>
       </div>
+      <% if @product.merchant == @current_merchant %>
+        <div class="product-detail-desc">
+          <p><%= link_to "Update this Product", edit_product_path(@product), class: "btn btn-light" %></p>
+        </div>
+      <% end %>
     </div>
   </div>
 </section>
