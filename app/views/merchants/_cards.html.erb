@@ -27,10 +27,14 @@
         </ul>
       <%if is_current_merchant %>
       <div class = 'card-body'>
-        <div class = "btn-toolbar">
-          <div class = "btn-group">
-          <%= link_to "Update", edit_product_path(product), class: "btn btn-primary mr-4" %>
-          <%= button_to change_status_btn(product.for_sale), { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch, class: "btn btn-secondary mr-2" %>
+        <div class="container">
+          <div class="row">
+            <div class="col text-center">
+              <div class = "btn-group">
+                <%= link_to "Update", edit_product_path(product), class: "btn btn-primary mr-4" %>
+                <%= button_to change_status_btn(product.for_sale), { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch, class: "btn btn-secondary mr-2" %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
