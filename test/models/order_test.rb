@@ -221,7 +221,6 @@ describe Order do
 
   describe 'custom methods' do
 
-
     describe 'total' do
       it 'will return the total' do
         expect(@order.sub_total).must_equal 19000
@@ -244,6 +243,48 @@ describe Order do
       it 'will return 0 if nothing is in the order' do
         @order.order_items.delete_all
         expect(@order.sub_total).must_equal 0
+      end
+    end
+
+    describe "check_stock" do
+      it "decreases a product's stock by the amount in an order" do
+        order = orders(:order1)
+        product1 = products(:product1)
+        product1_id = product1.id
+        product4 = products(:product4)
+        product4_id = product4.id
+
+        order.decrement_stock
+
+        updated_1 = Product.find_by(id: product1_id)
+        updated_4 = Product.find_by(id: product4_id)
+
+        expect(updated_1.stock).must_equal 19
+        expect(updated_4.stock).must_equal 23
+      end
+    end
+
+    describe "check_stock" do
+      before do
+        @order = orders(:order3)
+        @product2 = products(:product2)
+      end
+
+      it "returns a list of items that exceed product quantity" do
+        oi2 = OrderItem.new(order: @order, product: @product2, quantity: 50)
+        @order.order_items << oi2
+
+        results = @order.check_stock
+
+        expect(results).must_equal [[oi2.product.name, oi2.product.stock]]
+      end
+
+      it "returns nothing if all products are sufficiently stocked" do
+        oi2 = OrderItem.new(order: @order, product: @product2, quantity: 10)
+
+        results = @order.check_stock
+
+        expect(results).must_be_empty
       end
     end
 
