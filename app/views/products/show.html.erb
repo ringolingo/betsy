@@ -94,6 +94,9 @@
 <p></p>
 <p><%= @product.orders.length %> sold!</p>
 
+<div>
+  <span><%= link_to "Write A Review", new_product_review_path(@product), class:"btn btn-danger" %></span>
+</div>
 <div class="reviews">
   <h2>Reviews</h2>
   <section class="rating">Average Rating:

@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
 
   def new
     @product = Product.find(params[:product_id])
-    @review = Review.new(product: @product)
+    @review = Review.new(product_id: @product)
   end
 
   def create
