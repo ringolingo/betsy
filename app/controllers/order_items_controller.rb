@@ -47,12 +47,9 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  def edit
-    redirect_to orders_path and return if @order_item.nil?
-  end
 
   def destroy
-    redirect_to orders_path and return if @order_item.nil?
+    redirect_to root_path and return if @order_item.nil?
 
     if @order_item.destroy
       flash[:success] = "Order item successfully deleted"
@@ -65,7 +62,7 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    redirect_to orders_path and return if @order_item.nil?
+    redirect_to root_path and return if @order_item.nil?
 
     update = @order_item.update(order_item_params)
 
