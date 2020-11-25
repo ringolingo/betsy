@@ -112,17 +112,6 @@
     <% else %>
       <!--TODO - overall stats, and filter by status -->
 
-<!--      <table class="table">-->
-<!--        <thead>-->
-<!--          <tr>-->
-<!--            <th>Date</th>-->
-<!--            <th>Products</th>-->
-<!--            <th>Quantity</th>-->
-<!--            <th>Product Subtotals</th>-->
-<!--            <th>Order Subtotal</th>-->
-<!--            <th>Status</th>-->
-<!--          </tr>-->
-<!--        </thead>-->
 
         <% @merchant.orders.each do |order| %>
           <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
@@ -135,7 +124,7 @@
                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
                    aria-controls="collapseOne1">
                   <h5 class="mb-0">
-                    <%= link_to order.created_at.strftime("%b %e %Y, %l:%M"), order_history_path(order) %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - Order Status: <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
+                    <%= order.created_at.strftime("%b %e %Y, %l:%M") %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - Order Status: <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
                   </h5>
                 </a>
               </div>
@@ -150,7 +139,7 @@
                           <% items.each do |item| %>
                             <%= item.product_id %>
                             <%= link_to item.product.name, product_path(item.product) %>
-                            <%= item.quantity %>
+                        Quantity:  <%= item.quantity %>
                         Price: <%= display_money(item.line_item_total) %>
                             <% if item.shipped %>
                               - SHIPPED
