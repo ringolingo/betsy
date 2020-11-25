@@ -56,3 +56,45 @@
 .list-group-item{
   background-color:  #cc99ff;
 }
+
+.product-details-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 2rem;
+  margin-top: 7rem;
+  margin-right: 7rem;
+  margin-left: 5rem;
+}
+
+.product-image-container {
+  display: grid;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.product-details-info {
+  display: grid;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  padding: 1rem 1rem;
+}
+
+.main-body {
+  padding: 7rem;
+}
+
+.jumbotron-fluid {
+  margin-top: 1rem;
+  background-image: url(https://i.ibb.co/8PL08v5/jumbo-2.jpg);
+  background-size: cover;
+}
+
+.jumbotron-fluid h1 {
+  color: black;
+  //text-shadow: 2px 2px #2d3142;
+  font-size: 3rem;
+  padding-top: 1rem;
+  display: inline-block;
+  width: 100%;
+}
