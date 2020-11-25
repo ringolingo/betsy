@@ -104,5 +104,10 @@ ActiveRecord::Schema.define(version: 2020_11_25_005433) do
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
 end

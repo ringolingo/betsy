@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   root to: 'products#index'
 
-  get '/orders/find', to: 'orders#find', as: "find_my_order"
   get '/orders/search', to: 'orders#search', as: "search_order"
   resources :orders, only: [:show, :edit, :update] do
     resources :order_items, only: [:update, :destroy]
@@ -16,6 +15,9 @@ Rails.application.routes.draw do
   delete "/logout", to: "merchants#logout", as: "logout"
 
   patch "/products/:id/toggle", to: "products#toggle_for_sale", as: "toggle_for_sale"
+
+  resources :reviews, :except => [:show]
+
   resources :products do
     resources :order_items, only: [:create]
   end # only: [] or expect: []

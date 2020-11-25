@@ -27,10 +27,11 @@
 
   <div class="form-group">
     <%= f.label :category, "Category" %>
-    <%= f.collection_check_boxes :category, Category.all, :id, :category do |f| %>
+    <%= collection_check_boxes( :product, :category_ids, Category.all, :id, :category) do |b| %>
       <br>
-      <%= f.check_box %>
-      <%= f.label %>
+      <%= b.label %>
+      <%= b.check_box %>
+
     <% end %>
   </div>
 
