@@ -26,13 +26,13 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :category, "Category" %>
-    <%= collection_check_boxes( :product, :category_ids, Category.all, :id, :category) do |b| %>
-      <br>
-      <%= b.label %>
-      <%= b.check_box %>
-
-    <% end %>
+    <%= f.label :category %>
+    <div class="custom-form-group">
+      <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :category) do |b| %>
+        <%= b.label(class: "form-control") { b.check_box(class: "checkbox") +   b.text } %>
+      <% end %>
+      <%= link_to "Add a new category", new_category_path, class: "btn btn-primary" %>
+    </div>
   </div>
 
   <div class="form-group">
