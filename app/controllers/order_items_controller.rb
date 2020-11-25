@@ -12,13 +12,13 @@ class OrderItemsController < ApplicationController
 
     product = Product.find_by(id: params[:product_id])
 
-
     if params[:order_item][:quantity].to_i > product.stock
       flash[:error] = error_flash("There's not enough of this item to complete your request")
       redirect_to product_path(product) and return
     end
 
     save_order = true
+
 
     if @current_order.nil? || @current_order.status == 'paid'
 
@@ -34,6 +34,9 @@ class OrderItemsController < ApplicationController
     order_item = OrderItem.new(order: @current_order, product: product, quantity: params[:order_item][:quantity])
 
     save_order_item = order_item.save
+
+    merchant = order_item.product.merchant
+    merchant.orders << @current_order
 
     if(save_order && save_order_item)
       flash[:success] = "Item added to cart!"

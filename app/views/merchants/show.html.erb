@@ -78,28 +78,44 @@
       <p>You have no past orders</p>
     <% else %>
       <!--TODO - overall stats, and filter by status -->
+
       <table class="table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Products</th>
-            <th>Quantity</th>
-            <th>Product Subtotals</th>
-            <th>Order Subtotal</th>
-            <th>Status</th>
-          </tr>
-        </thead>
+<!--        <thead>-->
+<!--          <tr>-->
+<!--            <th>Date</th>-->
+<!--            <th>Products</th>-->
+<!--            <th>Quantity</th>-->
+<!--            <th>Product Subtotals</th>-->
+<!--            <th>Order Subtotal</th>-->
+<!--            <th>Status</th>-->
+<!--          </tr>-->
+<!--        </thead>-->
 
         <% @merchant.orders.each do |order| %>
-          <tbody>
-            <tr>
-              <td>
-                <%= link_to order.created_at.strftime("%b %e %Y, %l:%M"), order_history_path(order) %> <!--TODO - link to the order show view -->
-              </td>
+          <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+            <!-- Accordion card -->
+            <div class="card">
+
+              <!-- Card header -->
+              <div class="card-header" role="tab" id="headingOne1">
+                <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                   aria-controls="collapseOne1">
+                  <h5 class="mb-0">
+                    <%= link_to order.created_at.strftime("%b %e %Y, %l:%M"), order_history_path(order) %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
+                  </h5>
+                </a>
+              </div>
+
+              <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                   data-parent="#accordionEx">
+                <div class="card-body">
               <% items = @merchant.filter_order(order) %>
-                <td>
                   <% items.each do |item| %>
+                    <%= item.product_id %>
                     <%= link_to item.product.name, product_path(item.product) %>
+                    <%= item.quantity %>
+                    <%= display_money(item.line_item_total) %>
                     <% if item.shipped %>
                       - shipped
                     <% else %>
@@ -107,34 +123,28 @@
                     <% end %>
                     <br/>
                   <% end %>
-                </td>
-                <td>
-                  <% items.each do |item| %>
-                    <%= item.quantity %>
-                    <br/>
+
+                  <% if order.status == "paid" %>
+                    <h4>Customer Info</h4>
+
+                    <p>Name: <%= order.name %></p>
+                    <p>Email Address: <%= order.email %></p>
+                    <p>Mailing Address: <%= order.address %></p>
+                    <p>Credit Card: **** **** **** <%= order.credit_card_number.to_s[-4..-1]%></p>
+                    <p>Credit Card Expiration: <%= order.expiration_date %>
+                    <p>Cart Status: <%= order.status %></p>
+                    <p>Order placed: <%= order.updated_at.strftime("%F") %>
                   <% end %>
-                </td>
-                <td>
-                  <% items.each do |item| %>
-                    <%= display_money(item.line_item_total) %>
-                    <br/>
-                  <% end %>
-                </td>
-                <td>
-                  <%= display_money(items.sum { |item| item.product.price }) %>
-                </td>
-              <td>
-                <%= order.status %> <!--TODO - link/dropdown to change status -->
-              </td>
-            </tr>
-          </tbody>
+                </div>
+              </div>
+            </div>
         <% end %>
-      </table>
 
   <% end %>
 
   </section>
 <% end %>
+
 <% if session[:merchant_id] && @order.return_merchants.include?(@current_merchant) %>
   <h2>Order <%= @order.id %>: Items Requested From Your Store</h2>
   <% @order.return_merchant_items(session[:merchant_id]).each do |item| %>
@@ -152,5 +162,4 @@
   <p>Cart Status: <%= @order.status %></p>
   <p>Order placed: <%= @order.updated_at.strftime("%F") %>
 <%end%>
-
 
