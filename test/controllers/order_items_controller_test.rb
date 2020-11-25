@@ -12,6 +12,19 @@ describe OrderItemsController do
   }
 
   describe 'destroy' do
+
+    it "will respond with redirect when attempting to delete a nonexistant work" do
+
+      post product_order_items_path(products(:blanket).id), params: order_item_params
+      order_item = OrderItem.order("created_at").last
+
+      delete order_order_item_path(order_item.order, -1)
+
+      must_respond_with :redirect
+
+      must_redirect_to root_path
+    end
+
     it "can destroy an existing OrderItem" do
 
       post product_order_items_path(products(:blanket).id), params: order_item_params
@@ -28,7 +41,7 @@ describe OrderItemsController do
       expect(test_order_item).must_be_nil
 
       must_respond_with :redirect
-      #must_redirect_to works_path
+      must_redirect_to order_path(order_item.order)
     end
   end
 
@@ -36,6 +49,17 @@ describe OrderItemsController do
     before do
       post product_order_items_path(products(:blanket).id), params: {order_item: {quantity: 3}}
       @order_item = OrderItem.order("created_at").last
+    end
+
+    it "will respond with redirect when attempting to update a nonexistant work" do
+      post product_order_items_path(products(:blanket).id), params: order_item_params
+      order_item = OrderItem.order("created_at").last
+
+      patch order_order_item_path(order_item.order, -1), params: order_item_params
+
+      must_respond_with :redirect
+
+      must_redirect_to root_path
     end
 
     it "can update an existing OrderItem" do
@@ -69,7 +93,6 @@ describe OrderItemsController do
     end
   end
 
-  #add edge case
   describe 'create' do
 
     it 'will create a new order if nothing is in cart' do
@@ -143,6 +166,13 @@ describe OrderItemsController do
 
       must_respond_with :bad_request
     end
+
+    it 'will increase the number of orders  merchant of product has' do
+      expect{
+        post product_order_items_path(products(:blanket).id), params: order_item_params
+      }.must_change "products(:blanket).merchant.orders.count", 1
+    end
+
   end
 
   describe "custom methods" do

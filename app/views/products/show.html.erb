@@ -101,13 +101,13 @@
 </div>
 <div class="reviews">
   <h2>Reviews</h2>
-  <section class="rating">Average Rating:
-    <% if @product.reviews.length >= 1 %>
-      <% @product.avg_rating.round.times do %>
-        <% "*" %>
-      <% end %>
-    <% end %>
-  </section>
+<!--  <section class="rating">Average Rating:-->
+    <%# if @product.reviews.length >= 1 %>
+      <%# @product.avg_rating.round.times do %>
+        <%# "*" %>
+      <%# end %>
+    <%# end %>
+<!--  </section>-->
 
   <div class="table-responsive-md">
     <table class="table">
@@ -118,8 +118,8 @@
       </tr>
       </thead>
     <tbody>
-      <tr>
         <% @product.reviews.each do |review| %>
+          <tr>
           <td><%= review.rating%></td>
           <td> <%= review.description%></td>
           </tr>

@@ -1,72 +1,15 @@
 
-<div class="jumbotron-container">
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Browse our Comfy-Cozy Products </h1>
-    </div>
-  </div>
-</div>
+<!--<div class="jumbotron-container">-->
+<!--  <div class="jumbotron jumbotron-fluid">-->
+<!--    <div class="container">-->
+<!--      <h1 class="display-4"></h1>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
-<!--<h4> Search by Category: </h4>-->
-<%# @categories.each do |category| %>
-  <%#= link_to "#{category.category}", category_path(category.id) %>
-<%# end %>
+
+
 <main>
-<% if @available_products.nil? %>
-  <p>Sorry, no products!</p>
-
-<% else %>
-  <div class="card-columns" style="margin-top:30px">
-
-
-    <% @available_products.each do |product| %>
-
-      <div class="card w-75 mx-auto border border-info" style="width: 90%;" >
-        <%=image_tag(product.photo_url, class: "card-img-top", alt: "moon")%>
-        <div class="card-body">
-          <h5 class="card-title"><%=link_to product.name, product_path(product)%></h5>
-          <p class="card-text"><%=product.description%></p>
-        </div>
-        <!-- List group -->
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Price:<%= display_money(product.price) %> </li>
-          <li class="list-group-item">Category:
-            <% product.categories.each do |category| %>
-              <%= link_to category.category, category_path(category) %>
-            <% end %>
-          </li>
-          <li class="list-group-item">Seller: <%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
-          <li class="list-group-item"><%= product.stock %> in stock </li>
-        </ul>
-<!--        <div class="card-body">-->
-<!--          <a href="#" class="btn btn-primary">Button One</a>-->
-<!--          <a href="#" class="btn btn-default">Button Two</a>-->
-<!--        </div>-->
-      </div>
-    <% end %>
-  </div>
-
-<!--  <table class="table">-->
-<!--    <thead>-->
-<!--      <tr>-->
-<!--        <th>Product</th>-->
-<!--        <th>Price</th>-->
-<!--        <th>Category</th>-->
-<!--        <th>Seller</th>-->
-<!--      </tr>-->
-<!--    </thead>-->
-
-<!--    <tbody>-->
-      <%# @available_products.each do |product| %>
-<!--        <tr>-->
-<!--          <td><%#= link_to product.name, product_path(product) %></td>-->
-<!--          <td><%#= display_money(product.price) %></td>-->
-<!--          <td><%#= product.category %></td>-->
-<!--          <td><%#= link_to product.merchant.username, merchant_path(product.merchant) %></td>-->
-<!--        </tr>-->
-      <%# end %>
-<!--    </tbody>-->
-<!--  </table>-->
-<% end %>
-
+  <%= render partial: "jumbotron", locals: {text: "Browse our Comfy-Cozy Products" } %>
+  <%= render partial: "cards", locals: {products: @available_products } %>
 </main>

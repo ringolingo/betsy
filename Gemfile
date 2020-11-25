@@ -31,7 +31,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem "omniauth"
 gem "omniauth-github"
-gem 'simplecov', require: false, group: :test
+gem 'simplecov'
+gem 'simplecov-html'
+
 
 group :development, :test do
   gem 'dotenv-rails'

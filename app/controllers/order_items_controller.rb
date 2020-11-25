@@ -5,7 +5,7 @@ class OrderItemsController < ApplicationController
   before_action :still_pending?, except: [:create, :ship_order_item]
   before_action :find_order_item, except: :create
   before_action :are_products_active?, except: [:destroy, :create, :ship_order_item]
-  # before_action :validate_quantity, only: [:create, :update]
+
 
 
   def create
@@ -47,12 +47,9 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  def edit
-    redirect_to orders_path and return if @order_item.nil?
-  end
 
   def destroy
-    redirect_to orders_path and return if @order_item.nil?
+    redirect_to root_path and return if @order_item.nil?
 
     if @order_item.destroy
       flash[:success] = "Order item successfully deleted"
@@ -65,7 +62,7 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    redirect_to orders_path and return if @order_item.nil?
+    redirect_to root_path and return if @order_item.nil?
 
     update = @order_item.update(order_item_params)
 
@@ -97,14 +94,6 @@ class OrderItemsController < ApplicationController
 
   def order_item_params
     return params.require(:order_item).permit(:quantity)
-  end
-
-  def validate_quantity
-    if params[:quantity] && params[:quantity].to_i < 1 || params[:new_quantity] && params[:new_quantity].to_i < 1
-      flash.now[:error] = error_flash("Please add more quantity.",  order_item.errors)
-      render 'products/index', status: :bad_request
-      return
-    end
   end
 
 end
