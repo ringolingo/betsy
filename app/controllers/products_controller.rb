@@ -22,10 +22,8 @@ class ProductsController < ApplicationController
 
   def create
     auth_hash = request.env["omniauth.auth"]
-    # binding.pry
-
     @product = Product.new(product_params)
-    @product.categories
+    params[:product][:category_ids].filter{|category_id| !category_id.empty?}.each{|category_id| @product.categories << Category.find_by(id: category_id)}
     @product.merchant_id = session[:user_id]
 
     if @product.save
@@ -35,7 +33,7 @@ class ProductsController < ApplicationController
       redirect_to product_path(@product)
       return
     else
-      flash.now[:error] = error_flash("Error. Unable to create product.", @product.errors.messages)
+      flash.now[:error] = error_flash("Error. Unable to create product.", @product.errors)
       render :new
       return
     end
