@@ -82,7 +82,7 @@ class OrdersController < ApplicationController
     if @order.order_items.empty?
       flash.now[:status] = :danger
       flash.now[:result_text] = "This order has no items to check out."
-      render 'products/main', status: :bad_request
+      render 'products/index', status: :bad_request
       return
     end
   end

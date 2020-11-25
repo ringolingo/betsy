@@ -15,9 +15,6 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <%= link_to "Home", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
             <%= link_to "All Products", products_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
@@ -42,10 +39,7 @@
           </li>
           <% if @current_merchant.nil? %>
             <li class="nav-item">
-              <%= link_to "Become a Merchant", new_merchant_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Log In", github_login_path, class: "nav-link" %>
+              <%= link_to "Become a Merchant", github_login_path, class: "nav-link" %>
             </li>
           <% else %>
             <li class="nav-item">
@@ -57,18 +51,25 @@
             <li class="nav-item">
               <%= link_to "Add New Category", new_category_path, class: "nav-link" %>
             </li>
+          <% end %>
+          </ul>
+
+        <ul class="navbar-nav navbar-right">
+          <% if @current_merchant.nil? %>
+            <li class="nav-item">
+              <%= link_to "Log In", github_login_path, class: "nav-link" %>
+            </li>
+          <% else %>
             <li class="nav-item">
               <%= link_to "Log Out", logout_path, method: :delete, class: "nav-link" %>
             </li>
           <% end %>
-        </ul>
-        <% if session[:order_id] %>
-          <ul class="navbar-nav navbar-right">
+          <% if session[:order_id] %>
             <li class="nav-item">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><%= link_to "View Shopping Cart", order_path(session[:order_id]) %></button>
             </li>
-          </ul>
-        <% end %>
+          <% end %>
+        </ul>
       </div>
     </nav>
   </header>
