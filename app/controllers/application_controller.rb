@@ -43,6 +43,9 @@ class ApplicationController < ActionController::Base
   end
 
   def are_products_active?
+    #unneccesary method?
+    #inactive_items = @order.order_items.filter{|order_item| order_item.product.for_sale == false}
+
     inactive_items = []
     @order.order_items.each do |item|
       if item.product.for_sale == false

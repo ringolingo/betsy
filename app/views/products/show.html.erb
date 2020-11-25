@@ -39,7 +39,7 @@
       </div>
 
       <div class="product-detail-merchant">
-        <h6>Sold by:  <%= link_to @product.merchant.username, merchant_path(@product.merchant) %></h6>
+        <h6>Sold by:  <%= link_to @product.merchant.username, merchant_path(@product.merchant),class: "cat-link" %></h6>
       </div>
 
       <div class="product-detail-price">
@@ -56,7 +56,7 @@
         <h6>Categories:</h6>
         <ul>
         <% @product.categories.each do |cat|%>
-          <li><%=link_to(cat.category, category_path(cat))%></li>
+          <li><%=link_to(cat.category, category_path(cat), class: "cat-link")%></li>
           <%end%>
         </ul>
       </div>
@@ -75,12 +75,18 @@
       </div>
 
       <div class="product-detail-add-cart">
-        <%= form_for  :order_item, url: product_order_items_path(@product) do |f| %>
-          <div class="form-group">
-            <%= f.select :quantity, (1..@product.stock).map{|n| n},{}, {class: "form-control"} %>
-          </div>
-          <div class = "button"><%= f.submit "Purchase Item", class: "task-button" %></div>
-        <% end %>
+        <%if @product.stock > 0 && @product.for_sale%>
+          <%= form_for  :order_item, url: product_order_items_path(@product) do |f| %>
+            <div class="form-group">
+              <%= f.select :quantity, (1..@product.stock).map{|n| n},{}, {class: "form-control"} %>
+            </div>
+            <div class = "button"><%= f.submit "Purchase Item", class: "task-button" %></div>
+          <% end %>
+        <%elsif @product.stock < 1 %>
+          <p>Out of Stock</p>
+        <%else%>
+          <p>Product Retired</p>
+        <%end%>
       </div>
       <% if @product.merchant == @current_merchant %>
         <div class="product-detail-desc">

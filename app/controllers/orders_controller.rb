@@ -47,9 +47,6 @@ class OrdersController < ApplicationController
     params[:order][:status] = "paid"
 
     if @current_order.update(order_params)
-      # @current_order.status = "paid"
-      # @current_order.save
-
       @current_order.decrement_stock
       flash[:status] = :success
       flash[:result_text] = "Order submitted! Enjoy your self-care with vibes."

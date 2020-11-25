@@ -221,6 +221,7 @@ describe Order do
 
   describe 'custom methods' do
 
+
     describe 'total' do
       it 'will return the total' do
         expect(@order.sub_total).must_equal 19000
@@ -234,7 +235,7 @@ describe Order do
 
     end
 
-    describe 'total' do
+    describe 'sub_total' do
 
       it 'will return the total plus taxes and shipping' do
         expect(@order.total(tax: 0.065, shipping: 500)).must_equal 20735
