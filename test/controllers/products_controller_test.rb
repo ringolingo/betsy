@@ -37,6 +37,9 @@ describe ProductsController do
 
   describe "new" do
     it "responds with success" do
+      merchant = merchants(:merchant1)
+      perform_login(merchant)
+
       get new_product_path
 
       must_respond_with :success
@@ -124,11 +127,13 @@ describe ProductsController do
       current_merchant
 
       product = products(:product1)
+      product_id = product.id
       status = product.for_sale
 
       patch toggle_for_sale_path(product)
 
-      expect(product.for_sale).must_equal !status
+      updated_product = Product.find_by(id: product_id)
+      expect(updated_product.for_sale).must_equal !status
       must_respond_with :redirect
     end
 
@@ -138,11 +143,13 @@ describe ProductsController do
       current_merchant
 
       product = products(:product3)
+      product_id = product.id
       status = product.for_sale
 
       patch toggle_for_sale_path(product)
 
-      expect(product.for_sale).must_equal !status
+      updated_product = Product.find_by(id: product_id)
+      expect(updated_product.for_sale).must_equal !status
       must_respond_with :redirect
     end
 
