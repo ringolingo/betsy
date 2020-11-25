@@ -11,9 +11,7 @@
   <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
   <div>
     <% if @merchant == @current_merchant %>
-      <%= link_to "Update Your Store", edit_merchant_path(@merchant) %>
-    <% end %> |
-    <% if @merchant == @current_merchant %>
+      <%= link_to "Update Your Store", edit_merchant_path(@merchant) %> |
       <%= link_to "Add a New Product", new_product_path %>
     <% end %>
   </div>
@@ -124,7 +122,7 @@
                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
                    aria-controls="collapseOne1">
                   <h5 class="mb-0">
-                    <%= order.created_at.strftime("%b %e %Y, %l:%M") %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - Order Status: <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
+                    <%= order.created_at.strftime("%b %e %Y, %l:%M") %> - Order Subtotal:  <%= display_money(@merchant.filter_order(order).sum { |item| item.line_item_total }) %> - Order Status: <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
                   </h5>
                 </a>
               </div>
