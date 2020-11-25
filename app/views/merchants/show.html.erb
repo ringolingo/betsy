@@ -101,8 +101,13 @@
     <% else %>
       <!--TODO - overall stats, and filter by status -->
 
+      <%= form_with(url: merchant_path(@merchant), method: :get, local: true) do |form| %>
+        <%= form.label "Filter orders by status" %>
+        <%= form.select :merchant_order_status, ["all", "pending", "paid", "complete", "cancelled"] %>
+        <%= form.submit "Filter" %>
+      <% end%>
 
-        <% @merchant.orders.each do |order| %>
+      <% @merchant_order_history.each do |order| %>
           <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
             <!-- Accordion card -->
@@ -132,7 +137,7 @@
                         Price: <%= display_money(item.line_item_total) %>
                             <% if item.shipped %>
                               - SHIPPED
-                            <% else %>
+                            <% elsif item.order.status == "paid" %>
                               <%= link_to "Mark as shipped", { action: "ship_order_item", controller: "order_items", id: item.id }, method: :patch  %>
                             <% end %>
                             <br/>

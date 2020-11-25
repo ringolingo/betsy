@@ -54,8 +54,8 @@ class Merchant < ApplicationRecord
 
     all_items = []
     requested_orders.each do |order|
-      order_items = filter_order(order)
-      all_items += order_items
+      order_items = self.filter_order(order)
+      all_items += order_items unless order_items.nil?
     end
 
     return all_items.sum { |item| item.line_item_total }

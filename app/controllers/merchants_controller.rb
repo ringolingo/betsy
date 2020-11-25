@@ -11,6 +11,14 @@ class MerchantsController < ApplicationController
       flash[:error] = "No such person"
       redirect_to merchants_path and return
     end
+
+    if @merchant == @current_merchant
+      if params[:merchant_order_status]
+        @merchant_order_history = Order.select_status(status: params[:merchant_order_status], merchant: @current_merchant)
+      else
+        @merchant_order_history = Order.select_status(merchant: @current_merchant)
+      end
+    end
   end
   
   def create

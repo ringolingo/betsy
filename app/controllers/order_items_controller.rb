@@ -52,7 +52,19 @@ class OrderItemsController < ApplicationController
     redirect_to root_path and return if @order_item.nil?
 
     if @order_item.destroy
-      flash[:success] = "Order item successfully deleted"
+      flash[:success] = "Product removed from your cart"
+
+      # checks if this is the merchant's only product in this order
+      # if so, removes merchant from order
+      merchant = @order_item.product.merchant
+      merchant_products = 0
+      @order.order_items.each do |item|
+        if item.product.merchant == merchant
+          merchant_products += 1
+        end
+      end
+      @order.merchants.delete(merchant) unless merchant_products > 0
+
      redirect_to order_path(@order_item.order)
     else
       flash[:error] = error_flash("Unable to remove product from cart")
