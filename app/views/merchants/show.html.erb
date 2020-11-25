@@ -85,6 +85,24 @@
           <td><%= display_money(@merchant.total_revenue("complete")) %></td>
         </tr>
       </table>
+      <table class="table">
+        <tr>
+          <th>Total Orders with Etzzz</th>
+          <td><%= @merchant.orders.count %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Completed orders</th>
+          <td><%= Order.select_status(status: "complete", merchant: @merchant).count %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Paid orders</th>
+          <td><%= Order.select_status(status: "paid", merchant: @merchant).count %></td>
+        </tr>
+        <tr>
+          <th class="table_subheading">Pending orders</th>
+          <td><%= Order.select_status(status: "pending", merchant: @merchant).count %></td>
+        </tr>
+      </table>
     <% end %>
 
   <h3>Order history</h3>
