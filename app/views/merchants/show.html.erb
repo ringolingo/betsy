@@ -7,21 +7,20 @@
     <div><%= image_tag("dog_sleeping.jpg", :alt => "a dog sleeping in a bed, representative of your friendly site builders", :width => 200 ) %></div>
   <% end %>
 
-  <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
   <p>About <%= @merchant.username %>: <%= @merchant.description %></p>
+  <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
   <div>
     <% if @merchant == @current_merchant %>
       <%= link_to "Update Your Store", edit_merchant_path(@merchant) %>
+    <% end %> |
+    <% if @merchant == @current_merchant %>
+      <%= link_to "Add a New Product", new_product_path %>
     <% end %>
   </div>
 
-  <div>
-    <% if @merchant == @current_merchant %>
-      <%= link_to "Add a new product?", new_product_path %>
-    <% end %>
-  </div>
 </section>
 
+<h3>Your Products</h3>
 <section>
   <table class="table">
     <thead>
@@ -40,7 +39,6 @@
             <td>
               <%= link_to product.name, product_path(product) %>
               <% if @merchant == @current_merchant %>
-                <br/>
                 <%= link_to "Update this product?", edit_product_path(product), class: "btn btn-primary" %>
               <% end %>
             </td>
@@ -108,23 +106,12 @@
       </table>
     <% end %>
 
-  <h3>Order history</h3>
+  <h3>Order History</h3>
     <% if @merchant.orders.empty? %>
       <p>You have no past orders</p>
     <% else %>
       <!--TODO - overall stats, and filter by status -->
 
-<!--      <table class="table">-->
-<!--        <thead>-->
-<!--          <tr>-->
-<!--            <th>Date</th>-->
-<!--            <th>Products</th>-->
-<!--            <th>Quantity</th>-->
-<!--            <th>Product Subtotals</th>-->
-<!--            <th>Order Subtotal</th>-->
-<!--            <th>Status</th>-->
-<!--          </tr>-->
-<!--        </thead>-->
 
         <% @merchant.orders.each do |order| %>
           <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
@@ -137,7 +124,7 @@
                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
                    aria-controls="collapseOne1">
                   <h5 class="mb-0">
-                    <%= link_to order.created_at.strftime("%b %e %Y, %l:%M"), order_history_path(order) %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
+                    <%= order.created_at.strftime("%b %e %Y, %l:%M") %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - Order Status: <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
                   </h5>
                 </a>
               </div>
@@ -145,40 +132,46 @@
               <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
                    data-parent="#accordionEx">
                 <div class="card-body">
-              <% items = @merchant.filter_order(order) %>
-                  <% items.each do |item| %>
-                    <%= item.product_id %>
-                    <%= link_to item.product.name, product_path(item.product) %>
-                    <%= item.quantity %>
-                    <%= display_money(item.line_item_total) %>
-                    <% if item.shipped %>
-                      - shipped
-                    <% else %>
-                      <%= link_to "Mark as shipped", { action: "ship_order_item", controller: "order_items", id: item.id }, method: :patch  %>
-                    <% end %>
-                    <br/>
-                  <% end %>
+
+                  <div class="row">
+                    <div class="column">
+                      <% items = @merchant.filter_order(order) %>
+                          <% items.each do |item| %>
+                            <%= item.product_id %>
+                            <%= link_to item.product.name, product_path(item.product) %>
+                        Quantity:  <%= item.quantity %>
+                        Price: <%= display_money(item.line_item_total) %>
+                            <% if item.shipped %>
+                              - SHIPPED
+                            <% else %>
+                              <%= link_to "Mark as shipped", { action: "ship_order_item", controller: "order_items", id: item.id }, method: :patch  %>
+                            <% end %>
+                            <br/>
+                          <% end %>
+                    </div>
 
                   <% if order.status == "paid" %>
-                    <h4>Customer Info</h4>
+                    <div id="customer_info">
+                        <h4>Customer Info</h4>
 
-                    <p>Name: <%= order.name %></p>
-                    <p>Email Address: <%= order.email %></p>
-                    <p>Mailing Address: <%= order.address %></p>
-                    <p>Credit Card: **** **** **** <%= order.credit_card_number.to_s[-4..-1]%></p>
-                    <p>Credit Card Expiration: <%= order.expiration_date %>
-                    <p>Cart Status: <%= order.status %></p>
-                    <p>Order placed: <%= order.updated_at.strftime("%F") %>
-                  <% end %>
+                        <p>Name: <%= order.name %></p>
+                        <p>Email Address: <%= order.email %></p>
+                        <p>Mailing Address: <%= order.address %></p>
+                        <p>Credit Card: **** **** **** <%= order.credit_card_number.to_s[-4..-1]%></p>
+                        <p>Credit Card Expiration: <%= order.expiration_date %>
+                        <p>Order placed: <%= order.updated_at.strftime("%F") %>
+                      <% end %>
+                    </div>
+
+                  </div>
+
                 </div>
               </div>
             </div>
           </div>
         <% end %>
-
+          </div>
   <% end %>
 
   </section>
 <% end %>
-
-

@@ -34,6 +34,7 @@ gem "omniauth-github"
 gem 'simplecov'
 gem 'simplecov-html'
 
+
 group :development, :test do
   gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

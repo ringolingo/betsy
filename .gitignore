@@ -37,4 +37,5 @@
 yarn-debug.log*
 .yarn-integrity
 .env
-coverage
+/coverage
+

@@ -1,3 +1,20 @@
 // Place all the styles related to the Merchants controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#customer_info {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+  //width: auto;
+  display: inline-block;
+}
+
+.column {
+  float: left;
+  width: 70%;
+}
+
+img {
+  border-radius: 50%;
+}

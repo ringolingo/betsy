@@ -97,5 +97,27 @@ describe OrderItem do
         expect(item.line_item_total).must_equal 0
       end
     end
+
+    describe "arrange_by_created_at" do
+      before do
+        @sorted = OrderItem.arrange_by_created_at
+      end
+
+      it "returns the earliest order_item first" do
+        expect(@sorted.first).must_equal order_items(:one)
+      end
+
+      it "returns the newest order_item last" do
+        expect(@sorted.last).must_equal order_items(:oi4)
+      end
+
+      it "returns empty if no order_items" do
+        OrderItem.destroy_all
+
+        sorted = OrderItem.arrange_by_created_at
+
+        expect(sorted).must_be_empty
+      end
+    end
   end
 end
