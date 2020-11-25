@@ -146,4 +146,39 @@ describe Merchant do
       expect(merchant.total_revenue(status)).must_equal 0
     end
   end
+
+  describe "build_from_github" do
+    it "creates a valid merchant if given valid auth_hash" do
+      good_hash = {
+          "uid" => 2938,
+          "provider" => "github",
+          "info" => {
+              "nickname" => "Sleepy Sally",
+              "email" => "snooze@etzzz.com"
+          }
+      }
+
+      merchant = Merchant.build_from_github(good_hash)
+
+      status = merchant.valid?
+
+      expect(status).must_equal true
+    end
+
+    it "does not create merchant if given invalid auth_hash" do
+      bad_hash = {
+          "provider" => "github",
+          "info" => {
+              "nickname" => "Sleepy Sally",
+              "email" => "snooze@etzzz.com"
+          }
+      }
+
+      merchant = Merchant.build_from_github(bad_hash)
+
+      status = merchant.save
+
+      expect(status).must_equal true
+    end
+  end
 end

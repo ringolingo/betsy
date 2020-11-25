@@ -137,7 +137,7 @@
                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
                    aria-controls="collapseOne1">
                   <h5 class="mb-0">
-                    <%= link_to order.created_at.strftime("%b %e %Y, %l:%M"), order_history_path(order) %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
+                    <%= order.created_at.strftime("%b %e %Y, %l:%M") %> - Order Subtotal:  <%= display_money(order.order_items.sum { |item| item.line_item_total }) %> - <%= order.status.upcase %> <!--TODO - link/dropdown to change status -->
                   </h5>
                 </a>
               </div>
@@ -153,7 +153,7 @@
                     <%= display_money(item.line_item_total) %>
                     <% if item.shipped %>
                       - shipped
-                    <% else %>
+                    <% elsif item.order.status == "paid" %>
                       <%= link_to "Mark as shipped", { action: "ship_order_item", controller: "order_items", id: item.id }, method: :patch  %>
                     <% end %>
                     <br/>
@@ -173,6 +173,8 @@
                 </div>
               </div>
             </div>
+          </div>
+          </table>
         <% end %>
 
   <% end %>
