@@ -148,7 +148,7 @@
                         Price: <%= display_money(item.line_item_total) %>
                             <% if item.shipped %>
                               - SHIPPED
-                            <% else %>
+                            <% elsif item.order.status == "paid" %>
                               <%= link_to "Mark as shipped", { action: "ship_order_item", controller: "order_items", id: item.id }, method: :patch  %>
                             <% end %>
                             <br/>
