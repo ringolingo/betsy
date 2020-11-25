@@ -12,6 +12,7 @@ MERCHANTS_FILE = Rails.root.join("db", "merchants-seeds.csv")
 ORDER_ITEMS_FILE = Rails.root.join("db", "order-items-seeds.csv")
 ORDERS_FILE = Rails.root.join("db", "orders-seeds.csv")
 PRODUCTS_FILE = Rails.root.join("db", "products-seeds.csv")
+CATEGORIES_FILE = Rails.root.join("db", "categories-seeds.csv")
 
 merchant_failures = []
 CSV.foreach(MERCHANTS_FILE, headers: true).each do |row|
@@ -54,17 +55,39 @@ puts "#{order_failures.length} orders failed to save"
 
 
 
+category_failures = []
+CSV.foreach(CATEGORIES_FILE, headers: true).each do |row|
+  category = Category.new
+  category.category = row["category"]
+
+  created = category.save
+  if !created
+    category_failures << category
+    puts "Failed to save category: #{category.inspect}"
+  else
+    puts "Created category: #{category.inspect}"
+  end
+end
+
+puts "Added #{Category.count} categories to the database"
+puts "#{category_failures.length} categories failed to save"
+
+
+
 product_failures = []
 CSV.foreach(PRODUCTS_FILE, headers: true).each do |row|
   # name,category,description,price,stock,merchant_id
   product = Product.new
   product.for_sale = true
   product.name = row["name"]
-  product.category = row["category"]
   product.description = row["description"]
   product.price = row["price"]
   product.stock = row["stock"]
   product.merchant_id = row["merchant_id"]
+
+  ids = Category.pluck(:id)
+  category = Category.find(ids.sample)
+  product.categories << category
 
   created = product.save
   if !created

@@ -1,31 +1,31 @@
-name,category,description,price,stock,merchant_id,for_sale
-Footed Pajamas,Pajamas,keep your feet warm!,1162,5,8,true
-Multicolor Lamp,night lights,scare away the dark with fun colors,9370,9,5,true
-Motion Sensor Lights,night lights,only turns on when you need them,7773,13,2,true
-White Noise Machine,sleep aids,plays your choice of rain or ocean sounds,1434,5,8,true
-Sleep Mask,sleep aids,blocks out light that keeps you up,5278,7,2,true
-Oil Diffuser,sleep aids,disperses natural oils to help you relax,5820,14,2,true
-Weighted Blanket,bedding,like a thunder shirt but for people,2383,19,8,true
-Onesie,Pajamas,wrap yourself up in comfort,3167,16,8,true
-Himalayan Salt Lamp,night lights,piiiiiink,6590,11,3,true
-Sleepy Time Tea,sleep aids,wind down at the end of the day with a mug of delicious herbal tea,319,5,1,true
-Sleep Shirt,Pajamas,IT'S ENORMOUS,4659,8,9,true
-Comforter Set,bedding,cotton comforter with matching pillow cases,6843,17,3,true
-Flannel PJ Set,Pajamas,perfect for sitting in front of the fire on a winter night,8549,7,7,true
-Old Timey Lamp,night lights,leave the lamp on so you can see how cool your lamp is,7656,24,6,true
-Night Sky Projector,night lights,beams stars across the ceiling of your room,4117,4,4,true
-Mattress Topper,bedding,hypoallergenic memory foam mattress pad,5640,19,2,true
-Wedge Pillow,bedding,it's a pillow shaped like a block of cheese,6506,9,9,true
-Sweat Pants,Pajamas,on Zoom no one knows you're wearing pajama bottoms,3077,4,2,true
-Silk Chemise,Pajamas,keeps you cool (temperature-wise) and cool (style-wise),9846,13,10,true
-Water Bed,bedding,you know you've secretly always wanted one,6591,3,4,true
-Dinosaur Sheets,bedding,they're fun!,8621,19,8,true
-Guided Meditation Tapes,sleep aids,if you still have a tape deck these lessons will put you right to sleep,6484,19,5,true
-Cat Night Light,night lights,it's a night light shaped like a cat,779,12,8,true
-Timer Operated Night Light,night lights,slowly dims light to help you fall asleep,2618,23,4,true
-Majestic Bed Canopy,bedding,sleep like a fancy person,7462,19,8,true
-Superhero PJs,Pajamas,PJs wiwth a superhero logo on them,1904,4,7,true
-Sleepy Drops,sleep aids,all natural liquid herbal supplement,4217,18,4,true
-Mattress,bedding,you can bounce SO HIGH on this thing,1532,24,2,true
-Slippers,Pajamas,for when your feet are cold but you still have to get out of bed,535,6,10,true
-Cami,Pajamas,lightweight wear for warm weather,5338,5,6,true
+name,description,price,stock,merchant_id,for_sale
+Footed Pajamas,keep your feet warm!,1162,5,8,true
+Multicolor Lamp,scare away the dark with fun colors,9370,9,5,true
+Motion Sensor Lights,only turns on when you need them,7773,13,2,true
+White Noise Machine,plays your choice of rain or ocean sounds,1434,5,8,true
+Sleep Mask,blocks out light that keeps you up,5278,7,2,true
+Oil Diffuser,disperses natural oils to help you relax,5820,14,2,true
+Weighted Blanket,like a thunder shirt but for people,2383,19,8,true
+Onesie,wrap yourself up in comfort,3167,16,8,true
+Himalayan Salt Lamp,piiiiiink,6590,11,3,true
+Sleepy Time Tea,wind down at the end of the day with a mug of delicious herbal tea,319,5,1,true
+Sleep Shirt,IT'S ENORMOUS,4659,8,9,true
+Comforter Set,cotton comforter with matching pillow cases,6843,17,3,true
+Flannel PJ Set,perfect for sitting in front of the fire on a winter night,8549,7,7,true
+Old Timey Lamp,leave the lamp on so you can see how cool your lamp is,7656,24,6,true
+Night Sky Projector,beams stars across the ceiling of your room,4117,4,4,true
+Mattress Topper,hypoallergenic memory foam mattress pad,5640,19,2,true
+Wedge Pillow,it's a pillow shaped like a block of cheese,6506,9,9,true
+Sweat Pants,on Zoom no one knows you're wearing pajama bottoms,3077,4,2,true
+Silk Chemise,keeps you cool (temperature-wise) and cool (style-wise),9846,13,10,true
+Water Bed,you know you've secretly always wanted one,6591,3,4,true
+Dinosaur Sheets,they're fun!,8621,19,8,true
+Guided Meditation Tapes,if you still have a tape deck these lessons will put you right to sleep,6484,19,5,true
+Cat Night Light,it's a night light shaped like a cat,779,12,8,true
+Timer Operated Night Light,slowly dims light to help you fall asleep,2618,23,4,true
+Majestic Bed Canopy,sleep like a fancy person,7462,19,8,true
+Superhero PJs,PJs with a superhero logo on them that we totally own the legal rights to,1904,4,7,true
+Sleepy Drops,all natural liquid herbal supplement,4217,18,4,true
+Mattress,you can bounce SO HIGH on this thing,1532,24,2,true
+Slippers,for when your feet are cold but you still have to get out of bed,535,6,10,true
+Cami,lightweight wear for warm weather,5338,5,6,true
