@@ -5,8 +5,9 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-
     @available_products = Product.where(for_sale: true)
+    @category = Category.find_by(id: params[:category_id])
+
   end
 
   def show
@@ -24,7 +25,7 @@ class ProductsController < ApplicationController
   def create
     # auth_hash = request.env["omniauth.auth"]
     @product = Product.new(product_params)
-    params[:product][:category_ids].filter{|category_id| !category_id.empty?}.each{|category_id| @product.categories << Category.find_by(id: category_id)}
+    # params[:product][:category_ids].filter{|category_id| !category_id.empty?}.each{|category_id| @product.categories << Category.find_by(id: category_id)}
     @product.merchant_id = session[:user_id]
 
     if @product.save
@@ -41,6 +42,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @product = Product.find_by(id: params[:id])
     if @product.nil?
       flash[:error] = error_flash("No such product")
       redirect_to products_path and return
@@ -51,6 +53,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @product = Product.find_by(id: params[:id])
     if @product.nil?
       head :not_found
       return
@@ -58,6 +61,7 @@ class ProductsController < ApplicationController
       flash[:error] = error_flash("You do not have access to change that")
       redirect_to merchants_path and return
     elsif @product.update(product_params)
+
       redirect_to product_path(@product.id)
       return
     else
@@ -101,7 +105,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    return params.require(:product).permit(:name, :description, :price, :photo_url, :stock, :merchant_id, :category, :for_sale)
+    return params.require(:product).permit(:name, :description, :price, :photo_url, :stock, :merchant_id, :for_sale, category_ids: [] )
   end
 
   def find_product
