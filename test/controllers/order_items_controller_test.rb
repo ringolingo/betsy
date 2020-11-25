@@ -1,4 +1,5 @@
 
+
 require "test_helper"
 
 describe OrderItemsController do
@@ -34,7 +35,7 @@ describe OrderItemsController do
         delete order_order_item_path(order_item.order, order_item)
       }.must_change "OrderItem.count", -1
 
-      expect(flash[:success]).must_equal "Order item successfully deleted"
+      expect(flash[:success]).must_equal "Product removed from your cart"
 
       test_order_item = OrderItem.find_by(id: order_item.id)
 
@@ -179,7 +180,9 @@ describe OrderItemsController do
     describe "ship_order_item" do
       before do
         @order_item = order_items(:oi1)
+        @oi_id = @order_item.id
         @merchant = merchants(:merchant1)
+        @wrong_merchant = merchants(:merchant2)
       end
 
       it "responds with success when logged in merchant changes status" do
@@ -187,13 +190,17 @@ describe OrderItemsController do
 
         patch ship_order_item_path(@order_item)
 
-        must_respond_with :success
+        updated_oi = OrderItem.find_by(id: @oi_id)
+        expect(updated_oi.shipped).must_equal true
       end
 
       it "responds with redirect when merchant is not logged in" do
+        perform_login(@wrong_merchant)
+        
         patch ship_order_item_path(@order_item)
 
-        must_respond_with :unauthorized
+        updated_oi = OrderItem.find_by(id: @oi_id)
+        expect(updated_oi.shipped).must_equal true
       end
     end
   end
