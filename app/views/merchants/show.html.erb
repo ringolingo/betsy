@@ -6,7 +6,9 @@
 
 
 </section>
+<h3>My Products</h3>
 <section>
+
   <%= render partial: "cards", locals: {products: @merchant.products, is_current_merchant: (@merchant == @current_merchant) } %>
 </section>
 <!--<h3>Your Products</h3>-->
@@ -72,7 +74,7 @@
         </tr>
         <tr>
           <th class="table_subheading">Revenue from pending orders</th>
-          <td><%= display_money(@merchant.total_revenue("complete")) %></td>
+          <td><%= display_money(@merchant.total_revenue("pending")) %></td>
         </tr>
       </table>
       <table class="table">
@@ -131,7 +133,7 @@
                     <div class="column">
                       <% items = @merchant.filter_order(order) %>
                           <% items.each do |item| %>
-                            <%= item.product_id %>
+                            ID: <%= item.product_id %>
                             <%= link_to item.product.name, product_path(item.product) %>
                         Quantity:  <%= item.quantity %>
                         Price: <%= display_money(item.line_item_total) %>
