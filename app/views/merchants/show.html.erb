@@ -1,64 +1,55 @@
 <section class="text-center">
-  <h2 class="text-center"><%= @merchant.username %></h2>
 
-  <% if @merchant.avatar.attached? %>
-    <div><%= image_tag @merchant.avatar.variant(resize_to_limit: [200, nil]) %></div>
-  <% else %>
-    <div><%= image_tag("dog_sleeping.jpg", :alt => "a dog sleeping in a bed, representative of your friendly site builders", :width => 200 ) %></div>
-  <% end %>
 
-  <p>About <%= @merchant.username %>: <%= @merchant.description %></p>
-  <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
-  <div>
-    <% if @merchant == @current_merchant %>
-      <%= link_to "Update Your Store", edit_merchant_path(@merchant) %> |
-      <%= link_to "Add a New Product", new_product_path %>
-    <% end %>
-  </div>
+  <%= render partial: "jumbotron", locals: {merchant: @merchant, text: @merchant.username, subtitle: "#{display_desc(@merchant.description)} \n Registered seller with Etzzzz since #{@merchant.created_at.year}"}%>
+
+
 
 </section>
-
-<h3>Your Products</h3>
 <section>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>For Sale?</th>
-      </tr>
-    </thead>
-
-    <% unless @merchant.products.empty? %>
-      <tbody>
-        <% @merchant.sort_products.each do |product| %>
-          <tr>
-            <td>
-              <%= link_to product.name, product_path(product) %>
-              <% if @merchant == @current_merchant %>
-                <%= link_to "Update this product?", edit_product_path(product), class: "btn btn-primary" %>
-              <% end %>
-            </td>
-            <td>
-              <%= product.description %>
-            </td>
-            <td>
-              <%= display_money(product.price) %>
-            </td>
-            <td>
-              <%= product.for_sale ? "Active" : "Retired" %>
-              <% if @merchant == @current_merchant %>
-                <%= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch, class: "btn btn-secondary" %>
-              <% end %>
-            </td>
-        <% end %>
-      </tbody>
-    <% end %>
-  </table>
-
-
+  <%= render partial: "cards", locals: {products: @merchant.products, is_current_merchant: (@merchant == @current_merchant) } %>
 </section>
+<!--<h3>Your Products</h3>-->
+<!--<section>-->
+<!--  <table class="table">-->
+<!--    <thead>-->
+<!--      <tr>-->
+<!--        <th>Product</th>-->
+<!--        <th>Description</th>-->
+<!--        <th>Price</th>-->
+<!--        <th>For Sale?</th>-->
+<!--      </tr>-->
+<!--    </thead>-->
+
+    <%# unless @merchant.products.empty? %>
+<!--      <tbody>-->
+        <%# @merchant.sort_products.each do |product| %>
+<!--          <tr>-->
+<!--            <td>-->
+              <%#= link_to product.name, product_path(product) %>
+              <%# if @merchant == @current_merchant %>
+                <%#= link_to "Update this product?", edit_product_path(product), class: "btn btn-primary" %>
+              <%# end %>
+<!--            </td>-->
+<!--            <td>-->
+              <%#= product.description %>
+<!--            </td>-->
+<!--            <td>-->
+              <%#= display_money(product.price) %>
+<!--            </td>-->
+<!--            <td>-->
+              <%#= product.for_sale ? "Active" : "Retired" %>
+              <%# if @merchant == @current_merchant %>
+                <%#= button_to "Change status?", { action: "toggle_for_sale", controller: "products", id: product.id }, method: :patch, class: "btn btn-secondary" %>
+              <%# end %>
+<!--            </td>-->
+        <%# end %>
+<!--      </tbody>-->
+    <%# end %>
+<!--  </table>-->
+
+
+<!--</section>-->
 
 <% if @merchant == @current_merchant %>
   <section>
