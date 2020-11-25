@@ -2,7 +2,6 @@ blanket:
   merchant: merchant1
   id: 1
   name: cozy blanket
-  category: bedding
   description: A nice warm blanket for napping
   price: 3000
   photo_url: image.jpeg
@@ -12,7 +11,6 @@ diffuser:
   merchant: merchant2
   id: 2
   name: coil diffuser
-  category: equipment
   description: very calming
   price: 5000
   photo_url: image.jpeg
@@ -22,7 +20,6 @@ diffuser:
 product1:
   merchant: merchant1
   name: pillow
-  category: sleep aid
   description: it helps you sleep
   price: 1000
   stock: 20
@@ -30,7 +27,6 @@ product1:
 product2:
   merchant: merchant2
   name: a nicer pillow
-  category: sleep aid
   description: zonks you right out
   price: 2000
   stock: 40
@@ -39,7 +35,6 @@ product2:
 product3:
   merchant: merchant1
   name: the nicest pillow
-  category: sleep aid
   description: luxurious
   price: 4000
   stock: 10
@@ -47,7 +42,6 @@ product3:
 product4:
   merchant: merchant2
   name: big teddy bear
-  category: sleep aid
   description: it is. massive.
   price: 3599
   stock: 25
