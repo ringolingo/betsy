@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
     if @current_order.update(order_params)
       # @current_order.status = "paid"
       # @current_order.save
-      #session.delete(:order_id)
+
       @current_order.decrement_stock
       flash[:status] = :success
       flash[:result_text] = "Order submitted! Enjoy your self-care with vibes."
