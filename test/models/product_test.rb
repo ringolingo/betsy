@@ -9,14 +9,12 @@ describe Product do
         price: 30,
         photo_url: "image.jpeg",
         stock: 8,
-        merchant: @merchant
+        merchant: @merchant,
+        for_sale: true
     )
   end
 
   describe "validations" do
-    # it 'must have a merchant' do
-    #   # Is this necessary ?
-    # end
 
     it "creates a product" do
       @new_product.save
@@ -25,11 +23,6 @@ describe Product do
 
     it "does not create a new product without a name" do
       @new_product.name = nil
-      expect(@new_product.valid?).must_equal false
-    end
-
-    it "does not create a new product without a category" do
-      @new_product.category = nil
       expect(@new_product.valid?).must_equal false
     end
 
@@ -43,16 +36,17 @@ describe Product do
       expect(@new_product.valid?).must_equal false
     end
 
-    # it "does not create a new product without a photo url" do
-    #   @new_product.photo_url = nil
-    #   expect(@new_product.valid?).must_equal false
-    # end
-
     it "does not create a new product without stock count" do
       @new_product.stock = nil
       expect(@new_product.valid?).must_equal false
     end
+
+    it "does not create a new product without giving it a for sale status" do
+      @new_product.for_sale = nil
+      expect(@new_product.valid?).must_equal false
+    end
   end
+
   describe 'custome methods' do
     describe "toggle for sale" do
       it "makes an unavailable product available" do
