@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    auth_hash = request.env["omniauth.auth"]
+    # auth_hash = request.env["omniauth.auth"]
     @product = Product.new(product_params)
     params[:product][:category_ids].filter{|category_id| !category_id.empty?}.each{|category_id| @product.categories << Category.find_by(id: category_id)}
     @product.merchant_id = session[:user_id]

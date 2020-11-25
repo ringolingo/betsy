@@ -35,6 +35,88 @@ describe ProductsController do
     end
   end
 
+  describe "new" do
+    it "responds with success" do
+      get new_product_path
+
+      must_respond_with :success
+    end
+  end
+
+  describe "create" do
+    it "creates a product with valid data" do
+      merchant = merchants(:merchant1)
+      perform_login(merchant)
+      category = categories(:bedding)
+      category_id = [category.id]
+
+      data = {
+          product: {
+              name: "thing",
+              description: "you want one",
+              price: 1000,
+              stock: 10,
+              for_sale: true,
+              merchant: merchant,
+              category_ids: category_id
+          }
+      }
+
+      expect {
+        post products_path, params: data
+      }.must_differ "Product.count", 1
+
+      saved_product = Product.find_by(name: data[:product][:name])
+      expect(saved_product.description).must_equal data[:product][:description]
+    end
+
+    it "does not create a product with invalid data" do
+      merchant = merchants(:merchant1)
+      perform_login(merchant)
+      category = categories(:bedding)
+      category_id = [category.id]
+
+      bad_data = {
+          product: {
+              name: "thing",
+              for_sale: true,
+              merchant: merchant,
+              category_ids: category_id
+          }
+      }
+
+      expect {
+        post products_path, params: bad_data
+      }.wont_differ "Product.count", 1
+
+      failed_product = Product.find_by(name: bad_data[:product][:name])
+      expect(failed_product).must_be_nil
+    end
+
+    it "does not create a product if  merchant not logged in" do
+      category = categories(:bedding)
+      category_id = [category.id]
+
+      data = {
+          product: {
+              name: "thing",
+              description: "you want one",
+              price: 1000,
+              stock: 10,
+              for_sale: true,
+              category_ids: category_id
+          }
+      }
+
+      expect {
+        post products_path, params: data
+      }.wont_differ "Product.count", 1
+
+      failed_product = Product.find_by(name: data[:product][:name])
+      expect(failed_product).must_be_nil
+    end
+  end
+
   describe "toggle_for_sale" do
     it "retires an active product" do
       merchant = merchants(:merchant1)
