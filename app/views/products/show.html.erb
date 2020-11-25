@@ -2,7 +2,7 @@
 <!--<p><%#= link_to @product.merchant.username, merchant_path(@product.merchant) %></p>-->
 <%#= image_tag(@product.photo_url, alt: "moon") %>
 
-<%= render partial: "/layouts/flash_errors" %>
+
 
 <h2><%= @product.name %></h2>
 <p><%= link_to @product.merchant.username, merchant_path(@product.merchant) %></p>
@@ -16,6 +16,7 @@
 <% if @product.merchant == @current_merchant %>
   <p><%= link_to "update this product", edit_product_path(@product) %></p>
 <% end %>
+
 
 <%# TODO - check this correctly redirects once category/product table set up %>
 
@@ -68,10 +69,13 @@
         </ul>
       </div>
 
-      <div class="product-detail-rating">
-        <p>Average rating:
-          <i class="fa fa-star"></i>
-        </p>
+      <div class="rating-stars">
+        <% if @product.reviews.length >= 1 %>
+          <h5>Rating:</h5>
+          <% @product.avg_rating.round.times do %>
+            <img src="https://cdn2.iconfinder.com/data/icons/weather-color-2/500/weather-10-512.png" alt="rating star" height="50" width="50">
+          <% end %>
+        <% end %>
       </div>
 
       <div class="product-detail-inventory">
@@ -89,9 +93,12 @@
     </div>
   </div>
 </section>
-<p></p>
+
 <p><%= @product.orders.length %> sold!</p>
 
+<div>
+  <span><%= link_to "Write A Review", new_product_review_path(@product), class:"btn btn-danger" %></span>
+</div>
 <div class="reviews">
   <h2>Reviews</h2>
 <!--  <section class="rating">Average Rating:-->
@@ -108,17 +115,15 @@
       <tr>
         <th scope="col">Rating</th>
         <th scope="col">Review</th>
-        <th scope="col">Edit</th>
       </tr>
       </thead>
     <tbody>
-      <tr>
-        <%# @product.reviews.each do |review| %>
-<!--          <td><%#= review.rating%></td>-->
-<!--          <td> <%#= review.description%></td>-->
-<!--          <td><%#= link_to 'Edit', edit_review_path(review) %></td>-->
-<!--          </tr>-->
-        <%# end %>
+        <% @product.reviews.each do |review| %>
+          <tr>
+          <td><%= review.rating%></td>
+          <td> <%= review.description%></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

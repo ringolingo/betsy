@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :products do
     resources :order_items, only: [:create]
+    resources :reviews, only: [:new, :create]
   end # only: [] or expect: []
 
   resources :merchants # only: [] or expect: []
