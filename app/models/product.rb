@@ -5,7 +5,6 @@ class Product < ApplicationRecord
   has_many :orders, through: :order_items
   has_and_belongs_to_many :categories
   validates :name, presence: true, uniqueness: true
-  validates :category, presence: true
   validates :description, presence: true
   validates :price , presence: true, numericality: { greater_than: 0, message: "Price must be greater than 0"}
   # validates :photo_url, presence: true ** figure out how to validate image links
