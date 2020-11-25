@@ -1,5 +1,5 @@
-<section>
-  <h2><%= @merchant.username %></h2>
+<section class="text-center">
+  <h2 class="text-center"><%= @merchant.username %></h2>
 
   <% if @merchant.avatar.attached? %>
     <div><%= image_tag @merchant.avatar.variant(resize_to_limit: [200, nil]) %></div>
@@ -9,17 +9,20 @@
 
   <p>Registered seller with Etzzzz since <%= @merchant.created_at.year %></p>
   <p>About <%= @merchant.username %>: <%= @merchant.description %></p>
-  <% if @merchant == @current_merchant %>
-    <%= link_to "Update Your Store", edit_merchant_path(@merchant) %>
-  <% end %>
+  <div>
+    <% if @merchant == @current_merchant %>
+      <%= link_to "Update Your Store", edit_merchant_path(@merchant) %>
+    <% end %>
+  </div>
+
+  <div>
+    <% if @merchant == @current_merchant %>
+      <%= link_to "Add a new product?", new_product_path %>
+    <% end %>
+  </div>
 </section>
 
 <section>
-  <h3>Products</h3>
-  <% if @merchant == @current_merchant %>
-    <%= link_to "Add a new product?", new_product_path %>
-  <% end %>
-
   <table class="table">
     <thead>
       <tr>
