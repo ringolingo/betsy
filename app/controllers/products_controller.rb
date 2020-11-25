@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
       return
     end
+    @reviews = Review.where(product_id: @product)
   end
 
   def new
@@ -22,10 +23,8 @@ class ProductsController < ApplicationController
 
   def create
     auth_hash = request.env["omniauth.auth"]
-    # binding.pry
-
     @product = Product.new(product_params)
-    @product.categories
+    params[:product][:category_ids].filter{|category_id| !category_id.empty?}.each{|category_id| @product.categories << Category.find_by(id: category_id)}
     @product.merchant_id = session[:user_id]
 
     if @product.save
