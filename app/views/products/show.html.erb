@@ -70,10 +70,13 @@
         </ul>
       </div>
 
-      <div class="product-detail-rating">
-        <p>Average rating:
-          <i class="fa fa-star"></i>
-        </p>
+      <div class="rating-stars">
+        <% if @product.reviews.length >= 1 %>
+          <h5>Rating:</h5>
+          <% @product.avg_rating.round.times do %>
+            <img src="https://cdn2.iconfinder.com/data/icons/weather-color-2/500/weather-10-512.png" alt="rating star" height="50" width="50">
+          <% end %>
+        <% end %>
       </div>
 
       <div class="product-detail-inventory">
