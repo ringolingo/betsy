@@ -31,3 +31,5 @@ order1:
 order2:
   status: pending
   merchants: merchant2
+order3:
+  status: pending
