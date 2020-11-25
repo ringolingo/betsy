@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_current_order
   before_action :current_merchant
+  before_action :find_merchants
+  before_action :find_categories
   # before_action :all_categories
   # before_action :all_merchants
 
@@ -98,4 +100,13 @@ class ApplicationController < ActionController::Base
   def construct_error_messages(errors)
     return errors ? errors.messages.map{|error_type, msg| "#{error_type.to_s.gsub('_', ' ')}: #{msg.join(" - ")}" unless msg.empty?} : []
   end
+
+  def find_merchants
+    @merchants = Merchant.all
+  end
+
+  def find_categories
+    @categories = Category.all
+  end
+
 end

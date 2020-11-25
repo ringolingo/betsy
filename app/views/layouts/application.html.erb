@@ -12,10 +12,6 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <%= link_to "1Z", root_path, class: "navbar-brand" %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
@@ -24,17 +20,26 @@
           <li class="nav-item">
             <%= link_to "All Products", products_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "All Merchants", merchants_path, class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Browse by Merchants
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%@merchants.each do |merchant| %>
+                <%=link_to(merchant.username, merchant_path(merchant), class: "dropdown-item") %>
+              <%end%>
+            </div>
           </li>
-          <li class="nav-item">
-            <%= link_to "Search by Category", categories_path, class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Browse by Category
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%@categories.each do |category| %>
+                <%=link_to(category.category, category_path(category), class: "dropdown-item") %>
+              <%end%>
+            </div>
           </li>
-
-          <li class="nav-item">
-            <%= link_to "All Merchants", merchants_path, class: "nav-link" %>
-          </li>
-
           <% if @current_merchant.nil? %>
             <li class="nav-item">
               <%= link_to "Become a Merchant", new_merchant_path, class: "nav-link" %>
@@ -48,6 +53,9 @@
             </li>
             <li class="nav-item">
               <%= link_to "New Product", new_product_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Add New Category", new_category_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "Log Out", logout_path, class: "nav-link" %>

@@ -24,18 +24,18 @@
       <div class="card w-75 mx-auto border border-info" style="width: 90%;" >
         <%=image_tag(product.photo_url, class: "card-img-top", alt: "moon")%>
         <div class="card-body">
-          <h5 class="card-title"><%=link_to product.name, product_path(product)%></h5>
+          <h5 class="card-title"><%=link_to product.name, product_path(product), class: "product-link"%></h5>
           <p class="card-text"><%=product.description%></p>
         </div>
         <!-- List group -->
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Price:<%= display_money(product.price) %> </li>
-          <li class="list-group-item">Category:
+          <li class="list-group-item">Categories:
             <% product.categories.each do |category| %>
-              <%= link_to category.category, category_path(category) %>
+              <p><%= link_to category.category, category_path(category), class: "product-link" %></p>
             <% end %>
           </li>
-          <li class="list-group-item">Seller: <%= link_to product.merchant.username, merchant_path(product.merchant) %></li>
+          <li class="list-group-item">Seller: <%= link_to product.merchant.username, merchant_path(product.merchant), class: "product-link" %></li>
           <li class="list-group-item"><%= product.stock %> in stock </li>
         </ul>
 <!--        <div class="card-body">-->
